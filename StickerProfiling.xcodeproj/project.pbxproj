@@ -95,6 +95,10 @@
 		4E5558011DE635AA008FD841 /* GWText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557F11DE635AA008FD841 /* GWText.m */; };
 		4E5558061DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5558031DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m */; };
 		4E5558071DE635F1008FD841 /* GWAreaCulture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5558051DE635F1008FD841 /* GWAreaCulture.m */; };
+		4E55581C1DE637F4008FD841 /* GWCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5558151DE637F4008FD841 /* GWCoreDataManager.m */; };
+		4E55581D1DE637F4008FD841 /* GWDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5558171DE637F4008FD841 /* GWDataManager.m */; };
+		4E55581E1DE637F4008FD841 /* GWImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5558191DE637F4008FD841 /* GWImageManager.m */; };
+		4E55581F1DE637F4008FD841 /* ServerCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55581B1DE637F4008FD841 /* ServerCommunication.m */; };
 		7B413C6F4073A8FE3C897B66 /* Pods_StickerProfilingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2432E7750568AFDA8787871 /* Pods_StickerProfilingUITests.framework */; };
 		AF4474D5BCEDAE1BB53E3BBF /* Pods_StickerProfilingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D94D935D80854EB8FEF50D9 /* Pods_StickerProfilingTests.framework */; };
 		F65AB8F9953FEA26C84EDEFB /* Pods_StickerProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */; };
@@ -269,6 +273,14 @@
 		4E5558031DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWAreaCulture+CoreDataProperties.m"; sourceTree = "<group>"; };
 		4E5558041DE635F1008FD841 /* GWAreaCulture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWAreaCulture.h; sourceTree = "<group>"; };
 		4E5558051DE635F1008FD841 /* GWAreaCulture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWAreaCulture.m; sourceTree = "<group>"; };
+		4E5558141DE637F4008FD841 /* GWCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCoreDataManager.h; sourceTree = "<group>"; };
+		4E5558151DE637F4008FD841 /* GWCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCoreDataManager.m; sourceTree = "<group>"; };
+		4E5558161DE637F4008FD841 /* GWDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWDataManager.h; sourceTree = "<group>"; };
+		4E5558171DE637F4008FD841 /* GWDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWDataManager.m; sourceTree = "<group>"; };
+		4E5558181DE637F4008FD841 /* GWImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWImageManager.h; sourceTree = "<group>"; };
+		4E5558191DE637F4008FD841 /* GWImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWImageManager.m; sourceTree = "<group>"; };
+		4E55581A1DE637F4008FD841 /* ServerCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCommunication.h; sourceTree = "<group>"; };
+		4E55581B1DE637F4008FD841 /* ServerCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCommunication.m; sourceTree = "<group>"; };
 		57E24219279856AE3C55FCB5 /* Pods-StickerProfilingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfilingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfilingTests/Pods-StickerProfilingTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A815A13C9793E736F0B1CBD /* Pods-StickerProfiling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfiling.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfiling/Pods-StickerProfiling.release.xcconfig"; sourceTree = "<group>"; };
 		7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickerProfiling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -795,6 +807,14 @@
 		4E5558131DE63788008FD841 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4E5558141DE637F4008FD841 /* GWCoreDataManager.h */,
+				4E5558151DE637F4008FD841 /* GWCoreDataManager.m */,
+				4E5558161DE637F4008FD841 /* GWDataManager.h */,
+				4E5558171DE637F4008FD841 /* GWDataManager.m */,
+				4E5558181DE637F4008FD841 /* GWImageManager.h */,
+				4E5558191DE637F4008FD841 /* GWImageManager.m */,
+				4E55581A1DE637F4008FD841 /* ServerCommunication.h */,
+				4E55581B1DE637F4008FD841 /* ServerCommunication.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1128,6 +1148,7 @@
 				4E5557B81DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.m in Sources */,
 				4E5557941DE6306B008FD841 /* NSMutableDictionary+NoNilExtension.m in Sources */,
 				4E5557A71DE631D2008FD841 /* AppFlow.swift in Sources */,
+				4E55581E1DE637F4008FD841 /* GWImageManager.m in Sources */,
 				4E5557F91DE635AA008FD841 /* GWArea.m in Sources */,
 				4E5557B91DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m in Sources */,
 				4E5557951DE6306B008FD841 /* GWAnalyticsStore.m in Sources */,
@@ -1159,10 +1180,12 @@
 				4E5557FC1DE635AA008FD841 /* GWIntention+CoreDataProperties.m in Sources */,
 				4E5557FE1DE635AA008FD841 /* GWTag+CoreDataProperties.m in Sources */,
 				4E5557841DE62F3A008FD841 /* MAXPagingScrollView.m in Sources */,
+				4E55581D1DE637F4008FD841 /* GWDataManager.m in Sources */,
 				4E5557BB1DE63340008FD841 /* NSObject+MenigaRuntimeExtension.m in Sources */,
 				4E5557F71DE635AA008FD841 /* GWImage.m in Sources */,
 				4E5558001DE635AA008FD841 /* GWText+CoreDataProperties.m in Sources */,
 				4E5557CF1DE6352F008FD841 /* GWFramework1.xcdatamodeld in Sources */,
+				4E55581C1DE637F4008FD841 /* GWCoreDataManager.m in Sources */,
 				4E5557781DE62F1C008FD841 /* NSString+MAXHeightExtension.m in Sources */,
 				4E55573C1DE62E89008FD841 /* ViewControllerExtension.swift in Sources */,
 				4E5558071DE635F1008FD841 /* GWAreaCulture.m in Sources */,
@@ -1173,6 +1196,7 @@
 				4E5557F31DE635AA008FD841 /* GWPersonalityQuestion.m in Sources */,
 				4E5557431DE62EB6008FD841 /* MAXBlockSwitch.m in Sources */,
 				4E5557491DE62EC7008FD841 /* MAXFadeBlockButton.m in Sources */,
+				4E55581F1DE637F4008FD841 /* ServerCommunication.m in Sources */,
 				4E5557F21DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.m in Sources */,
 				4E5557931DE6306B008FD841 /* GoogleAnalyticsCommunication.m in Sources */,
 				4E55579A1DE630C4008FD841 /* UserDefaults.m in Sources */,

@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GWPersonalityQuestion (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) id answers;
+@property (nullable, nonatomic, retain) NSArray *answers;
 @property (nullable, nonatomic, retain) NSString *defaultImage;
 @property (nullable, nonatomic, retain) NSString *personalityQuestionId;
-@property (nullable, nonatomic, retain) id question;
+@property (nullable, nonatomic, retain) NSArray *question;
 
 @end
 

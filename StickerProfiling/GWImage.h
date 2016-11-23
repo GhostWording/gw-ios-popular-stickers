@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GWImage : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
+// Insert code here to declare functionality of your managed object subclass
++(GWImage *)createGWImage;
++(GWImage *)createGWImageOnMainThread;
+
++(GWImage*)createGWImageWithImagePath:(NSString*)theImagePath withImageData:(NSData*)theImageData withManagedContext:(nullable NSManagedObjectContext*)theContext;
+-(void)updateImageWithImagePath:(NSString*)theImagePath withImageData:(NSData*)theImageData;
 
 @end
 

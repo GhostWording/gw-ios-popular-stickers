@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
+    <entity name="GWArea" representedClassName="GWArea" syncable="YES">
+        <attribute name="areaId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastChangeTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="availableCultures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GWAreaCulture" inverseName="area" inverseEntity="GWAreaCulture" syncable="YES"/>
+    </entity>
+    <entity name="GWAreaCulture" representedClassName="GWAreaCulture" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GWArea" inverseName="availableCultures" inverseEntity="GWArea" syncable="YES"/>
+    </entity>
+    <entity name="GWImage" representedClassName="GWImage" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="GWImageWithThumb" representedClassName="GWImageWithThumb" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbImageData" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
+    <entity name="GWIntention" representedClassName="GWIntention" syncable="YES">
+        <attribute name="areaName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="culture" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasImage" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="impersonal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intentionDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intentionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="labels" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="mediaUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mostRecentTextUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="mostRecentTextUpdateEpoch" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="recurring" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relationTypesString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="slug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="slugPrototypeLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sortOrderInArea" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="weightingCoefficient" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="GWRecipient" representedClassName="GWRecipient" syncable="YES">
+        <attribute name="areaName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="importance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="labels" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="localLabel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="politeForm" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recipientId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relationTypeTag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subscribableRecipient" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="usualRecipient" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
+    <entity name="GWTag" representedClassName="GWTag" syncable="YES">
+        <attribute name="tagId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="GWText" representedClassName="GWText" syncable="YES">
+        <attribute name="abstract" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="culture" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="impersonal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intentionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intentionLabel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isQuote" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="politeForm" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prototypeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="proximity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="referenceUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortBy" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tagsString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="target" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GWArea" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="GWAreaCulture" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="GWImage" positionX="-36" positionY="9" width="128" height="75"/>
+        <element name="GWImageWithThumb" positionX="-27" positionY="135" width="128" height="90"/>
+        <element name="GWIntention" positionX="-18" positionY="27" width="128" height="345"/>
+        <element name="GWRecipient" positionX="-18" positionY="144" width="128" height="210"/>
+        <element name="GWTag" positionX="0" positionY="45" width="128" height="60"/>
+        <element name="GWText" positionX="18" positionY="63" width="128" height="360"/>
+    </elements>
+</model>

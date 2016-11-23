@@ -76,6 +76,25 @@
 		4E5557C41DE63390008FD841 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557C31DE63390008FD841 /* NotificationManager.m */; };
 		4E5557CA1DE633BB008FD841 /* NSDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557C71DE633BB008FD841 /* NSDateValueTransformer.m */; };
 		4E5557CB1DE633BB008FD841 /* NSSetValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557C91DE633BB008FD841 /* NSSetValueTransformer.m */; };
+		4E5557CF1DE6352F008FD841 /* GWFramework1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557CC1DE6352F008FD841 /* GWFramework1.xcdatamodeld */; };
+		4E5557F21DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557D31DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.m */; };
+		4E5557F31DE635AA008FD841 /* GWPersonalityQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557D51DE635AA008FD841 /* GWPersonalityQuestion.m */; };
+		4E5557F41DE635AA008FD841 /* GWRecipient+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557D71DE635AA008FD841 /* GWRecipient+CoreDataProperties.m */; };
+		4E5557F51DE635AA008FD841 /* GWRecipient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557D91DE635AA008FD841 /* GWRecipient.m */; };
+		4E5557F61DE635AA008FD841 /* GWImage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557DB1DE635AA008FD841 /* GWImage+CoreDataProperties.m */; };
+		4E5557F71DE635AA008FD841 /* GWImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557DD1DE635AA008FD841 /* GWImage.m */; };
+		4E5557F81DE635AA008FD841 /* GWArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557DF1DE635AA008FD841 /* GWArea+CoreDataProperties.m */; };
+		4E5557F91DE635AA008FD841 /* GWArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557E11DE635AA008FD841 /* GWArea.m */; };
+		4E5557FA1DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557E31DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.m */; };
+		4E5557FB1DE635AA008FD841 /* GWImageWithThumb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557E51DE635AA008FD841 /* GWImageWithThumb.m */; };
+		4E5557FC1DE635AA008FD841 /* GWIntention+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557E71DE635AA008FD841 /* GWIntention+CoreDataProperties.m */; };
+		4E5557FD1DE635AA008FD841 /* GWIntention.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557E91DE635AA008FD841 /* GWIntention.m */; };
+		4E5557FE1DE635AA008FD841 /* GWTag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557EB1DE635AA008FD841 /* GWTag+CoreDataProperties.m */; };
+		4E5557FF1DE635AA008FD841 /* GWTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557ED1DE635AA008FD841 /* GWTag.m */; };
+		4E5558001DE635AA008FD841 /* GWText+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557EF1DE635AA008FD841 /* GWText+CoreDataProperties.m */; };
+		4E5558011DE635AA008FD841 /* GWText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557F11DE635AA008FD841 /* GWText.m */; };
+		4E5558061DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5558031DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m */; };
+		4E5558071DE635F1008FD841 /* GWAreaCulture.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5558051DE635F1008FD841 /* GWAreaCulture.m */; };
 		7B413C6F4073A8FE3C897B66 /* Pods_StickerProfilingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2432E7750568AFDA8787871 /* Pods_StickerProfilingUITests.framework */; };
 		AF4474D5BCEDAE1BB53E3BBF /* Pods_StickerProfilingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D94D935D80854EB8FEF50D9 /* Pods_StickerProfilingTests.framework */; };
 		F65AB8F9953FEA26C84EDEFB /* Pods_StickerProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */; };
@@ -212,6 +231,44 @@
 		4E5557C71DE633BB008FD841 /* NSDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateValueTransformer.m; sourceTree = "<group>"; };
 		4E5557C81DE633BB008FD841 /* NSSetValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSetValueTransformer.h; sourceTree = "<group>"; };
 		4E5557C91DE633BB008FD841 /* NSSetValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSetValueTransformer.m; sourceTree = "<group>"; };
+		4E5557CD1DE6352F008FD841 /* GWFramework 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GWFramework 2.xcdatamodel"; sourceTree = "<group>"; };
+		4E5557CE1DE6352F008FD841 /* GWFramework.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GWFramework.xcdatamodel; sourceTree = "<group>"; };
+		4E5557D21DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWPersonalityQuestion+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557D31DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWPersonalityQuestion+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557D41DE635AA008FD841 /* GWPersonalityQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWPersonalityQuestion.h; sourceTree = "<group>"; };
+		4E5557D51DE635AA008FD841 /* GWPersonalityQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWPersonalityQuestion.m; sourceTree = "<group>"; };
+		4E5557D61DE635AA008FD841 /* GWRecipient+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWRecipient+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557D71DE635AA008FD841 /* GWRecipient+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWRecipient+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557D81DE635AA008FD841 /* GWRecipient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWRecipient.h; sourceTree = "<group>"; };
+		4E5557D91DE635AA008FD841 /* GWRecipient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWRecipient.m; sourceTree = "<group>"; };
+		4E5557DA1DE635AA008FD841 /* GWImage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWImage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557DB1DE635AA008FD841 /* GWImage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWImage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557DC1DE635AA008FD841 /* GWImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWImage.h; sourceTree = "<group>"; };
+		4E5557DD1DE635AA008FD841 /* GWImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWImage.m; sourceTree = "<group>"; };
+		4E5557DE1DE635AA008FD841 /* GWArea+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWArea+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557DF1DE635AA008FD841 /* GWArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWArea+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557E01DE635AA008FD841 /* GWArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWArea.h; sourceTree = "<group>"; };
+		4E5557E11DE635AA008FD841 /* GWArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWArea.m; sourceTree = "<group>"; };
+		4E5557E21DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWImageWithThumb+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557E31DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWImageWithThumb+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557E41DE635AA008FD841 /* GWImageWithThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWImageWithThumb.h; sourceTree = "<group>"; };
+		4E5557E51DE635AA008FD841 /* GWImageWithThumb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWImageWithThumb.m; sourceTree = "<group>"; };
+		4E5557E61DE635AA008FD841 /* GWIntention+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWIntention+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557E71DE635AA008FD841 /* GWIntention+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWIntention+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557E81DE635AA008FD841 /* GWIntention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWIntention.h; sourceTree = "<group>"; };
+		4E5557E91DE635AA008FD841 /* GWIntention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWIntention.m; sourceTree = "<group>"; };
+		4E5557EA1DE635AA008FD841 /* GWTag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWTag+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557EB1DE635AA008FD841 /* GWTag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWTag+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557EC1DE635AA008FD841 /* GWTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWTag.h; sourceTree = "<group>"; };
+		4E5557ED1DE635AA008FD841 /* GWTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWTag.m; sourceTree = "<group>"; };
+		4E5557EE1DE635AA008FD841 /* GWText+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWText+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5557EF1DE635AA008FD841 /* GWText+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWText+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5557F01DE635AA008FD841 /* GWText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWText.h; sourceTree = "<group>"; };
+		4E5557F11DE635AA008FD841 /* GWText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWText.m; sourceTree = "<group>"; };
+		4E5558021DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GWAreaCulture+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4E5558031DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GWAreaCulture+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4E5558041DE635F1008FD841 /* GWAreaCulture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWAreaCulture.h; sourceTree = "<group>"; };
+		4E5558051DE635F1008FD841 /* GWAreaCulture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWAreaCulture.m; sourceTree = "<group>"; };
 		57E24219279856AE3C55FCB5 /* Pods-StickerProfilingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfilingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfilingTests/Pods-StickerProfilingTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A815A13C9793E736F0B1CBD /* Pods-StickerProfiling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfiling.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfiling/Pods-StickerProfiling.release.xcconfig"; sourceTree = "<group>"; };
 		7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickerProfiling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -564,6 +621,7 @@
 			children = (
 				4E5557C11DE63386008FD841 /* Notification Manager */,
 				4E5557A91DE63330008FD841 /* Json Adapter */,
+				4E5557D01DE6353A008FD841 /* Core Data */,
 			);
 			name = "Data Layer";
 			sourceTree = "<group>";
@@ -607,6 +665,138 @@
 				4E5557C91DE633BB008FD841 /* NSSetValueTransformer.m */,
 			);
 			name = "Value Transformers";
+			sourceTree = "<group>";
+		};
+		4E5557D01DE6353A008FD841 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				4E5558131DE63788008FD841 /* Managers */,
+				4E5557D11DE63555008FD841 /* Model Objects */,
+				4E5557CC1DE6352F008FD841 /* GWFramework1.xcdatamodeld */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		4E5557D11DE63555008FD841 /* Model Objects */ = {
+			isa = PBXGroup;
+			children = (
+				4E5558081DE63603008FD841 /* GWArea */,
+				4E55580F1DE6371D008FD841 /* GWIntention */,
+				4E55580E1DE63644008FD841 /* GWImage With Thumb */,
+				4E55580C1DE6362D008FD841 /* GWImage */,
+				4E55580B1DE6361F008FD841 /* GWRecipient */,
+				4E55580A1DE63616008FD841 /* GWPersonality */,
+				4E5558101DE63727008FD841 /* GWTag */,
+				4E5558111DE63732008FD841 /* GWText */,
+			);
+			name = "Model Objects";
+			sourceTree = "<group>";
+		};
+		4E5558081DE63603008FD841 /* GWArea */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557DE1DE635AA008FD841 /* GWArea+CoreDataProperties.h */,
+				4E5557DF1DE635AA008FD841 /* GWArea+CoreDataProperties.m */,
+				4E5557E01DE635AA008FD841 /* GWArea.h */,
+				4E5557E11DE635AA008FD841 /* GWArea.m */,
+				4E5558091DE6360C008FD841 /* Culture */,
+			);
+			name = GWArea;
+			sourceTree = "<group>";
+		};
+		4E5558091DE6360C008FD841 /* Culture */ = {
+			isa = PBXGroup;
+			children = (
+				4E5558021DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.h */,
+				4E5558031DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m */,
+				4E5558041DE635F1008FD841 /* GWAreaCulture.h */,
+				4E5558051DE635F1008FD841 /* GWAreaCulture.m */,
+			);
+			name = Culture;
+			sourceTree = "<group>";
+		};
+		4E55580A1DE63616008FD841 /* GWPersonality */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557D21DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.h */,
+				4E5557D31DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.m */,
+				4E5557D41DE635AA008FD841 /* GWPersonalityQuestion.h */,
+				4E5557D51DE635AA008FD841 /* GWPersonalityQuestion.m */,
+			);
+			name = GWPersonality;
+			sourceTree = "<group>";
+		};
+		4E55580B1DE6361F008FD841 /* GWRecipient */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557D61DE635AA008FD841 /* GWRecipient+CoreDataProperties.h */,
+				4E5557D71DE635AA008FD841 /* GWRecipient+CoreDataProperties.m */,
+				4E5557D81DE635AA008FD841 /* GWRecipient.h */,
+				4E5557D91DE635AA008FD841 /* GWRecipient.m */,
+			);
+			name = GWRecipient;
+			sourceTree = "<group>";
+		};
+		4E55580C1DE6362D008FD841 /* GWImage */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557DA1DE635AA008FD841 /* GWImage+CoreDataProperties.h */,
+				4E5557DB1DE635AA008FD841 /* GWImage+CoreDataProperties.m */,
+				4E5557DC1DE635AA008FD841 /* GWImage.h */,
+				4E5557DD1DE635AA008FD841 /* GWImage.m */,
+			);
+			name = GWImage;
+			sourceTree = "<group>";
+		};
+		4E55580E1DE63644008FD841 /* GWImage With Thumb */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557E21DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.h */,
+				4E5557E31DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.m */,
+				4E5557E41DE635AA008FD841 /* GWImageWithThumb.h */,
+				4E5557E51DE635AA008FD841 /* GWImageWithThumb.m */,
+			);
+			name = "GWImage With Thumb";
+			sourceTree = "<group>";
+		};
+		4E55580F1DE6371D008FD841 /* GWIntention */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557E61DE635AA008FD841 /* GWIntention+CoreDataProperties.h */,
+				4E5557E71DE635AA008FD841 /* GWIntention+CoreDataProperties.m */,
+				4E5557E81DE635AA008FD841 /* GWIntention.h */,
+				4E5557E91DE635AA008FD841 /* GWIntention.m */,
+			);
+			name = GWIntention;
+			sourceTree = "<group>";
+		};
+		4E5558101DE63727008FD841 /* GWTag */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557EA1DE635AA008FD841 /* GWTag+CoreDataProperties.h */,
+				4E5557EB1DE635AA008FD841 /* GWTag+CoreDataProperties.m */,
+				4E5557EC1DE635AA008FD841 /* GWTag.h */,
+				4E5557ED1DE635AA008FD841 /* GWTag.m */,
+			);
+			name = GWTag;
+			sourceTree = "<group>";
+		};
+		4E5558111DE63732008FD841 /* GWText */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557EE1DE635AA008FD841 /* GWText+CoreDataProperties.h */,
+				4E5557EF1DE635AA008FD841 /* GWText+CoreDataProperties.m */,
+				4E5557F01DE635AA008FD841 /* GWText.h */,
+				4E5557F11DE635AA008FD841 /* GWText.m */,
+			);
+			name = GWText;
+			sourceTree = "<group>";
+		};
+		4E5558131DE63788008FD841 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		9A4D69303D7A653A4F4E638C /* Pods */ = {
@@ -938,11 +1128,17 @@
 				4E5557B81DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.m in Sources */,
 				4E5557941DE6306B008FD841 /* NSMutableDictionary+NoNilExtension.m in Sources */,
 				4E5557A71DE631D2008FD841 /* AppFlow.swift in Sources */,
+				4E5557F91DE635AA008FD841 /* GWArea.m in Sources */,
 				4E5557B91DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m in Sources */,
 				4E5557951DE6306B008FD841 /* GWAnalyticsStore.m in Sources */,
 				4E5557461DE62EC2008FD841 /* MAXBlockButton.m in Sources */,
 				4E5557C41DE63390008FD841 /* NotificationManager.m in Sources */,
+				4E5557FA1DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.m in Sources */,
 				4E5557751DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m in Sources */,
+				4E5557F81DE635AA008FD841 /* GWArea+CoreDataProperties.m in Sources */,
+				4E5557FD1DE635AA008FD841 /* GWIntention.m in Sources */,
+				4E5557F51DE635AA008FD841 /* GWRecipient.m in Sources */,
+				4E5557F41DE635AA008FD841 /* GWRecipient+CoreDataProperties.m in Sources */,
 				4E5556E11DE626E3008FD841 /* ViewController.swift in Sources */,
 				4E55577D1DE62F2A008FD841 /* UIView+MAXExtension.m in Sources */,
 				4E55577E1DE62F2A008FD841 /* UIView+RenderViewToImage.m in Sources */,
@@ -952,20 +1148,32 @@
 				4E5557BC1DE63340008FD841 /* NSString+MNFExtension.m in Sources */,
 				4E5557511DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m in Sources */,
 				4E5557161DE62B39008FD841 /* MBSwitch.m in Sources */,
+				4E5558061DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m in Sources */,
+				4E5557FB1DE635AA008FD841 /* GWImageWithThumb.m in Sources */,
+				4E5558011DE635AA008FD841 /* GWText.m in Sources */,
 				4E5557551DE62EE7008FD841 /* UIColor+Extension.m in Sources */,
 				4E5557A21DE63125008FD841 /* GWLocalizedBundle.m in Sources */,
 				4E5557BA1DE63340008FD841 /* MNFJsonAdapterValueTransformer.m in Sources */,
 				4E5557B71DE63340008FD841 /* MNFJsonAdapter.m in Sources */,
 				4E5557831DE62F3A008FD841 /* MAXPageControl.m in Sources */,
+				4E5557FC1DE635AA008FD841 /* GWIntention+CoreDataProperties.m in Sources */,
+				4E5557FE1DE635AA008FD841 /* GWTag+CoreDataProperties.m in Sources */,
 				4E5557841DE62F3A008FD841 /* MAXPagingScrollView.m in Sources */,
 				4E5557BB1DE63340008FD841 /* NSObject+MenigaRuntimeExtension.m in Sources */,
+				4E5557F71DE635AA008FD841 /* GWImage.m in Sources */,
+				4E5558001DE635AA008FD841 /* GWText+CoreDataProperties.m in Sources */,
+				4E5557CF1DE6352F008FD841 /* GWFramework1.xcdatamodeld in Sources */,
 				4E5557781DE62F1C008FD841 /* NSString+MAXHeightExtension.m in Sources */,
 				4E55573C1DE62E89008FD841 /* ViewControllerExtension.swift in Sources */,
+				4E5558071DE635F1008FD841 /* GWAreaCulture.m in Sources */,
 				4E5556DF1DE626E3008FD841 /* AppDelegate.swift in Sources */,
 				4E5557401DE62EAA008FD841 /* BlocksAlertView.m in Sources */,
+				4E5557FF1DE635AA008FD841 /* GWTag.m in Sources */,
 				4E5557911DE6306B008FD841 /* AnalyticsManager.m in Sources */,
+				4E5557F31DE635AA008FD841 /* GWPersonalityQuestion.m in Sources */,
 				4E5557431DE62EB6008FD841 /* MAXBlockSwitch.m in Sources */,
 				4E5557491DE62EC7008FD841 /* MAXFadeBlockButton.m in Sources */,
+				4E5557F21DE635AA008FD841 /* GWPersonalityQuestion+CoreDataProperties.m in Sources */,
 				4E5557931DE6306B008FD841 /* GoogleAnalyticsCommunication.m in Sources */,
 				4E55579A1DE630C4008FD841 /* UserDefaults.m in Sources */,
 				4E5557CB1DE633BB008FD841 /* NSSetValueTransformer.m in Sources */,
@@ -973,6 +1181,7 @@
 				4E5557521DE62ED9008FD841 /* MAXCollectionViewImageAndText.m in Sources */,
 				4E5557CA1DE633BB008FD841 /* NSDateValueTransformer.m in Sources */,
 				4E55574C1DE62ECF008FD841 /* MAXSelectedContentButton.m in Sources */,
+				4E5557F61DE635AA008FD841 /* GWImage+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1241,6 +1450,18 @@
 			);
 			currentVersion = 4E5556E61DE626E3008FD841 /* StickerProfiling.xcdatamodel */;
 			path = StickerProfiling.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		4E5557CC1DE6352F008FD841 /* GWFramework1.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4E5557CD1DE6352F008FD841 /* GWFramework 2.xcdatamodel */,
+				4E5557CE1DE6352F008FD841 /* GWFramework.xcdatamodel */,
+			);
+			currentVersion = 4E5557CD1DE6352F008FD841 /* GWFramework 2.xcdatamodel */;
+			name = GWFramework1.xcdatamodeld;
+			path = "Data Layer/GWFramework1.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

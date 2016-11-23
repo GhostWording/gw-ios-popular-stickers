@@ -29,6 +29,34 @@
 		4E55572A1DE62C20008FD841 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5557291DE62C1F008FD841 /* CoreVideo.framework */; };
 		4E55572C1DE62CC7008FD841 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55572B1DE62CC7008FD841 /* AudioToolbox.framework */; };
 		4E55572E1DE62D3D008FD841 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E55572D1DE62D3D008FD841 /* libxml2.tbd */; };
+		4E55573C1DE62E89008FD841 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E55573B1DE62E89008FD841 /* ViewControllerExtension.swift */; };
+		4E5557401DE62EAA008FD841 /* BlocksAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55573F1DE62EAA008FD841 /* BlocksAlertView.m */; };
+		4E5557431DE62EB6008FD841 /* MAXBlockSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557421DE62EB6008FD841 /* MAXBlockSwitch.m */; };
+		4E5557461DE62EC2008FD841 /* MAXBlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557451DE62EC2008FD841 /* MAXBlockButton.m */; };
+		4E5557491DE62EC7008FD841 /* MAXFadeBlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557481DE62EC7008FD841 /* MAXFadeBlockButton.m */; };
+		4E55574C1DE62ECF008FD841 /* MAXSelectedContentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55574B1DE62ECF008FD841 /* MAXSelectedContentButton.m */; };
+		4E5557511DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55574E1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m */; };
+		4E5557521DE62ED9008FD841 /* MAXCollectionViewImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557501DE62ED9008FD841 /* MAXCollectionViewImageAndText.m */; };
+		4E5557551DE62EE7008FD841 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557541DE62EE7008FD841 /* UIColor+Extension.m */; };
+		4E55575A1DE62F05008FD841 /* UIFont+MAXSystemFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557591DE62F05008FD841 /* UIFont+MAXSystemFonts.m */; };
+		4E5557691DE62F0E008FD841 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E55575B1DE62F0E008FD841 /* Roboto-Black.ttf */; };
+		4E55576A1DE62F0E008FD841 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E55575C1DE62F0E008FD841 /* Roboto-BlackItalic.ttf */; };
+		4E55576B1DE62F0E008FD841 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E55575D1DE62F0E008FD841 /* Roboto-Bold.ttf */; };
+		4E55576C1DE62F0E008FD841 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E55575E1DE62F0E008FD841 /* Roboto-BoldItalic.ttf */; };
+		4E55576D1DE62F0E008FD841 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E55575F1DE62F0E008FD841 /* Roboto-Italic.ttf */; };
+		4E55576E1DE62F0E008FD841 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557601DE62F0E008FD841 /* Roboto-Light.ttf */; };
+		4E55576F1DE62F0E008FD841 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557611DE62F0E008FD841 /* Roboto-LightItalic.ttf */; };
+		4E5557701DE62F0E008FD841 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557621DE62F0E008FD841 /* Roboto-Medium.ttf */; };
+		4E5557711DE62F0E008FD841 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557631DE62F0E008FD841 /* Roboto-MediumItalic.ttf */; };
+		4E5557721DE62F0E008FD841 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557641DE62F0E008FD841 /* Roboto-Regular.ttf */; };
+		4E5557731DE62F0E008FD841 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557651DE62F0E008FD841 /* Roboto-Thin.ttf */; };
+		4E5557741DE62F0E008FD841 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557661DE62F0E008FD841 /* Roboto-ThinItalic.ttf */; };
+		4E5557751DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557681DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m */; };
+		4E5557781DE62F1C008FD841 /* NSString+MAXHeightExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557771DE62F1C008FD841 /* NSString+MAXHeightExtension.m */; };
+		4E55577D1DE62F2A008FD841 /* UIView+MAXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55577A1DE62F2A008FD841 /* UIView+MAXExtension.m */; };
+		4E55577E1DE62F2A008FD841 /* UIView+RenderViewToImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55577C1DE62F2A008FD841 /* UIView+RenderViewToImage.m */; };
+		4E5557831DE62F3A008FD841 /* MAXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557801DE62F3A008FD841 /* MAXPageControl.m */; };
+		4E5557841DE62F3A008FD841 /* MAXPagingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557821DE62F3A008FD841 /* MAXPagingScrollView.m */; };
 		7B413C6F4073A8FE3C897B66 /* Pods_StickerProfilingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2432E7750568AFDA8787871 /* Pods_StickerProfilingUITests.framework */; };
 		AF4474D5BCEDAE1BB53E3BBF /* Pods_StickerProfilingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D94D935D80854EB8FEF50D9 /* Pods_StickerProfilingTests.framework */; };
 		F65AB8F9953FEA26C84EDEFB /* Pods_StickerProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */; };
@@ -83,6 +111,49 @@
 		4E5557291DE62C1F008FD841 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		4E55572B1DE62CC7008FD841 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4E55572D1DE62D3D008FD841 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		4E55573B1DE62E89008FD841 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
+		4E55573E1DE62EAA008FD841 /* BlocksAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlocksAlertView.h; sourceTree = "<group>"; };
+		4E55573F1DE62EAA008FD841 /* BlocksAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlocksAlertView.m; sourceTree = "<group>"; };
+		4E5557411DE62EB6008FD841 /* MAXBlockSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXBlockSwitch.h; sourceTree = "<group>"; };
+		4E5557421DE62EB6008FD841 /* MAXBlockSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXBlockSwitch.m; sourceTree = "<group>"; };
+		4E5557441DE62EC2008FD841 /* MAXBlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXBlockButton.h; sourceTree = "<group>"; };
+		4E5557451DE62EC2008FD841 /* MAXBlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXBlockButton.m; sourceTree = "<group>"; };
+		4E5557471DE62EC7008FD841 /* MAXFadeBlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXFadeBlockButton.h; sourceTree = "<group>"; };
+		4E5557481DE62EC7008FD841 /* MAXFadeBlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXFadeBlockButton.m; sourceTree = "<group>"; };
+		4E55574A1DE62ECF008FD841 /* MAXSelectedContentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXSelectedContentButton.h; sourceTree = "<group>"; };
+		4E55574B1DE62ECF008FD841 /* MAXSelectedContentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXSelectedContentButton.m; sourceTree = "<group>"; };
+		4E55574D1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXCollectionViewCellImageAndText.h; sourceTree = "<group>"; };
+		4E55574E1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXCollectionViewCellImageAndText.m; sourceTree = "<group>"; };
+		4E55574F1DE62ED9008FD841 /* MAXCollectionViewImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXCollectionViewImageAndText.h; sourceTree = "<group>"; };
+		4E5557501DE62ED9008FD841 /* MAXCollectionViewImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXCollectionViewImageAndText.m; sourceTree = "<group>"; };
+		4E5557531DE62EE7008FD841 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		4E5557541DE62EE7008FD841 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		4E5557581DE62F05008FD841 /* UIFont+MAXSystemFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MAXSystemFonts.h"; sourceTree = "<group>"; };
+		4E5557591DE62F05008FD841 /* UIFont+MAXSystemFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MAXSystemFonts.m"; sourceTree = "<group>"; };
+		4E55575B1DE62F0E008FD841 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		4E55575C1DE62F0E008FD841 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		4E55575D1DE62F0E008FD841 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		4E55575E1DE62F0E008FD841 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		4E55575F1DE62F0E008FD841 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		4E5557601DE62F0E008FD841 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		4E5557611DE62F0E008FD841 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		4E5557621DE62F0E008FD841 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		4E5557631DE62F0E008FD841 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		4E5557641DE62F0E008FD841 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		4E5557651DE62F0E008FD841 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		4E5557661DE62F0E008FD841 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		4E5557671DE62F0E008FD841 /* UIFont+MAXRobotoExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MAXRobotoExtension.h"; sourceTree = "<group>"; };
+		4E5557681DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MAXRobotoExtension.m"; sourceTree = "<group>"; };
+		4E5557761DE62F1C008FD841 /* NSString+MAXHeightExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MAXHeightExtension.h"; sourceTree = "<group>"; };
+		4E5557771DE62F1C008FD841 /* NSString+MAXHeightExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MAXHeightExtension.m"; sourceTree = "<group>"; };
+		4E5557791DE62F2A008FD841 /* UIView+MAXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MAXExtension.h"; sourceTree = "<group>"; };
+		4E55577A1DE62F2A008FD841 /* UIView+MAXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MAXExtension.m"; sourceTree = "<group>"; };
+		4E55577B1DE62F2A008FD841 /* UIView+RenderViewToImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RenderViewToImage.h"; sourceTree = "<group>"; };
+		4E55577C1DE62F2A008FD841 /* UIView+RenderViewToImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RenderViewToImage.m"; sourceTree = "<group>"; };
+		4E55577F1DE62F3A008FD841 /* MAXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXPageControl.h; sourceTree = "<group>"; };
+		4E5557801DE62F3A008FD841 /* MAXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXPageControl.m; sourceTree = "<group>"; };
+		4E5557811DE62F3A008FD841 /* MAXPagingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXPagingScrollView.h; sourceTree = "<group>"; };
+		4E5557821DE62F3A008FD841 /* MAXPagingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXPagingScrollView.m; sourceTree = "<group>"; };
 		57E24219279856AE3C55FCB5 /* Pods-StickerProfilingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfilingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfilingTests/Pods-StickerProfilingTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A815A13C9793E736F0B1CBD /* Pods-StickerProfiling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfiling.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfiling/Pods-StickerProfiling.release.xcconfig"; sourceTree = "<group>"; };
 		7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickerProfiling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,7 +271,8 @@
 		4E5557121DE62B09008FD841 /* UI Components & Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4E5557131DE62B22008FD841 /* External Components */,
+				4E5557351DE62DFF008FD841 /* Extensions / Categories */,
+				4E5557341DE62DF8008FD841 /* UI Components */,
 			);
 			name = "UI Components & Extensions";
 			sourceTree = "<group>";
@@ -208,10 +280,164 @@
 		4E5557131DE62B22008FD841 /* External Components */ = {
 			isa = PBXGroup;
 			children = (
+				4E55577F1DE62F3A008FD841 /* MAXPageControl.h */,
+				4E5557801DE62F3A008FD841 /* MAXPageControl.m */,
+			);
+			name = "External Components";
+			sourceTree = "<group>";
+		};
+		4E55572F1DE62DB7008FD841 /* Blocks Alert Views */ = {
+			isa = PBXGroup;
+			children = (
+				4E55573E1DE62EAA008FD841 /* BlocksAlertView.h */,
+				4E55573F1DE62EAA008FD841 /* BlocksAlertView.m */,
+			);
+			name = "Blocks Alert Views";
+			sourceTree = "<group>";
+		};
+		4E5557301DE62DC7008FD841 /* Block Switch */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557411DE62EB6008FD841 /* MAXBlockSwitch.h */,
+				4E5557421DE62EB6008FD841 /* MAXBlockSwitch.m */,
+			);
+			name = "Block Switch";
+			sourceTree = "<group>";
+		};
+		4E5557311DE62DD3008FD841 /* Block Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557441DE62EC2008FD841 /* MAXBlockButton.h */,
+				4E5557451DE62EC2008FD841 /* MAXBlockButton.m */,
+				4E5557471DE62EC7008FD841 /* MAXFadeBlockButton.h */,
+				4E5557481DE62EC7008FD841 /* MAXFadeBlockButton.m */,
+				4E55574A1DE62ECF008FD841 /* MAXSelectedContentButton.h */,
+				4E55574B1DE62ECF008FD841 /* MAXSelectedContentButton.m */,
+			);
+			name = "Block Buttons";
+			sourceTree = "<group>";
+		};
+		4E5557321DE62DDE008FD841 /* Collection View Image and Text */ = {
+			isa = PBXGroup;
+			children = (
+				4E55574D1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.h */,
+				4E55574E1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m */,
+				4E55574F1DE62ED9008FD841 /* MAXCollectionViewImageAndText.h */,
+				4E5557501DE62ED9008FD841 /* MAXCollectionViewImageAndText.m */,
+			);
+			name = "Collection View Image and Text";
+			sourceTree = "<group>";
+		};
+		4E5557331DE62DEB008FD841 /* Color Category */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557531DE62EE7008FD841 /* UIColor+Extension.h */,
+				4E5557541DE62EE7008FD841 /* UIColor+Extension.m */,
+			);
+			name = "Color Category";
+			sourceTree = "<group>";
+		};
+		4E5557341DE62DF8008FD841 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557131DE62B22008FD841 /* External Components */,
+				4E55573A1DE62E66008FD841 /* Paging Scroll View */,
+				4E55572F1DE62DB7008FD841 /* Blocks Alert Views */,
+				4E5557301DE62DC7008FD841 /* Block Switch */,
+				4E5557311DE62DD3008FD841 /* Block Buttons */,
+				4E5557321DE62DDE008FD841 /* Collection View Image and Text */,
+			);
+			name = "UI Components";
+			sourceTree = "<group>";
+		};
+		4E5557351DE62DFF008FD841 /* Extensions / Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557391DE62E5E008FD841 /* View Controller Category */,
+				4E5557381DE62E52008FD841 /* UIView Category */,
+				4E5557371DE62E4C008FD841 /* NSString Category */,
+				4E5557361DE62E14008FD841 /* Font Category */,
+				4E5557331DE62DEB008FD841 /* Color Category */,
+			);
+			name = "Extensions / Categories";
+			sourceTree = "<group>";
+		};
+		4E5557361DE62E14008FD841 /* Font Category */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557571DE62EF9008FD841 /* System Fonts */,
+				4E5557561DE62EF2008FD841 /* Custom Fonts */,
+			);
+			name = "Font Category";
+			sourceTree = "<group>";
+		};
+		4E5557371DE62E4C008FD841 /* NSString Category */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557761DE62F1C008FD841 /* NSString+MAXHeightExtension.h */,
+				4E5557771DE62F1C008FD841 /* NSString+MAXHeightExtension.m */,
+			);
+			name = "NSString Category";
+			sourceTree = "<group>";
+		};
+		4E5557381DE62E52008FD841 /* UIView Category */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557791DE62F2A008FD841 /* UIView+MAXExtension.h */,
+				4E55577A1DE62F2A008FD841 /* UIView+MAXExtension.m */,
+				4E55577B1DE62F2A008FD841 /* UIView+RenderViewToImage.h */,
+				4E55577C1DE62F2A008FD841 /* UIView+RenderViewToImage.m */,
+			);
+			name = "UIView Category";
+			sourceTree = "<group>";
+		};
+		4E5557391DE62E5E008FD841 /* View Controller Category */ = {
+			isa = PBXGroup;
+			children = (
+				4E55573B1DE62E89008FD841 /* ViewControllerExtension.swift */,
+			);
+			name = "View Controller Category";
+			sourceTree = "<group>";
+		};
+		4E55573A1DE62E66008FD841 /* Paging Scroll View */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557811DE62F3A008FD841 /* MAXPagingScrollView.h */,
+				4E5557821DE62F3A008FD841 /* MAXPagingScrollView.m */,
 				4E5557141DE62B39008FD841 /* MBSwitch.h */,
 				4E5557151DE62B39008FD841 /* MBSwitch.m */,
 			);
-			name = "External Components";
+			name = "Paging Scroll View";
+			sourceTree = "<group>";
+		};
+		4E5557561DE62EF2008FD841 /* Custom Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4E55575B1DE62F0E008FD841 /* Roboto-Black.ttf */,
+				4E55575C1DE62F0E008FD841 /* Roboto-BlackItalic.ttf */,
+				4E55575D1DE62F0E008FD841 /* Roboto-Bold.ttf */,
+				4E55575E1DE62F0E008FD841 /* Roboto-BoldItalic.ttf */,
+				4E55575F1DE62F0E008FD841 /* Roboto-Italic.ttf */,
+				4E5557601DE62F0E008FD841 /* Roboto-Light.ttf */,
+				4E5557611DE62F0E008FD841 /* Roboto-LightItalic.ttf */,
+				4E5557621DE62F0E008FD841 /* Roboto-Medium.ttf */,
+				4E5557631DE62F0E008FD841 /* Roboto-MediumItalic.ttf */,
+				4E5557641DE62F0E008FD841 /* Roboto-Regular.ttf */,
+				4E5557651DE62F0E008FD841 /* Roboto-Thin.ttf */,
+				4E5557661DE62F0E008FD841 /* Roboto-ThinItalic.ttf */,
+				4E5557671DE62F0E008FD841 /* UIFont+MAXRobotoExtension.h */,
+				4E5557681DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m */,
+			);
+			name = "Custom Fonts";
+			sourceTree = "<group>";
+		};
+		4E5557571DE62EF9008FD841 /* System Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557581DE62F05008FD841 /* UIFont+MAXSystemFonts.h */,
+				4E5557591DE62F05008FD841 /* UIFont+MAXSystemFonts.m */,
+			);
+			name = "System Fonts";
 			sourceTree = "<group>";
 		};
 		9A4D69303D7A653A4F4E638C /* Pods */ = {
@@ -362,9 +588,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E5557741DE62F0E008FD841 /* Roboto-ThinItalic.ttf in Resources */,
+				4E5557731DE62F0E008FD841 /* Roboto-Thin.ttf in Resources */,
 				4E5556EC1DE626E3008FD841 /* LaunchScreen.storyboard in Resources */,
 				4E5556E91DE626E3008FD841 /* Assets.xcassets in Resources */,
+				4E55576F1DE62F0E008FD841 /* Roboto-LightItalic.ttf in Resources */,
+				4E55576B1DE62F0E008FD841 /* Roboto-Bold.ttf in Resources */,
+				4E5557711DE62F0E008FD841 /* Roboto-MediumItalic.ttf in Resources */,
+				4E55576A1DE62F0E008FD841 /* Roboto-BlackItalic.ttf in Resources */,
 				4E5556E41DE626E3008FD841 /* Main.storyboard in Resources */,
+				4E55576D1DE62F0E008FD841 /* Roboto-Italic.ttf in Resources */,
+				4E55576C1DE62F0E008FD841 /* Roboto-BoldItalic.ttf in Resources */,
+				4E5557701DE62F0E008FD841 /* Roboto-Medium.ttf in Resources */,
+				4E5557721DE62F0E008FD841 /* Roboto-Regular.ttf in Resources */,
+				4E5557691DE62F0E008FD841 /* Roboto-Black.ttf in Resources */,
+				4E55576E1DE62F0E008FD841 /* Roboto-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,10 +765,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E5557461DE62EC2008FD841 /* MAXBlockButton.m in Sources */,
+				4E5557751DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m in Sources */,
 				4E5556E11DE626E3008FD841 /* ViewController.swift in Sources */,
+				4E55577D1DE62F2A008FD841 /* UIView+MAXExtension.m in Sources */,
+				4E55577E1DE62F2A008FD841 /* UIView+RenderViewToImage.m in Sources */,
 				4E5556E71DE626E3008FD841 /* StickerProfiling.xcdatamodeld in Sources */,
+				4E5557511DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m in Sources */,
 				4E5557161DE62B39008FD841 /* MBSwitch.m in Sources */,
+				4E5557551DE62EE7008FD841 /* UIColor+Extension.m in Sources */,
+				4E5557831DE62F3A008FD841 /* MAXPageControl.m in Sources */,
+				4E5557841DE62F3A008FD841 /* MAXPagingScrollView.m in Sources */,
+				4E5557781DE62F1C008FD841 /* NSString+MAXHeightExtension.m in Sources */,
+				4E55573C1DE62E89008FD841 /* ViewControllerExtension.swift in Sources */,
 				4E5556DF1DE626E3008FD841 /* AppDelegate.swift in Sources */,
+				4E5557401DE62EAA008FD841 /* BlocksAlertView.m in Sources */,
+				4E5557431DE62EB6008FD841 /* MAXBlockSwitch.m in Sources */,
+				4E5557491DE62EC7008FD841 /* MAXFadeBlockButton.m in Sources */,
+				4E55575A1DE62F05008FD841 /* UIFont+MAXSystemFonts.m in Sources */,
+				4E5557521DE62ED9008FD841 /* MAXCollectionViewImageAndText.m in Sources */,
+				4E55574C1DE62ECF008FD841 /* MAXSelectedContentButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

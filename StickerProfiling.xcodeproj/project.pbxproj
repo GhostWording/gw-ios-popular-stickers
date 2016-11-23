@@ -66,6 +66,16 @@
 		4E5557A21DE63125008FD841 /* GWLocalizedBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55579E1DE63125008FD841 /* GWLocalizedBundle.m */; };
 		4E5557A31DE63125008FD841 /* PopularStickersLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557A01DE63125008FD841 /* PopularStickersLocalization.m */; };
 		4E5557A41DE63125008FD841 /* PopularStickersLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E5557A11DE63125008FD841 /* PopularStickersLocalization.strings */; };
+		4E5557A71DE631D2008FD841 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557A61DE631D2008FD841 /* AppFlow.swift */; };
+		4E5557B71DE63340008FD841 /* MNFJsonAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557AB1DE63340008FD841 /* MNFJsonAdapter.m */; };
+		4E5557B81DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557AE1DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.m */; };
+		4E5557B91DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557B01DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m */; };
+		4E5557BA1DE63340008FD841 /* MNFJsonAdapterValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557B21DE63340008FD841 /* MNFJsonAdapterValueTransformer.m */; };
+		4E5557BB1DE63340008FD841 /* NSObject+MenigaRuntimeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557B41DE63340008FD841 /* NSObject+MenigaRuntimeExtension.m */; };
+		4E5557BC1DE63340008FD841 /* NSString+MNFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557B61DE63340008FD841 /* NSString+MNFExtension.m */; };
+		4E5557C41DE63390008FD841 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557C31DE63390008FD841 /* NotificationManager.m */; };
+		4E5557CA1DE633BB008FD841 /* NSDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557C71DE633BB008FD841 /* NSDateValueTransformer.m */; };
+		4E5557CB1DE633BB008FD841 /* NSSetValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557C91DE633BB008FD841 /* NSSetValueTransformer.m */; };
 		7B413C6F4073A8FE3C897B66 /* Pods_StickerProfilingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2432E7750568AFDA8787871 /* Pods_StickerProfilingUITests.framework */; };
 		AF4474D5BCEDAE1BB53E3BBF /* Pods_StickerProfilingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D94D935D80854EB8FEF50D9 /* Pods_StickerProfilingTests.framework */; };
 		F65AB8F9953FEA26C84EDEFB /* Pods_StickerProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */; };
@@ -182,6 +192,26 @@
 		4E55579F1DE63125008FD841 /* PopularStickersLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopularStickersLocalization.h; sourceTree = "<group>"; };
 		4E5557A01DE63125008FD841 /* PopularStickersLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopularStickersLocalization.m; sourceTree = "<group>"; };
 		4E5557A11DE63125008FD841 /* PopularStickersLocalization.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = PopularStickersLocalization.strings; sourceTree = "<group>"; };
+		4E5557A61DE631D2008FD841 /* AppFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
+		4E5557AA1DE63340008FD841 /* MNFJsonAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNFJsonAdapter.h; sourceTree = "<group>"; };
+		4E5557AB1DE63340008FD841 /* MNFJsonAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNFJsonAdapter.m; sourceTree = "<group>"; };
+		4E5557AC1DE63340008FD841 /* MNFJsonAdapterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNFJsonAdapterDelegate.h; sourceTree = "<group>"; };
+		4E5557AD1DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNFJsonAdapterKeyAndProperty.h; sourceTree = "<group>"; };
+		4E5557AE1DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNFJsonAdapterKeyAndProperty.m; sourceTree = "<group>"; };
+		4E5557AF1DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNFJsonAdapterSubclassedProperty.h; sourceTree = "<group>"; };
+		4E5557B01DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNFJsonAdapterSubclassedProperty.m; sourceTree = "<group>"; };
+		4E5557B11DE63340008FD841 /* MNFJsonAdapterValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNFJsonAdapterValueTransformer.h; sourceTree = "<group>"; };
+		4E5557B21DE63340008FD841 /* MNFJsonAdapterValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNFJsonAdapterValueTransformer.m; sourceTree = "<group>"; };
+		4E5557B31DE63340008FD841 /* NSObject+MenigaRuntimeExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MenigaRuntimeExtension.h"; sourceTree = "<group>"; };
+		4E5557B41DE63340008FD841 /* NSObject+MenigaRuntimeExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MenigaRuntimeExtension.m"; sourceTree = "<group>"; };
+		4E5557B51DE63340008FD841 /* NSString+MNFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MNFExtension.h"; sourceTree = "<group>"; };
+		4E5557B61DE63340008FD841 /* NSString+MNFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MNFExtension.m"; sourceTree = "<group>"; };
+		4E5557C21DE63390008FD841 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
+		4E5557C31DE63390008FD841 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
+		4E5557C61DE633BB008FD841 /* NSDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateValueTransformer.h; sourceTree = "<group>"; };
+		4E5557C71DE633BB008FD841 /* NSDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateValueTransformer.m; sourceTree = "<group>"; };
+		4E5557C81DE633BB008FD841 /* NSSetValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSetValueTransformer.h; sourceTree = "<group>"; };
+		4E5557C91DE633BB008FD841 /* NSSetValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSetValueTransformer.m; sourceTree = "<group>"; };
 		57E24219279856AE3C55FCB5 /* Pods-StickerProfilingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfilingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfilingTests/Pods-StickerProfilingTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A815A13C9793E736F0B1CBD /* Pods-StickerProfiling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfiling.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfiling/Pods-StickerProfiling.release.xcconfig"; sourceTree = "<group>"; };
 		7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickerProfiling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +292,8 @@
 				4E5557851DE6304C008FD841 /* Analaytics */,
 				4E55579C1DE63111008FD841 /* Localization */,
 				4E5557971DE630A8008FD841 /* User Defaults & Constants */,
+				4E5557A51DE631C3008FD841 /* Messenger Share State */,
+				4E5557A81DE63303008FD841 /* Data Layer */,
 				4E5556DE1DE626E3008FD841 /* AppDelegate.swift */,
 				4E5556E01DE626E3008FD841 /* ViewController.swift */,
 				4E5556E21DE626E3008FD841 /* Main.storyboard */,
@@ -517,6 +549,64 @@
 				4E5557A11DE63125008FD841 /* PopularStickersLocalization.strings */,
 			);
 			name = Localization;
+			sourceTree = "<group>";
+		};
+		4E5557A51DE631C3008FD841 /* Messenger Share State */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557A61DE631D2008FD841 /* AppFlow.swift */,
+			);
+			name = "Messenger Share State";
+			sourceTree = "<group>";
+		};
+		4E5557A81DE63303008FD841 /* Data Layer */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557C11DE63386008FD841 /* Notification Manager */,
+				4E5557A91DE63330008FD841 /* Json Adapter */,
+			);
+			name = "Data Layer";
+			sourceTree = "<group>";
+		};
+		4E5557A91DE63330008FD841 /* Json Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557C51DE633AF008FD841 /* Value Transformers */,
+				4E5557AA1DE63340008FD841 /* MNFJsonAdapter.h */,
+				4E5557AB1DE63340008FD841 /* MNFJsonAdapter.m */,
+				4E5557AC1DE63340008FD841 /* MNFJsonAdapterDelegate.h */,
+				4E5557AD1DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.h */,
+				4E5557AE1DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.m */,
+				4E5557AF1DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.h */,
+				4E5557B01DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m */,
+				4E5557B11DE63340008FD841 /* MNFJsonAdapterValueTransformer.h */,
+				4E5557B21DE63340008FD841 /* MNFJsonAdapterValueTransformer.m */,
+				4E5557B31DE63340008FD841 /* NSObject+MenigaRuntimeExtension.h */,
+				4E5557B41DE63340008FD841 /* NSObject+MenigaRuntimeExtension.m */,
+				4E5557B51DE63340008FD841 /* NSString+MNFExtension.h */,
+				4E5557B61DE63340008FD841 /* NSString+MNFExtension.m */,
+			);
+			name = "Json Adapter";
+			sourceTree = "<group>";
+		};
+		4E5557C11DE63386008FD841 /* Notification Manager */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557C21DE63390008FD841 /* NotificationManager.h */,
+				4E5557C31DE63390008FD841 /* NotificationManager.m */,
+			);
+			name = "Notification Manager";
+			sourceTree = "<group>";
+		};
+		4E5557C51DE633AF008FD841 /* Value Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				4E5557C61DE633BB008FD841 /* NSDateValueTransformer.h */,
+				4E5557C71DE633BB008FD841 /* NSDateValueTransformer.m */,
+				4E5557C81DE633BB008FD841 /* NSSetValueTransformer.h */,
+				4E5557C91DE633BB008FD841 /* NSSetValueTransformer.m */,
+			);
+			name = "Value Transformers";
 			sourceTree = "<group>";
 		};
 		9A4D69303D7A653A4F4E638C /* Pods */ = {
@@ -845,9 +935,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E5557B81DE63340008FD841 /* MNFJsonAdapterKeyAndProperty.m in Sources */,
 				4E5557941DE6306B008FD841 /* NSMutableDictionary+NoNilExtension.m in Sources */,
+				4E5557A71DE631D2008FD841 /* AppFlow.swift in Sources */,
+				4E5557B91DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m in Sources */,
 				4E5557951DE6306B008FD841 /* GWAnalyticsStore.m in Sources */,
 				4E5557461DE62EC2008FD841 /* MAXBlockButton.m in Sources */,
+				4E5557C41DE63390008FD841 /* NotificationManager.m in Sources */,
 				4E5557751DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m in Sources */,
 				4E5556E11DE626E3008FD841 /* ViewController.swift in Sources */,
 				4E55577D1DE62F2A008FD841 /* UIView+MAXExtension.m in Sources */,
@@ -855,12 +949,16 @@
 				4E5557921DE6306B008FD841 /* CustomAnalytics.m in Sources */,
 				4E5557A31DE63125008FD841 /* PopularStickersLocalization.m in Sources */,
 				4E5556E71DE626E3008FD841 /* StickerProfiling.xcdatamodeld in Sources */,
+				4E5557BC1DE63340008FD841 /* NSString+MNFExtension.m in Sources */,
 				4E5557511DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m in Sources */,
 				4E5557161DE62B39008FD841 /* MBSwitch.m in Sources */,
 				4E5557551DE62EE7008FD841 /* UIColor+Extension.m in Sources */,
 				4E5557A21DE63125008FD841 /* GWLocalizedBundle.m in Sources */,
+				4E5557BA1DE63340008FD841 /* MNFJsonAdapterValueTransformer.m in Sources */,
+				4E5557B71DE63340008FD841 /* MNFJsonAdapter.m in Sources */,
 				4E5557831DE62F3A008FD841 /* MAXPageControl.m in Sources */,
 				4E5557841DE62F3A008FD841 /* MAXPagingScrollView.m in Sources */,
+				4E5557BB1DE63340008FD841 /* NSObject+MenigaRuntimeExtension.m in Sources */,
 				4E5557781DE62F1C008FD841 /* NSString+MAXHeightExtension.m in Sources */,
 				4E55573C1DE62E89008FD841 /* ViewControllerExtension.swift in Sources */,
 				4E5556DF1DE626E3008FD841 /* AppDelegate.swift in Sources */,
@@ -870,8 +968,10 @@
 				4E5557491DE62EC7008FD841 /* MAXFadeBlockButton.m in Sources */,
 				4E5557931DE6306B008FD841 /* GoogleAnalyticsCommunication.m in Sources */,
 				4E55579A1DE630C4008FD841 /* UserDefaults.m in Sources */,
+				4E5557CB1DE633BB008FD841 /* NSSetValueTransformer.m in Sources */,
 				4E55575A1DE62F05008FD841 /* UIFont+MAXSystemFonts.m in Sources */,
 				4E5557521DE62ED9008FD841 /* MAXCollectionViewImageAndText.m in Sources */,
+				4E5557CA1DE633BB008FD841 /* NSDateValueTransformer.m in Sources */,
 				4E55574C1DE62ECF008FD841 /* MAXSelectedContentButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

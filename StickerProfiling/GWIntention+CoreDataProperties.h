@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *intentionDescription;
 @property (nullable, nonatomic, retain) NSString *intentionId;
 @property (nullable, nonatomic, retain) NSString *label;
-@property (nullable, nonatomic, retain) id labels;
+@property (nullable, nonatomic, retain) NSArray *labels;
 @property (nullable, nonatomic, retain) NSString *mediaUrl;
 @property (nullable, nonatomic, retain) NSDate *mostRecentTextUpdate;
 @property (nullable, nonatomic, retain) NSNumber *mostRecentTextUpdateEpoch;

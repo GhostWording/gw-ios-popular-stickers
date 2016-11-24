@@ -1,0 +1,71 @@
+/* 
+  PopularStickersLocalization.strings
+  StickerBliss
+
+  Created by Mathieu Skulason on 31/05/16.
+  Copyright © 2016 Konta ehf. All rights reserved.
+*/
+
+"<AppName>" = "Sticker Bliss";
+
+// MARK: Send Method
+"<ChooseSendMethodSettings>" = "Send messages with";
+"<ChooseSendMethod>" = "Send with";
+"<MessengerMethod>" = "Messenger";
+"<OtherMethod>" = "WhatsApp, others...";
+"<RememberSendMethod>" = "Always use this option";
+
+// MARK: For Messenger Thank You Intention Answer
+"<ThankYouIntentionLabel>" = "Thank you";
+
+// MARK:
+"<Next>" = "Next";
+"<Done>" = "Done";
+"<MyMBTI>" = "My personality Type";
+"<Of>" = "of";
+"<MBTIDoneMessage>" = "Thank you! That will help us improve suggestions.";
+
+// MARK: Notification Alert
+"<NotificationAlertTitle>" = "Notifications";
+"<NotificationAlertMessage>" = "Can we send you new sticker ideas?";
+"<NotificationAlertCancelTitle>" = "Cancel";
+"<NotificationAlertAcceptTitle>" = "Accept";
+
+// MARK: Login View Controller
+"<StartAppTitle>" = "Continue without Facebook";
+"<FacebookButtonTitle>" = "Continue with Facebook";
+"<Skip>" = "SKIP";
+
+// MARK: Single Detail View Controller
+"<SendPhotoOnly>" = "Send photo on its own";
+"<SendExplanation>" = "or click on a text to add it";
+"<Send>" = "Send";
+"<SelectRecipientTitle>" = "Select a recipient";
+"<SelectIntentionTitle>" = "Select message type";
+
+// MARK: Settings View Controller
+"<SettingsTitle>" = "Settings";
+
+"<MyGenderTitle>" = "MY GENDER";
+"<MaleString>" = "a man";
+"<FemaleString>" = "a woman";
+
+"<MyAgeTitle>" = "MY AGE";
+"<17>" = "17-";
+"<18-39>" = "18-39";
+"<40-64>" = "40-64";
+"<65>" = "65+";
+
+"<ChooseLanguageTitle>" = "MY LANGUAGE";
+"<FrenchTitle>" = "Francais";
+"<EnglishTitle>" = "English";
+"<SpanishTitle>" = "Espanol";
+
+"<ReceiveNotificationTitle>" = "MY NOTIFICATIONS";
+"<OnceNotificationPerDay>" = "One message idea per day";
+"<OneNotificationEveryOtherDay>" = "One every 2 days";
+"<OneNotificationEveryWeek>" = "One per week";
+
+"<RelationshipStatusTitle>" = "MY RELATIONSHIP STATUS";
+"<LiveOnMyOwnTitle>" = "I live on my own";
+"<LiveWithSomeoneTitle>" = "I live with someone";

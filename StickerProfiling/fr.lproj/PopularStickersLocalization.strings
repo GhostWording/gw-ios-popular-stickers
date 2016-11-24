@@ -1,0 +1,72 @@
+/*
+ PopularStickersLocalization.strings
+ StickerBliss
+ 
+ Created by Mathieu Skulason on 31/05/16.
+ Copyright © 2016 Konta ehf. All rights reserved.
+ */
+
+"<AppName>" = "Sticker Bliss";
+
+// MARK: Send Method
+"<ChooseSendMethodSettings>" = "Envoyer les messages avec";
+"<ChooseSendMethod>" = "Envoyer avec";
+"<MessengerMethod>" = "Messenger";
+"<OtherMethod>" = "WhatsApp, autres...";
+"<RememberSendMethod>" = "Toujours utiliser cette option";
+
+// MARK: For Messenger Thank You Intention Answer
+"<ThankYouIntentionLabel>" = "Merci";
+
+// MARK:
+"<Next>" = "Suivant";
+"<Done>" = "Terminer";
+"<MyMBTI>" = "Mon type de personnalité";
+"<Of>" = "sur";
+"<MBTIDoneMessage>" = "Thank you! That will help us improve suggestions.";
+
+// MARK: Notification Alert
+"<NotificationAlertTitle>" = "Notifications";
+"<NotificationAlertMessage>" = "Pouvons-nous vous envoyer de nouvelles idées de stickers ?";
+"<NotificationAlertCancelTitle>" = "Annuler";
+"<NotificationAlertAcceptTitle>" = "Oui";
+
+
+// MARK: Login View Controller
+"<StartAppTitle>" = "Continuer sans Facebook";
+"<FacebookButtonTitle>" = "Continuer avec Facebook";
+"<Skip>" = "PASSER";
+
+// MARK: Single Detail View Controller
+"<SendPhotoOnly>" = "Envoyer la photo sans texte";
+"<SendExplanation>" = "ou choisir un texte pour l'ajouter";
+"<Send>" = "Envoyer";
+"<SelectRecipientTitle>" = "Choisir un destinataire";
+"<SelectIntentionTitle>" = "Choisissez le type de message";
+
+// MARK: Settings View Controller
+"<SettingsTitle>" = "Réglages";
+
+"<MyGenderTitle>" = "JE SUIS";
+"<MaleString>" = "un homme";
+"<FemaleString>" = "une femme";
+
+"<MyAgeTitle>" = "MON AGE";
+"<17>" = "17-";
+"<18-39>" = "18-39";
+"<40-64>" = "40-64";
+"<65>" = "65+";
+
+"<ChooseLanguageTitle>" = "MA LANGUE";
+"<FrenchTitle>" = "Français";
+"<EnglishTitle>" = "Anglais";
+"<SpanishTitle>" = "Espagnol";
+
+"<ReceiveNotificationTitle>" = "MES NOTIFICATIONS";
+"<OnceNotificationPerDay>" = "Une idée de message par jour";
+"<OneNotificationEveryOtherDay>" = "Une tous les 2 jours";
+"<OneNotificationEveryWeek>" = "Une par semaine";
+
+"<RelationshipStatusTitle>" = "SITUATION SENTIMENTALE";
+"<LiveOnMyOwnTitle>" = "Je vis seul(e)";
+"<LiveWithSomeoneTitle>" = "J'habite avec quelqu'un";

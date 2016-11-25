@@ -33,7 +33,7 @@
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         [GAI sharedInstance].dispatchInterval = 5;
         [[[GAI sharedInstance] logger] setLogLevel: kGAILogLevelWarning];
-        [[GAI sharedInstance] trackerWithTrackingId: @"UA-47718196-18"];
+        [[GAI sharedInstance] trackerWithTrackingId: @"UA-47718196-16"];
         
         tracker = [[GAI sharedInstance] defaultTracker];
         tracker.allowIDFACollection = YES;

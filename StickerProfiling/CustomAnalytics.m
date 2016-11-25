@@ -56,7 +56,7 @@ static NSURLSession *session = nil;
     [analyticsPost c_setObject: versionNumber forKey: @"VersionNumber"];
     [analyticsPost c_setObject: @"iOS" forKey: @"OsType"];
     [analyticsPost c_setObject: [UserDefaults facebookId] forKey: @"FacebookId"];
-    [analyticsPost c_setObject: @"StickerBliss" forKey: @"AreaId"];
+    [analyticsPost c_setObject: @"MBTIStickers" forKey: @"AreaId"];
 
     [GWAnalyticsStore addAnalyticsPost: analyticsPost];
     

@@ -453,7 +453,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             AnalyticsManager.sharedManager().postActionWithType( kGALoginWithFacebook, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: "Options")
             
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, name, gender, age_range"]).startWithCompletionHandler({
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, email, name, gender, age_range"]).startWithCompletionHandler({
                 connection, result, error -> Void in
                 
                 
@@ -473,6 +473,12 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                     
                     if let identifier = dict.objectForKey("id") as? String {
                         AnalyticsManager.sharedManager().postActionWithType( kGASetFacebookId, targetType: kGAEventCategoryAppEvent, targetId: identifier, targetParameter: nil, actionLocation: nil)
+                    }
+                    
+                    if let email = dict.objectForKey("email") as? String {
+                        
+                        AnalyticsManager.sharedManager().postActionWithType(kGASetEmail, targetType: kGAEventCategoryAppEvent, targetId: email, targetParameter: nil, actionLocation: "Options")
+                        
                     }
                     
                 }

@@ -396,6 +396,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         AnalyticsManager.sharedManager().postActionWithType( kGASetFacebookId, targetType: kGAEventCategoryAppEvent, targetId: facebookId, targetParameter: nil, actionLocation: nil)
                     }
                     
+                    if let email = dict.objectForKey("email") as? String {
+                        
+                        AnalyticsManager.sharedManager().postActionWithType(kGASetEmail, targetType: kGAEventCategoryAppEvent, targetId: email, targetParameter: nil, actionLocation: "Login")
+                        
+                    }
+                    
                 }
                 
             })

@@ -54,6 +54,7 @@ static const NSString *kGASetFacebookId = @"SetFacebookId";
 static const NSString *kGALogoutWithFacebook = @"LogoutWithFacebook";
 static const NSString *kGAContactFacebbokId = @"ContactFacebookId";
 static const NSString *kGAMainScreenReached = @"MainScreenReached";
+static const NSString *kGASetEmail = @"UserEmail";
 
 static const NSString *kGAAdRequested = @"AdRequested";
 static const NSString *kGAAdDisplayed = @"AdDisplayed";

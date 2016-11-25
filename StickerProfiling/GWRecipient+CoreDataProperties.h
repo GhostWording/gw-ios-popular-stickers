@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *gender;
 @property (nullable, nonatomic, retain) NSString *imageUrl;
 @property (nullable, nonatomic, retain) NSNumber *importance;
-@property (nullable, nonatomic, retain) id labels;
+@property (nullable, nonatomic, retain) NSArray *labels;
 @property (nullable, nonatomic, retain) NSString *localLabel;
 @property (nullable, nonatomic, retain) NSString *politeForm;
 @property (nullable, nonatomic, retain) NSString *recipientId;

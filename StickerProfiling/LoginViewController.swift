@@ -79,7 +79,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("en")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString() , targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Login")
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -101,7 +101,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("fr")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Login")
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -123,7 +123,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("es")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Login")
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -378,7 +378,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 
                 if let dict = result as? NSDictionary where error == nil {
-                    print("dict is \(dict)")
                     
                     if let gender = dict.objectForKey("gender") as? String {
                         

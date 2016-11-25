@@ -223,7 +223,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("en")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Settings")
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -249,7 +249,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("fr")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Settings")
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -275,7 +275,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("es")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Settings")
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in

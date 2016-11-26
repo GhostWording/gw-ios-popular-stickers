@@ -2211,7 +2211,7 @@
 				INFOPLIST_FILE = StickerProfiling/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ghostwording.StickerProfiling;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostwording.StickerProfiling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "StickerProfiling/StickerProfiling-Bridging-Header.h";
 			};
@@ -2231,7 +2231,7 @@
 				INFOPLIST_FILE = StickerProfiling/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ghostwording.StickerProfiling;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghostwording.StickerProfiling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "StickerProfiling/StickerProfiling-Bridging-Header.h";
 			};

@@ -29,7 +29,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     let bottomButton = MAXFadeBlockButton()
     let infoLabel = UILabel()
     let backButton = MAXFadeBlockButton()
-    var rememberMethodSwitch : MBSwitch!
+    var rememberMethodSwitch : MBSwitch?
     var overlayView : UIView?
     var backToMessengerButton: MAXBlockButton?
 
@@ -382,10 +382,10 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             if  UserDefaults.hasSentImageOrText() == true {
                 
                 self.rememberMethodSwitch = MBSwitch(frame: CGRectMake(CGRectGetWidth(chooseMethodView.frame) * 0.08, CGRectGetMaxY(otherButtonContainerRow.frame) + CGRectGetWidth(chooseMethodView.frame) * 0.035, CGRectGetWidth(chooseMethodView.frame) * 0.15, CGRectGetWidth(chooseMethodView.frame) * 0.1))
-                self.rememberMethodSwitch.onTintColor = UIColor.c_blueColor()
-                chooseMethodView.addSubview( rememberMethodSwitch )
+                self.rememberMethodSwitch!.onTintColor = UIColor.c_blueColor()
+                chooseMethodView.addSubview( rememberMethodSwitch! )
                 
-                let rememberTitleLabel = UILabel(frame: CGRectMake(CGRectGetMaxX(self.rememberMethodSwitch.frame) + 10, CGRectGetMinY(self.rememberMethodSwitch.frame), CGRectGetWidth(chooseMethodView.frame) * 0.7, CGRectGetWidth(chooseMethodView.frame) * 0.1))
+                let rememberTitleLabel = UILabel(frame: CGRectMake(CGRectGetMaxX(self.rememberMethodSwitch!.frame) + 10, CGRectGetMinY(self.rememberMethodSwitch!.frame), CGRectGetWidth(chooseMethodView.frame) * 0.7, CGRectGetWidth(chooseMethodView.frame) * 0.1))
                 rememberTitleLabel.textAlignment = .Left
                 rememberTitleLabel.textColor = UIColor.c_textDarkGrayColor()
                 rememberTitleLabel.font = UIFont.c_robotoMediumWithSize( 15.0 )
@@ -418,8 +418,10 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             messengerButtonContainerRow.buttonTouchUpInsideWithCompletion({
                 
-                if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch.on == true {
-                    UserDefaults.setSendMethodForMessage( MessageSendMethod.Messenger )
+                if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch != nil {
+                    if self.rememberMethodSwitch!.on == true {
+                        UserDefaults.setSendMethodForMessage( MessageSendMethod.Messenger )
+                    }
                 }
                 
                 self.fadeOutOverlayView(nil)
@@ -430,8 +432,10 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             otherButtonContainerRow.buttonTouchUpInsideWithCompletion({
                 
-                if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch.on == true {
-                    UserDefaults.setSendMethodForMessage(  MessageSendMethod.OS )
+                if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch != nil {
+                    if self.rememberMethodSwitch!.on == true {
+                        UserDefaults.setSendMethodForMessage(  MessageSendMethod.OS )
+                    }
                 }
                 
                 self.fadeOutOverlayView(nil)

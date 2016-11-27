@@ -108,7 +108,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         
         backButton.buttonTouchUpInsideWithCompletion({
             
-            AnalyticsManager.sharedManager().postActionWithType( kGABackFromImage, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGABackFromImage, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
             self.dismissViewControllerAnimated(true, completion: nil)
         })
@@ -210,19 +210,19 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     func sendWithMessenger() {
         
-        AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: nil)
+        AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
         
         
         if let nonNilIndexPath = indexPath {
             // when index path is not nil we sent it with a text
-            AnalyticsManager.sharedManager().postActionWithType( kGATextAddedd, targetType: kGAEventCategoryButtonPressed, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGASendText, targetType: kGAEventCategoryButtonPressed, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGAEventCategoryButtonPressed, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.getImageName(self.imageName), actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName, actionLocation: kGAItemDetailScreen)
         }
         else {
-            AnalyticsManager.sharedManager().postActionWithType( kGASendImage, targetType: kGAEventCategoryButtonPressed, targetId: self.getImageName(self.imageName), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeImage, targetId: self.imageName, targetParameter: nil, actionLocation: kGAItemDetailScreen)
         }
         
         let progressHud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -248,17 +248,19 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             activityVC.excludedActivityTypes = excludedActivities
         }
         
-        AnalyticsManager.sharedManager().postActionWithType( kGASendThroughOS, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: nil)
+        AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
         
         if let nonNilIndexPath = indexPath {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGATextAddedd, targetType: kGAEventCategoryButtonPressed, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGASendText, targetType: kGAEventCategoryButtonPressed, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            
+            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName, actionLocation: kGAItemDetailScreen)
             
         }
         else {
-            AnalyticsManager.sharedManager().postActionWithType( kGASendImage, targetType: kGAEventCategoryButtonPressed, targetId: self.getImageName(self.imageName), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeImage, targetId: self.imageName, targetParameter: nil, actionLocation: kGAItemDetailScreen)
         }
         
         

@@ -33,15 +33,15 @@ class StickersDetailViewController: UIViewController {
         if messengerMetadata != nil {
             
             if let nonNilIntentionId = messengerMetadata?.objectForKey("imagePath") as? String {
-                AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAReplyingIntention, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType(kGAReplyingIntention, targetType: kGATargetTypeIntention, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGACategoryListScreen)
             }
             
             if let nonNilPrototypeTextId = messengerMetadata?.objectForKey("prototypeId") as? String {
-                AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAReplyingTextPrototypeId, targetId: nonNilPrototypeTextId, targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType(kGAReplyingTextPrototypeId, targetType: kGATargetTypeText, targetId: nonNilPrototypeTextId, targetParameter: nil, actionLocation: kGACategoryListScreen)
             }
             
             if let nonNilImageId = messengerMetadata?.objectForKey("imageName") as? String {
-                AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAReplyingImageName, targetId: nonNilImageId, targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType(kGAReplyingImageName, targetType: kGATargetTypeImage, targetId: nonNilImageId, targetParameter: nil, actionLocation: kGACategoryListScreen)
             }
             
         }
@@ -124,12 +124,12 @@ class StickersDetailViewController: UIViewController {
         
         if self.selectedIntentionId != nil {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAMoodIntention, targetType: kGAEventCategoryButtonPressed, targetId: selectedIntentionId, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAMoodIntention, targetType: kGATargetTypeIntention, targetId: selectedIntentionId, targetParameter: nil, actionLocation: kGACategoryListScreen)
         
         }
         else {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAMoodTheme, targetType: kGAEventCategoryButtonPressed, targetId: selectedImagePath, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAMoodTheme, targetType: kGATargetTypeTheme, targetId: selectedImagePath, targetParameter: nil, actionLocation: kGACategoryListScreen)
         
         }
         
@@ -153,7 +153,7 @@ class StickersDetailViewController: UIViewController {
         
         backButton.buttonTouchUpInsideWithCompletion({
             
-            AnalyticsManager.sharedManager().postActionWithType( kGABackFromThemes, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGABackFromThemes, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGACategoryListScreen)
             
             UserDefaults.incrementNumBackToMainMenu()
             
@@ -219,7 +219,7 @@ class StickersDetailViewController: UIViewController {
         viewModel.selectedImage({
             imageName, selectedImage -> Void in
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAImageSelected, targetType: kGAEventCategoryButtonPressed, targetId: imageName, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAImageSelected, targetType: kGATargetTypeImage, targetId: imageName, targetParameter: nil, actionLocation: kGACategoryListScreen)
             
             self.showSingleStickerDetail(imageName, image: selectedImage)
             

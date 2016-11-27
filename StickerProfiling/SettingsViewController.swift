@@ -223,7 +223,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("en")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Settings")
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGATargetTypeApp, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -249,7 +249,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("fr")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Settings")
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGATargetTypeApp, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -275,7 +275,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("es")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Settings")
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGATargetTypeApp, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -300,7 +300,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserNotificationFrequency( NSNumber(int: Int32( UserNotifications.OneMessageADay.rawValue ) ))
             
-            AnalyticsManager.sharedManager().postActionWithType( kGANotificationFrequency, targetType: kGAEventCategoryButtonPressed, targetId: "OnceADay", targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGANotificationFrequency, targetType: kGATargetTypeApp, targetId: "OnceADay", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             self.updateSelectedStateOfButtons()
         })
@@ -309,7 +309,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserNotificationFrequency( NSNumber(int: Int32( UserNotifications.OneMessageEveryOtherDay.rawValue ) ))
             
-            AnalyticsManager.sharedManager().postActionWithType( kGANotificationFrequency, targetType: kGAEventCategoryButtonPressed, targetId: "EveryOtherDay", targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGANotificationFrequency, targetType: kGATargetTypeApp, targetId: "EveryOtherDay", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             self.updateSelectedStateOfButtons()
         })
@@ -318,7 +318,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserNotificationFrequency( NSNumber(int: Int32( UserNotifications.OneMessageAWeek.rawValue ) ))
             
-            AnalyticsManager.sharedManager().postActionWithType( kGANotificationFrequency, targetType: kGAEventCategoryButtonPressed, targetId: "OnceAWeek", targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGANotificationFrequency, targetType: kGATargetTypeApp, targetId: "OnceAWeek", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             self.updateSelectedStateOfButtons()
         })
@@ -343,7 +343,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserGender( maleGender )
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryButtonPressed, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             self.updateSelectedStateOfButtons()
         })
@@ -352,7 +352,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserGender( femaleGender )
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryButtonPressed, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             self.updateSelectedStateOfButtons()
         })
@@ -362,7 +362,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserLivingSituation( NSNumber(int: Int32( UserLivingSituation.LiveAlone.rawValue ) ))
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAConjugalSituation, targetType: kGAEventCategoryButtonPressed, targetId: "Single", targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAConjugalSituation, targetType: kGATargetTypeApp, targetId: "Single", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             self.updateSelectedStateOfButtons()
         })
@@ -371,7 +371,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserLivingSituation( NSNumber(int: Int32( UserLivingSituation.LiveWithSomeone.rawValue ) ))
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAConjugalSituation, targetType: kGAEventCategoryButtonPressed, targetId: "InACouple", targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAConjugalSituation, targetType: kGATargetTypeApp, targetId: "InACouple", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             self.updateSelectedStateOfButtons()
         })
@@ -451,7 +451,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if let _ = FBSDKAccessToken.currentAccessToken() {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALoginWithFacebook, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: "Options")
+            AnalyticsManager.sharedManager().postActionWithType( kGALoginWithFacebook, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, email, name, gender, age_range"]).startWithCompletionHandler({
                 connection, result, error -> Void in
@@ -463,21 +463,21 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                         
                         if gender == "male" {
                             UserDefaults.setUserGender("H")
-                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryAppEvent, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
                         }
                         else if gender == "female" {
                             UserDefaults.setUserGender("F")
-                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryAppEvent, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
                         }
                     }
                     
                     if let identifier = dict.objectForKey("id") as? String {
-                        AnalyticsManager.sharedManager().postActionWithType( kGASetFacebookId, targetType: kGAEventCategoryAppEvent, targetId: identifier, targetParameter: nil, actionLocation: nil)
+                        AnalyticsManager.sharedManager().postActionWithType( kGASetFacebookId, targetType: kGATargetTypeApp, targetId: identifier, targetParameter: nil, actionLocation: kGAUserProfileScreen)
                     }
                     
                     if let email = dict.objectForKey("email") as? String {
                         
-                        AnalyticsManager.sharedManager().postActionWithType(kGASetEmail, targetType: kGAEventCategoryAppEvent, targetId: email, targetParameter: nil, actionLocation: "Options")
+                        AnalyticsManager.sharedManager().postActionWithType(kGAUserEmail, targetType: kGATargetTypeApp, targetId: email, targetParameter: nil, actionLocation: kGAUserProfileScreen)
                         
                     }
                     
@@ -496,7 +496,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         
-        AnalyticsManager.sharedManager().postActionWithType( kGALogoutWithFacebook, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: "Options")
+        AnalyticsManager.sharedManager().postActionWithType( kGALogoutWithFacebook, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAUserProfileScreen)
         
     }
 

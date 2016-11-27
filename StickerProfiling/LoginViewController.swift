@@ -79,7 +79,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("en")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Login")
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGATargetTypeApp, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: kGALoginScreen)
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -101,7 +101,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("fr")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Login")
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGATargetTypeApp, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: kGALoginScreen)
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -123,7 +123,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 GWLocalizedBundle.setLanguage("es")
                 
-                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGAEventCategoryButtonPressed, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: "Login")
+                AnalyticsManager.sharedManager().postActionWithType( kGASetLanguage, targetType: kGATargetTypeApp, targetId: GWLocalizedBundle.currentLocaleString(), targetParameter: nil, actionLocation: kGALoginScreen)
                 
                 GWDataManager().downloadAllTextsWithBlockForArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     texts, error -> Void in
@@ -172,7 +172,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         startButton.buttonTouchUpInsideWithCompletion({
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALoginWithoutFacebook, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGALoginWithoutFacebook, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGALoginScreen)
             
             self.showGenderSelectionView()
         })
@@ -296,7 +296,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserGender("F")
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryButtonPressed, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGALoginScreen)
             
             self.showStickersOverviewController()
         })
@@ -323,7 +323,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             UserDefaults.setUserGender("H")
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryButtonPressed, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGALoginScreen)
             
             self.showStickersOverviewController()
         })
@@ -336,7 +336,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         skipButton.buttonTouchUpInsideWithCompletion({
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryButtonPressed, targetId: "skip", targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: "Skip", targetParameter: nil, actionLocation: kGALoginScreen)
             
             self.showStickersOverviewController()
         })
@@ -370,7 +370,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         if let _ = FBSDKAccessToken.currentAccessToken() {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALoginWithFacebook, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: "Login")
+            AnalyticsManager.sharedManager().postActionWithType( kGALoginWithFacebook, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGALoginScreen)
             
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "id, name, gender, age_range, email"]).startWithCompletionHandler({
                 connection, result, error -> Void in
@@ -383,22 +383,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         
                         if gender == "male" {
                             UserDefaults.setUserGender("H")
-                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryAppEvent, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGALoginScreen)
                         }
                         else if gender == "female" {
                             UserDefaults.setUserGender("F")
-                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGAEventCategoryAppEvent, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: nil)
+                            AnalyticsManager.sharedManager().postActionWithType( kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGALoginScreen)
                         }
                     }
                     
                     if let facebookId = dict.objectForKey("id") as? String {
                         UserDefaults.setFacebookId(facebookId)
-                        AnalyticsManager.sharedManager().postActionWithType( kGASetFacebookId, targetType: kGAEventCategoryAppEvent, targetId: facebookId, targetParameter: nil, actionLocation: nil)
+                        AnalyticsManager.sharedManager().postActionWithType( kGASetFacebookId, targetType: kGATargetTypeApp, targetId: facebookId, targetParameter: nil, actionLocation: kGALoginScreen)
                     }
                     
                     if let email = dict.objectForKey("email") as? String {
                         
-                        AnalyticsManager.sharedManager().postActionWithType(kGASetEmail, targetType: kGAEventCategoryAppEvent, targetId: email, targetParameter: nil, actionLocation: "Login")
+                        AnalyticsManager.sharedManager().postActionWithType(kGAUserEmail, targetType: kGATargetTypeApp, targetId: email, targetParameter: nil, actionLocation: kGALoginScreen)
                         
                     }
                     

@@ -1602,7 +1602,6 @@
 				TargetAttributes = {
 					4E5556DA1DE626E3008FD841 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = G63YN3982U;
 					};
 					4E5556F11DE626E3008FD841 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2213,6 +2212,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostwording.StickerProfiling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "df17ab64-4b9f-4f63-86d0-0e4f14a77d30";
 				SWIFT_OBJC_BRIDGING_HEADER = "StickerProfiling/StickerProfiling-Bridging-Header.h";
 			};
 			name = Debug;
@@ -2233,6 +2233,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghostwording.StickerProfiling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a66d35e4-48d1-4816-b3e2-82407fc10782";
 				SWIFT_OBJC_BRIDGING_HEADER = "StickerProfiling/StickerProfiling-Bridging-Header.h";
 			};
 			name = Release;

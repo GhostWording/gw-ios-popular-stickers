@@ -45,7 +45,7 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         }
         
         if UserDefaults.isMainScreenReached() == false {
-            AnalyticsManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAMainScreenReached, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager().postActionWithType(kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         }
         
     }
@@ -89,7 +89,7 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         
         settingsButton.buttonTouchUpInsideWithCompletion({
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAOptionMenu, targetType: kGAEventCategoryButtonPressed, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType( kGAOptionMenu, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
             
             self.showSettingsView()
         })
@@ -176,10 +176,10 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         if UserDefaults.isFirstMoodItemPressed() == false {
             
             if intentionId != nil {
-                AnalyticsManager.sharedManager().postActionWithType( kGAFirstMoodItemPressed, targetType: kGAEventCategoryButtonPressed, targetId: intentionId, targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGAFirstMoodItemPressed, targetType: kGATargetTypeIntention, targetId: intentionId, targetParameter: nil, actionLocation: kGAMainScreen)
             }
             else {
-                AnalyticsManager.sharedManager().postActionWithType( kGAMoodItemPressed, targetType: kGAEventCategoryButtonPressed, targetId: imagePath, targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType( kGAMoodItemPressed, targetType: kGATargetTypeTheme, targetId: imagePath, targetParameter: nil, actionLocation: kGAMainScreen)
             }
                         
         }

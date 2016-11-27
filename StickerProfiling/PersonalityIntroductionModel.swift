@@ -218,7 +218,8 @@ class PersonalityIntroductionModel: NSObject {
                 answer, answerId in
                 
                 if answer != nil && answerId != nil {
-                    CustomAnalytics().postActionWithType(question.personalityQuestionId, actionLocation: "Intro", targetType: nil, targetId: answerId, targetParameter: nil)
+                    
+                    AnalyticsManager.sharedManager().postActionWithType(question.personalityQuestionId, targetType: kGATargetTypeApp, targetId: answerId, targetParameter: nil, actionLocation: kGAPersonalityScreen)
                     UserDefaults.addPersonalityAnswer( answerId! )
                     
                 }

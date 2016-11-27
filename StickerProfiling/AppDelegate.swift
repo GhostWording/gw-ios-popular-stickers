@@ -58,12 +58,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             
             self.window?.rootViewController = LoginViewController()
             
-            AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAFirstLaunch, targetId: nil, targetParameter: nil, actionLocation: nil)
-            AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAAppLaunch, targetId: nil, targetParameter: nil, actionLocation: nil)
+            if let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
+                AnalyticsManager.sharedManager().postActionWithType(kGACountry, targetType: kGATargetTypeApp, targetId: countryCode, targetParameter: nil, actionLocation: nil)
+            }
+            
+            
+            AnalyticsManager.sharedManager().postActionWithType(kGAFirstLaunch, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType(kGAAppLaunch, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         }
         else {
             
-            AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAAppLaunch, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager.sharedManager().postActionWithType(kGAAppLaunch, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
             self.loadInterstitialAd()
             
             let stickersOverview = StickersOverviewController()
@@ -155,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         
         interstitialAd.loadAd()
         
-        AnalyticsManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAAdRequested, targetId: nil, targetParameter: nil, actionLocation: nil)
+        AnalyticsManager().postActionWithType(kGAAdRequested, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         
         return interstitialAd
     }
@@ -163,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
     func interstitialAdDidLoad(interstitialAd: FBInterstitialAd) {
         
         UserDefaults.setLastDateAdWasShown( NSDate() )
-        AnalyticsManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAAdDisplayed, targetId: nil, targetParameter: nil, actionLocation: nil)
+        AnalyticsManager().postActionWithType(kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         interstitialAd.showAdFromRootViewController( self.window!.rootViewController )
         
     }
@@ -221,12 +226,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         AppFlow.replyContext = context
         AppFlow.currentMessengerFlow = MessengerFlow.Reply
         
-        AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAReplyFromMessenger, targetId: nil, targetParameter: nil, actionLocation: nil)
+        AnalyticsManager.sharedManager().postActionWithType(kGAReplyFromMessenger, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         
         if let userIds = context.userIDs {
             
             for currentId in userIds {
-                AnalyticsManager.sharedManager().postActionWithType(kGAEventCategoryAppEvent, targetType: kGAReplyingToFacebookContact, targetId: currentId as? String, targetParameter: nil, actionLocation: nil)
+                AnalyticsManager.sharedManager().postActionWithType(kGAReplyingToFacebookContact, targetType: kGATargetTypeApp, targetId: currentId as? String, targetParameter: nil, actionLocation: nil)
             }
             
         }

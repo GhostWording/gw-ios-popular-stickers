@@ -158,6 +158,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
         })
         
+        if UIScreen.mainScreen().bounds.size.height == 480.0 {
+            loginFacebookButton.frame = CGRectMake(CGRectGetMinX(loginFacebookButton.frame), CGRectGetHeight(self.view.frame) - 130, CGRectGetWidth(loginFacebookButton.frame), CGRectGetHeight(loginFacebookButton.frame))
+        }
+        
         self.view.addSubview( loginFacebookButton )
         
         startButton = MAXFadeBlockButton()

@@ -280,6 +280,13 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         
         if UserDefaults.sendMethodForMessage() == MessageSendMethod.NoMethod {
             
+            if let nonNilIndexPath = indexPath {
+                AnalyticsManager.sharedManager().postActionWithType(kGASendMenuOpened, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
+            }
+            else {
+                AnalyticsManager.sharedManager().postActionWithType(kGASendMenuOpened, targetType: kGATargetTypeApp, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            }
+            
             overlayView = UIView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame) , CGRectGetHeight(self.view.frame)))
             overlayView?.backgroundColor = UIColor.c_colorWithHexString(UIColor.c_hexValuesFromUIColor(UIColor.blackColor()), alpha:  0.3)
             overlayView?.alpha = 0.0

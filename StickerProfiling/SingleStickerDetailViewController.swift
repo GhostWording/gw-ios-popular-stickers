@@ -219,10 +219,10 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
         }
         else {
-            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeImage, targetId: self.imageName, targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
         }
         
         let progressHud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -233,7 +233,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.2 ) * Int64( NSEC_PER_SEC )), dispatch_get_main_queue(), {
-            self.showMessengerExtension(self.imageToSend, imageId: self.imageName, prototypeId: nil)
+            self.showMessengerExtension(self.imageToSend, imageId: self.imageName?.imageName(), prototypeId: nil)
             UserDefaults.setHasSentImageOrText( true )
         });
         
@@ -256,11 +256,11 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
             
         }
         else {
-            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeImage, targetId: self.imageName, targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
         }
         
         
@@ -665,17 +665,6 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         
     }
     
-    func getImageName(imageName: String?) -> String? {
-        
-        if let selectedImageName = imageName {
-            
-            let imageComponents = selectedImageName.componentsSeparatedByString("/")
-            
-            return imageComponents.last
-        }
-        
-        return nil
-    }
     
     // MARK: Messenger Integration
     

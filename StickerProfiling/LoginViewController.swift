@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.view.addSubview(imageView)
         
         
-        let appTitleLabel = UILabel(frame: CGRectMake(CGRectGetWidth(self.view.frame) * 0.1, CGRectGetHeight(self.view.frame) * 0.34, CGRectGetWidth(self.view.frame) * 0.8, CGRectGetHeight(self.view.frame) * 0.1))
+        let appTitleLabel = UILabel(frame: CGRectMake(CGRectGetWidth(self.view.frame) * 0.1, CGRectGetHeight(self.view.frame) * 0.37, CGRectGetWidth(self.view.frame) * 0.8, CGRectGetHeight(self.view.frame) * 0.1))
         appTitleLabel.text = PopularStickersLocalizedString("<AppName>", nil)
         appTitleLabel.textAlignment = NSTextAlignment.Center
         appTitleLabel.textColor = UIColor.whiteColor()
@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         
         
-        let languageBox = UIView(frame: CGRectMake(CGRectGetWidth(self.view.frame) * 0.0625, CGRectGetHeight(self.view.frame) * 0.44, CGRectGetWidth(self.view.frame) * 0.875, CGRectGetHeight(self.view.frame) * 0.25))
+        let languageBox = UIView(frame: CGRectMake(CGRectGetWidth(self.view.frame) * 0.0625, CGRectGetHeight(self.view.frame) * 0.47, CGRectGetWidth(self.view.frame) * 0.875, CGRectGetHeight(self.view.frame) * 0.25))
         languageBox.backgroundColor = UIColor.whiteColor()
         languageBox.layer.cornerRadius = 4
         self.view.addSubview(languageBox)
@@ -146,7 +146,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         facebookButton.setTitle(PopularStickersLocalizedString("<FacebookButtonTitle>", ""), forState: UIControlState.Normal)
         //self.view.addSubview(facebookButton)
         
-        loginFacebookButton = MAXFadeBlockButton(frame: CGRectMake(CGRectGetMidX(self.view.frame) - 120, CGRectGetHeight(self.view.frame) - 160, 240, 60))
+        loginFacebookButton = MAXFadeBlockButton(frame: CGRectMake(CGRectGetMinX(languageBox.frame), CGRectGetHeight(self.view.frame) - 154, CGRectGetWidth(languageBox.frame), 60))
         loginFacebookButton.backgroundColor = UIColor.c_facebookBlueColor()
         loginFacebookButton.layer.cornerRadius = 4.0
         loginFacebookButton.setTitle(PopularStickersLocalizedString("<FacebookButtonTitle>", nil), forState: UIControlState.Normal)
@@ -158,14 +158,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
         })
         
-        if UIScreen.mainScreen().bounds.size.height == 480.0 {
-            loginFacebookButton.frame = CGRectMake(CGRectGetMinX(loginFacebookButton.frame), CGRectGetHeight(self.view.frame) - 130, CGRectGetWidth(loginFacebookButton.frame), CGRectGetHeight(loginFacebookButton.frame))
-        }
         
         self.view.addSubview( loginFacebookButton )
         
         startButton = MAXFadeBlockButton()
-        startButton.frame = CGRectMake(CGRectGetMidX(self.view.frame) - 120, CGRectGetHeight(self.view.frame) - 80, 240, 60)
+        startButton.frame = CGRectMake(CGRectGetMinX(languageBox.frame), CGRectGetHeight(self.view.frame) - 85, CGRectGetWidth(loginFacebookButton.frame), 60)
         startButton.setTitle( PopularStickersLocalizedString("<StartAppTitle>", nil), forState: UIControlState.Normal)
         startButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         startButton.titleLabel?.font = UIFont.c_robotoMediumWithSize(16.0)
@@ -185,8 +182,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
         
         if self.view.frame.size.height == 480 {
-            facebookButton.frame = CGRectMake(CGRectGetMinX(facebookButton.frame), CGRectGetHeight(self.view.frame) - 130, CGRectGetWidth(facebookButton.frame), CGRectGetHeight(facebookButton.frame))
-            startButton.frame = CGRectMake(CGRectGetMinX(startButton.frame), CGRectGetHeight(self.view.frame) - 60, CGRectGetWidth(startButton.frame), 50)
+            loginFacebookButton.frame = CGRectMake(CGRectGetMinX(loginFacebookButton.frame), CGRectGetHeight(self.view.frame) - 130, CGRectGetWidth(loginFacebookButton.frame), 50)
+            startButton.frame = CGRectMake(CGRectGetMinX(startButton.frame), CGRectGetHeight(self.view.frame) - 74, CGRectGetWidth(startButton.frame), 50)
         }
         
         

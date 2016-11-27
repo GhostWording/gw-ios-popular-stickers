@@ -132,6 +132,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         return handled
     }
     
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        
+        if notificationSettings.types != UIUserNotificationType.None {
+            AnalyticsManager.sharedManager().postActionWithType(kGAAcceptNotifications, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+        }
+        else {
+            AnalyticsManager.sharedManager().postActionWithType(kGACancelNotifications, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+        }
+        
+    }
+    
+    // MARK: Ads
+    
+    
     func showAdIfAppropriate() {
         
         if let nonNilDate = UserDefaults.lastDateAdWasShown() {

@@ -169,7 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
     
     func loadInterstitialAd() -> FBInterstitialAd {
         
-        let interstitialAd = FBInterstitialAd(placementID: "1102012976529819_1207815575949558")
+        let interstitialAd = FBInterstitialAd(placementID: "1594200494225037_1684892605155825")
         interstitialAd.delegate = self
         
         interstitialAd.loadAd()

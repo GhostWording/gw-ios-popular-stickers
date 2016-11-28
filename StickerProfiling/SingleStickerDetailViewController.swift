@@ -195,7 +195,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         self.tableView.frame = CGRectMake(0, CGRectGetMaxY(infoLabel.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMaxY(infoLabel.frame))
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.lightGrayColor()
         
         self.view.insertSubview(self.tableView, belowSubview : bottomButton)
         self.tableView.reloadData()

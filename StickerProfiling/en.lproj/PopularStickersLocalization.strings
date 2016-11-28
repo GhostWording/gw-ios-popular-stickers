@@ -6,7 +6,7 @@
   Copyright © 2016 Konta ehf. All rights reserved.
 */
 
-"<AppName>" = "Sticker Bliss";
+"<AppName>" = "Sticker Profiling";
 
 // MARK: Send Method
 "<ChooseSendMethodSettings>" = "Send messages with";

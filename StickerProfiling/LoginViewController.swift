@@ -203,7 +203,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         */
         
         startButton.setTitle(PopularStickersLocalizedString("<StartAppTitle>", nil), forState: UIControlState.Normal)
-        facebookButton.setTitle(PopularStickersLocalizedString("<FacebookButtonTitle>", ""), forState: UIControlState.Normal)
+        loginFacebookButton.setTitle(PopularStickersLocalizedString("<FacebookButtonTitle>", ""), forState: UIControlState.Normal)
         
     }
     

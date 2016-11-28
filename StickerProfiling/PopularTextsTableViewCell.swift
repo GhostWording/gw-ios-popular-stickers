@@ -58,7 +58,7 @@ class PopularTextsTableViewCell: UITableViewCell {
         
 
         
-        nbSharesImageView.frame = CGRectMake(CGRectGetMidX(self.frame) - 20 - 8, CGRectGetHeight(self.frame) - 18, 16, 16)
+        nbSharesImageView.frame = CGRectMake(CGRectGetMidX(self.frame) - 20 - 8, CGRectGetHeight(self.frame) - 24, 16, 16)
         
         nbSharesLabel.frame = CGRectMake(CGRectGetMaxX(nbSharesImageView.frame) + 4, CGRectGetMinY(nbSharesImageView.frame), 40, 16)
         

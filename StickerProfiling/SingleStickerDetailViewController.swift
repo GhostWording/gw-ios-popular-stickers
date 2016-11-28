@@ -196,6 +196,8 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorColor = UIColor.lightGrayColor()
+        self.tableView.layoutMargins = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsetsZero
         
         self.view.insertSubview(self.tableView, belowSubview : bottomButton)
         self.tableView.reloadData()
@@ -488,6 +490,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             self.infoLabel.alpha = 0.0
             self.bottomButton.c_setOriginY( Float(CGRectGetHeight(self.view.frame) - self.backButton.frame.size.height - 20))
+            self.tableView.separatorColor = UIColor.clearColor()
             
         })
         
@@ -509,6 +512,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             }
             
             self.infoLabel.alpha = 1.0
+            self.tableView.separatorColor = UIColor.lightGrayColor()
         
         })
         
@@ -555,7 +559,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
-        return self.viewModel.textHeight(indexPath.row, width: CGRectGetWidth(self.view.frame) * 0.8, font: UIFont.c_robotoLightWithSize(17.0)) + 40
+        return self.viewModel.textHeight(indexPath.row, width: CGRectGetWidth(self.view.frame) * 0.8, font: UIFont.c_robotoLightWithSize(17.0)) + 50
         
     }
     

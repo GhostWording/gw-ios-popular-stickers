@@ -62,7 +62,14 @@ class PopularTextsTableViewCell: UITableViewCell {
         
         nbSharesLabel.frame = CGRectMake(CGRectGetMaxX(nbSharesImageView.frame) + 4, CGRectGetMinY(nbSharesImageView.frame), 40, 16)
         
-        popularTextLabel.frame = CGRectMake(CGRectGetWidth(self.frame) * 0.1, CGRectGetHeight(self.frame) * 0.07, CGRectGetWidth(self.frame) * 0.8, CGRectGetHeight(self.frame) - CGRectGetHeight(self.frame) * 0.1 - CGRectGetHeight(nbSharesImageView.frame) - 4)
+        
+        
+        if nbSharesImageView.hidden == false {
+            popularTextLabel.frame = CGRectMake(CGRectGetWidth(self.frame) * 0.1, 15, CGRectGetWidth(self.frame) * 0.8, CGRectGetHeight(self.frame) - 50)
+        }
+        else {
+            popularTextLabel.frame = CGRectMake(CGRectGetWidth(self.frame) * 0.1, 15, CGRectGetWidth(self.frame) * 0.8, CGRectGetHeight(self.frame) - 30)
+        }
         
         
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 enum PersonalityViewControllerType {
     case Settings
@@ -118,11 +119,16 @@ class PersonalityIntroViewController: UIViewController {
         self.view.addSubview( pagingScrollView )
         
         
+        let progressHud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        progressHud.mode = MBProgressHUDMode.Indeterminate
+        
         self.viewModel.downloadPersonalQuestions({
             error -> Void in
             
             self.pagingScrollView.reloadDataBlocks()
             stickersTitleLabel.text = "\(PopularStickersLocalizedString("<MyMBTI>", nil)) \(self.pagingScrollView.currentPage + 1) \(PopularStickersLocalizedString("<Of>", nil)) \(self.pagingScrollView.numPages)"
+            
+            progressHud.hideAnimated( true )
             
         })
         

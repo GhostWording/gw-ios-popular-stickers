@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 import FBSDKMessengerShareKit
 import FBAudienceNetwork
 
@@ -99,7 +100,8 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         
         self.view.addSubview(collectionView)
         
-        
+        let progressHud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        progressHud.mode = MBProgressHUDMode.Indeterminate
         
         viewModel.downloadIntentions({
             error -> Void in
@@ -108,6 +110,7 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
                 error -> Void in
                 
                 self.collectionView.collectionView.reloadData()
+                progressHud.hideAnimated( true )
                 
             })
             

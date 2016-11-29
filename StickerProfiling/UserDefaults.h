@@ -59,6 +59,9 @@ typedef NS_ENUM(NSInteger, MessageSendMethod) {
 +(NSString * _Nullable)facebookId;
 +(void)setFacebookId:(NSString * _Nullable)theFacebookId;
 
++(BOOL)developerModeEnabled;
++(void)setDeveloperMode:(BOOL)developerMode;
+
 // MARK: User Settings
 
 +(NSString * _Nullable)userGender;

@@ -216,6 +216,21 @@
     
 }
 
++(BOOL)developerModeEnabled {
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey: @"developerMode"] == nil) {
+        [UserDefaults setDeveloperMode: NO];
+    }
+    
+    return [[[NSUserDefaults standardUserDefaults] objectForKey: @"developerMode"] boolValue];
+}
+
++(void)setDeveloperMode:(BOOL)developerMode {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@( developerMode ) forKey: @"developerMode"];
+    
+}
+
 // MARK: User settings
 
 +(NSString *)userGender {

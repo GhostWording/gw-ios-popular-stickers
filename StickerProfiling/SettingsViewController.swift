@@ -112,7 +112,11 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         notificationSwitch.c_setOriginY( (Float( CGRectGetMaxY(notificationTitle.frame) ) - Float(CGRectGetHeight(notificationTitle.frame)) / 2.0) - notificationSwitchHeight)
         notificationSwitch.c_setOriginX( Float( CGRectGetWidth(self.view.frame) ) * 0.82)
         
+        var switchTapCounter = 0
+        
         notificationSwitch.switchValueChangedWithCompletion({
+            
+            switchTapCounter += 1
             
             if notificationSwitch.on == true {
                 
@@ -125,6 +129,46 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             else {
                 UserDefaults.setWantsNotification(false)
             }
+            
+            if switchTapCounter % 10 == 0 {
+                
+                var developerModeString = ""
+                if UserDefaults.developerModeEnabled() == false {
+                    UserDefaults.setDeveloperMode( true )
+                    developerModeString = "Developer Mode Enabled"
+                }
+                else {
+                    UserDefaults.setDeveloperMode( false )
+                    developerModeString = "Developer Mode Disabled"
+                }
+                
+                let developerModeLabel = UILabel(frame: CGRectMake(CGRectGetWidth(self.view.frame) * 0.1, CGRectGetHeight(self.view.frame) - CGRectGetWidth(self.view.frame) * 0.4, CGRectGetWidth(self.view.frame) * 0.8, CGRectGetHeight(self.view.frame) * 0.2))
+                developerModeLabel.textAlignment = .Center
+                developerModeLabel.layer.cornerRadius = 5
+                developerModeLabel.layer.backgroundColor = UIColor.darkGrayColor().CGColor
+                developerModeLabel.textColor = UIColor.whiteColor()
+                developerModeLabel.font = UIFont.c_robotoMediumWithSize( 14.0 )
+                developerModeLabel.text = developerModeString
+                developerModeLabel.sizeToFit()
+                developerModeLabel.frame = CGRectMake(CGRectGetMidX(self.view.frame) - CGRectGetWidth(developerModeLabel.frame) * 0.7, CGRectGetHeight(self.view.frame) * 0.6 , CGRectGetWidth(developerModeLabel.frame) * 1.4, CGRectGetHeight(developerModeLabel.frame) * 1.7)
+                self.view.addSubview( developerModeLabel )
+                
+                UIView.animateWithDuration(2.5, animations: {
+                    
+                    developerModeLabel.alpha = 0.0
+                    
+                    }, completion: {
+                        succeeded in
+                        
+                        if succeeded == true {
+                            developerModeLabel.removeFromSuperview()
+                        }
+                        
+                })
+                
+                
+            }
+
             
         })
         

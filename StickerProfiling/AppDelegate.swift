@@ -15,6 +15,10 @@ import FBSDKLoginKit
 import FBSDKMessengerShareKit
 import FBAudienceNetwork
 
+let sessionResumesPlacementId = "1594200494225037_1684892605155825"
+let firstTimeMainScreenReachedPlacementId = "1594200494225037_1684883995156686"
+let bottomStickerGalleryPlacementId = "1594200494225037_1688239298154489"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerDelegate, FBInterstitialAdDelegate {
 
@@ -22,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
     let messengerUrlHandler = FBSDKMessengerURLHandler()
     var replyContext: FBSDKMessengerContext?
     var composerContext: FBSDKMessengerContext?
-    var interstialAd : FBInterstitialAd!
+    var sessionResumesInterstitialAd : FBInterstitialAd!
+    var firstTimeMainScreenReachedInterstitialAd : FBInterstitialAd?
+    var bottomStickerGalleryInterstitialAd : FBInterstitialAd?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -78,12 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         else {
             
             AnalyticsManager.sharedManager().postActionWithType(kGAAppLaunch, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
-            self.loadInterstitialAd()
             
             let stickersOverview = StickersOverviewController()
             
             self.window?.rootViewController = stickersOverview
-            self.showAdIfAppropriate()
+            self.showGlobalAdIfAppropriate()
         }
         
         
@@ -109,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         
         AppFlow.currentMessengerFlow = MessengerFlow.Send
         self.updateViewControllerForMessenger(self.window?.rootViewController)
-        self.showAdIfAppropriate()
+        self.showGlobalAdIfAppropriate()
         
     }
 
@@ -155,49 +160,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
     // MARK: Ads
     
     
-    func showAdIfAppropriate() {
+    func showGlobalAdIfAppropriate() {
         
         if let nonNilDate = UserDefaults.lastDateAdWasShown() {
             
             let timeInterval = nonNilDate.timeIntervalSinceNow
             
             if timeInterval < -240 {
-                self.interstialAd = self.loadInterstitialAd()
+                self.sessionResumesInterstitialAd = self.loadInterstitialAd()
             }
             
         }
         else {
             
-            self.interstialAd = self.loadInterstitialAd()
+            self.sessionResumesInterstitialAd = self.loadInterstitialAd()
             
         }
         
     }
     
+    func showFirstTimeMainScreenReachedAd() {
+        
+        self.firstTimeMainScreenReachedInterstitialAd = self.loadfirstTimeMainScreenReachedAd()
+        
+    }
+    
+    func showBottomStickerCategoryAd() {
+        
+        self.bottomStickerGalleryInterstitialAd = self.loadBottomStickerGalleryAd()
+        
+    }
+    
     // MARK: Ads
     
-    func loadInterstitialAd() -> FBInterstitialAd {
+    private func loadInterstitialAd() -> FBInterstitialAd {
         
-        let interstitialAd = FBInterstitialAd(placementID: "1594200494225037_1684892605155825")
+        AnalyticsManager().postActionWithType(kGAAdRequested, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+        
+        return self.createAdWithPlacementId( sessionResumesPlacementId )
+    }
+    
+    private func loadfirstTimeMainScreenReachedAd() -> FBInterstitialAd {
+        
+        
+        return self.createAdWithPlacementId( firstTimeMainScreenReachedPlacementId )
+    }
+    
+    private func loadBottomStickerGalleryAd() -> FBInterstitialAd {
+        
+        
+        return self.createAdWithPlacementId( bottomStickerGalleryPlacementId )
+    }
+    
+    private func createAdWithPlacementId(placementId: String) -> FBInterstitialAd {
+        
+        let interstitialAd = FBInterstitialAd(placementID: placementId)
         interstitialAd.delegate = self
         
         interstitialAd.loadAd()
         
-        AnalyticsManager().postActionWithType(kGAAdRequested, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         
         return interstitialAd
     }
     
     func interstitialAdDidLoad(interstitialAd: FBInterstitialAd) {
         
-        UserDefaults.setLastDateAdWasShown( NSDate() )
-        AnalyticsManager().postActionWithType(kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+        if interstitialAd.placementID == sessionResumesPlacementId {
+            UserDefaults.setLastDateAdWasShown( NSDate() )
+            AnalyticsManager().postActionWithType(kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+        }
+        
         interstitialAd.showAdFromRootViewController( self.window!.rootViewController )
         
     }
     
     func interstitialAd(interstitialAd: FBInterstitialAd, didFailWithError error: NSError) {
-        
+        print("add error \(error) with ad placement id \(interstitialAd.placementID)")
     }
     
     // MARK: Update View Controllers with back to messenger buttons

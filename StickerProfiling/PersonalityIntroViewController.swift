@@ -404,6 +404,15 @@ class PersonalityIntroViewController: UIViewController {
     
     func moveToOverviewVC() {
         
+        if let nonNilVariationId = GWExperiment.variationId() where GWExperiment.experimentId() != nil {
+            
+            if nonNilVariationId.integerValue > 1 {
+                let applicationDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                applicationDelegate.showFirstTimeMainScreenReachedAd()
+            }
+            
+        }
+        
         let stickersOverview = StickersOverviewController()        
         
         self.presentViewController( stickersOverview, animated: true, completion: nil)

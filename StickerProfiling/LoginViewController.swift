@@ -185,6 +185,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             loginFacebookButton.frame = CGRectMake(CGRectGetMinX(loginFacebookButton.frame), CGRectGetHeight(self.view.frame) - 130, CGRectGetWidth(loginFacebookButton.frame), 50)
             startButton.frame = CGRectMake(CGRectGetMinX(startButton.frame), CGRectGetHeight(self.view.frame) - 74, CGRectGetWidth(startButton.frame), 50)
         }
+        else if self.view.frame.size.height == 667 {
+            
+            loginFacebookButton.frame = CGRectMake(CGRectGetMinX(loginFacebookButton.frame), CGRectGetHeight(self.view.frame) - 175, CGRectGetWidth(loginFacebookButton.frame), CGRectGetHeight(loginFacebookButton.frame))
+            startButton.frame = CGRectMake(CGRectGetMinX(startButton.frame), CGRectGetHeight(self.view.frame) - 99, CGRectGetWidth(startButton.frame), CGRectGetHeight(startButton.frame))
+            
+        }
+        else if self.view.frame.size.height == 736 {
+            
+            loginFacebookButton.frame = CGRectMake(CGRectGetMinX(loginFacebookButton.frame), CGRectGetHeight(self.view.frame) - 185, CGRectGetWidth(loginFacebookButton.frame), CGRectGetHeight(loginFacebookButton.frame))
+            startButton.frame = CGRectMake(CGRectGetMinX(startButton.frame), CGRectGetHeight(self.view.frame) - 106, CGRectGetWidth(startButton.frame), CGRectGetHeight(startButton.frame))
+            
+        }
         
         
     }

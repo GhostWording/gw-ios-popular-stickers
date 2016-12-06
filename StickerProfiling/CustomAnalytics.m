@@ -11,6 +11,7 @@
 #import "UserDefaults.h"
 #import "GWAnalyticsStore.h"
 #import "NSMutableDictionary+NoNilExtension.h"
+#import "GWExperiment.h"
 
 static NSURLSession *session = nil;
 
@@ -57,6 +58,11 @@ static NSURLSession *session = nil;
     [analyticsPost c_setObject: @"iOS" forKey: @"OsType"];
     [analyticsPost c_setObject: [UserDefaults facebookId] forKey: @"FacebookId"];
     [analyticsPost c_setObject: @"MBTIStickers" forKey: @"AreaId"];
+    [analyticsPost c_setObject: [GWExperiment experimentId] forKey: @"ExperimentId"];
+    [analyticsPost c_setObject: [GWExperiment variationId] forKey: @"VariationId"];
+    [analyticsPost c_setObject: [UserDefaults isNewInstall] forKey: @"IsNewInstall"];
+    
+    
 
     [GWAnalyticsStore addAnalyticsPost: analyticsPost];
     

@@ -73,6 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             
             self.window?.rootViewController = LoginViewController()
             
+            UserDefaults.setIsNewInstall( true )
+            
             if let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
                 AnalyticsManager.sharedManager().postActionWithType(kGACountry, targetType: kGATargetTypeApp, targetId: countryCode, targetParameter: nil, actionLocation: nil)
             }
@@ -104,6 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
+        UserDefaults.setIsNewInstall( false )
         GWCoreDataManager.sharedInstance().saveContext()
         CustomAnalytics.sharedInstance().forceSendAllEvents()
         
@@ -111,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
         
         AppFlow.currentMessengerFlow = MessengerFlow.Send
         self.updateViewControllerForMessenger(self.window?.rootViewController)

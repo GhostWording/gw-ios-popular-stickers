@@ -62,6 +62,9 @@ typedef NS_ENUM(NSInteger, MessageSendMethod) {
 +(BOOL)developerModeEnabled;
 +(void)setDeveloperMode:(BOOL)developerMode;
 
++(NSNumber *)isNewInstall;
++(void)setIsNewInstall:(BOOL)isNewInstall;
+
 // MARK: User Settings
 
 +(NSString * _Nullable)userGender;

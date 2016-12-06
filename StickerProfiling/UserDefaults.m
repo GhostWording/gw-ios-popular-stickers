@@ -231,6 +231,17 @@
     
 }
 
++(NSNumber *)isNewInstall {
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey: @"isNewInstall"];
+}
+
++(void)setIsNewInstall:(BOOL)isNewInstall {
+    
+    [[NSUserDefaults standardUserDefaults] setObject: [NSNumber numberWithBool: isNewInstall] forKey: @"isNewInstall"];
+    
+}
+
 // MARK: User settings
 
 +(NSString *)userGender {

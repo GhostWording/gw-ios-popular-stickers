@@ -1546,6 +1546,7 @@
 				4E5556D91DE626E3008FD841 /* Resources */,
 				20E8C62EB1443D83BC9D87FF /* [CP] Embed Pods Frameworks */,
 				07D96A6635E33FAC5FA72D4C /* [CP] Copy Pods Resources */,
+				4EDD4ECC1DF65A1800D40DC4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1912,6 +1913,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StickerProfiling/Pods-StickerProfiling-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4EDD4ECC1DF65A1800D40DC4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 7249e8eba037ad564939aabb85bfd2ce68b733d6 2b7ec157d4e3a4d548a0d30569a324d50cc59c07f403886dabe0319046492794";
 		};
 		696AC40A5E2560046E58A3C2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

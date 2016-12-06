@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         messengerUrlHandler.delegate = self
         
         let facebookLaunch = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        //Fabric.with([Crashlytics.self])
+        Fabric.with([Crashlytics.self])
         
         if UserDefaults.dateInstalled() == nil {
             UserDefaults.setDateInstalled(NSDate())

@@ -285,6 +285,7 @@
 		4E5559A71DE66920008FD841 /* :themes:emoticons:small:iStock_000065867241_Medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E5559421DE66920008FD841 /* :themes:emoticons:small:iStock_000065867241_Medium.jpg */; };
 		4E5559A81DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E5559431DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg */; };
 		4E5559A91DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E5559441DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg */; };
+		4EDD4ECB1DF6376900D40DC4 /* GWExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD4ECA1DF6376900D40DC4 /* GWExperiment.m */; };
 		4EEECC0E1DE673DD0095A65D /* PopularStickersLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EEECC0C1DE673DD0095A65D /* PopularStickersLocalization.strings */; };
 		4EEECC121DE674F30095A65D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEECC111DE674F30095A65D /* Main.storyboard */; };
 		7B413C6F4073A8FE3C897B66 /* Pods_StickerProfilingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2432E7750568AFDA8787871 /* Pods_StickerProfilingUITests.framework */; };
@@ -657,6 +658,8 @@
 		4E5559421DE66920008FD841 /* :themes:emoticons:small:iStock_000065867241_Medium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ":themes:emoticons:small:iStock_000065867241_Medium.jpg"; sourceTree = "<group>"; };
 		4E5559431DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ":themes:emoticons:small:iStock_000065867555_Medium.jpg"; sourceTree = "<group>"; };
 		4E5559441DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ":themes:emoticons:small:iStock_000065868013_Medium.jpg"; sourceTree = "<group>"; };
+		4EDD4EC91DF6376900D40DC4 /* GWExperiment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWExperiment.h; sourceTree = "<group>"; };
+		4EDD4ECA1DF6376900D40DC4 /* GWExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWExperiment.m; sourceTree = "<group>"; };
 		4EEECC0D1DE673DD0095A65D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
 		4EEECC0F1DE674450095A65D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
 		4EEECC101DE674560095A65D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
@@ -1014,6 +1017,7 @@
 		4E5557A81DE63303008FD841 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				4E5558131DE63788008FD841 /* Managers */,
 				4E5558241DE662E9008FD841 /* Text Filter */,
 				4E5557C11DE63386008FD841 /* Notification Manager */,
 				4E5557A91DE63330008FD841 /* Json Adapter */,
@@ -1066,7 +1070,6 @@
 		4E5557D01DE6353A008FD841 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				4E5558131DE63788008FD841 /* Managers */,
 				4E5557D11DE63555008FD841 /* Model Objects */,
 				4E5557CC1DE6352F008FD841 /* GWFramework1.xcdatamodeld */,
 			);
@@ -1191,6 +1194,8 @@
 		4E5558131DE63788008FD841 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4EDD4EC91DF6376900D40DC4 /* GWExperiment.h */,
+				4EDD4ECA1DF6376900D40DC4 /* GWExperiment.m */,
 				4E5558141DE637F4008FD841 /* GWCoreDataManager.h */,
 				4E5558151DE637F4008FD841 /* GWCoreDataManager.m */,
 				4E5558161DE637F4008FD841 /* GWDataManager.h */,
@@ -2014,6 +2019,7 @@
 				4E5557FD1DE635AA008FD841 /* GWIntention.m in Sources */,
 				4E55583E1DE664E4008FD841 /* SingleStickerDetailViewController.swift in Sources */,
 				4E5558501DE66555008FD841 /* PersonalityIntroductionModel.swift in Sources */,
+				4EDD4ECB1DF6376900D40DC4 /* GWExperiment.m in Sources */,
 				4E5557F51DE635AA008FD841 /* GWRecipient.m in Sources */,
 				4E5557F41DE635AA008FD841 /* GWRecipient+CoreDataProperties.m in Sources */,
 				4E5556E11DE626E3008FD841 /* ViewController.swift in Sources */,

@@ -37,6 +37,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             UserDefaults.setDateInstalled(NSDate())
         }
         
+        // get the experiment for the user
+        if GWExperiment.variationId() == nil || GWExperiment.experimentId() == nil {
+            GWExperiment.fetchExperimentWithArea("stickers", withCompletion: {
+                experimentId, variationId, error in
+                
+                print("experiment Id is\(experimentId) variation id: \(variationId) error \(error)")
+                
+            })
+        }
         
         NotificationManager().downloadAndSaveNotificationTextsWithCompletion({
             error -> Void in

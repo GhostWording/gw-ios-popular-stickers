@@ -30,6 +30,7 @@
 #import "GWIntention.h"
 #import "GWImage.h"
 #import "GWPersonalityQuestion.h"
+#import "GWExperiment.h"
 
 #import "MAXCollectionViewImageAndText.h"
 #import "UIColor+Extension.h"

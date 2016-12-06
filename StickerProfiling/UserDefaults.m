@@ -233,6 +233,10 @@
 
 +(NSNumber *)isNewInstall {
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey: @"isNewInstall"] == nil) {
+        [self setIsNewInstall: true];
+    }
+    
     return [[NSUserDefaults standardUserDefaults] objectForKey: @"isNewInstall"];
 }
 

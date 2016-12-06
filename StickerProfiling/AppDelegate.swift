@@ -73,8 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             
             self.window?.rootViewController = LoginViewController()
             
-            UserDefaults.setIsNewInstall( true )
-            
             if let countryCode = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
                 AnalyticsManager.sharedManager().postActionWithType(kGACountry, targetType: kGATargetTypeApp, targetId: countryCode, targetParameter: nil, actionLocation: nil)
             }

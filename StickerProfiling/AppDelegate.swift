@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
     var composerContext: FBSDKMessengerContext?
     var sessionResumesInterstitialAd : FBInterstitialAd!
     var firstTimeMainScreenReachedInterstitialAd : FBInterstitialAd?
-    var bottomStickerGalleryInterstitialAd : FBInterstitialAd?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -48,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             GWExperiment.fetchExperimentWithArea("stickers", withCompletion: {
                 experimentId, variationId, error in
                 
+                AnalyticsManager.sharedManager().postActionWithType(kGAReadVariation, targetType: kGATargetTypeApp, targetId:  String(variationId), targetParameter: nil, actionLocation: nil)
                 print("experiment Id is\(experimentId) variation id: \(variationId) error \(error)")
                 
             })
@@ -188,12 +188,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         
     }
     
-    func showBottomStickerCategoryAd() {
-        
-        self.bottomStickerGalleryInterstitialAd = self.loadBottomStickerGalleryAd()
-        
-    }
-    
     // MARK: Ads
     
     private func loadInterstitialAd() -> FBInterstitialAd {
@@ -208,13 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         
         return self.createAdWithPlacementId( firstTimeMainScreenReachedPlacementId )
     }
-    
-    private func loadBottomStickerGalleryAd() -> FBInterstitialAd {
-        
-        
-        return self.createAdWithPlacementId( bottomStickerGalleryPlacementId )
-    }
-    
+
     private func createAdWithPlacementId(placementId: String) -> FBInterstitialAd {
         
         let interstitialAd = FBInterstitialAd(placementID: placementId)

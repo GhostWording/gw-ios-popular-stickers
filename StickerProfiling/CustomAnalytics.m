@@ -62,7 +62,6 @@ static NSURLSession *session = nil;
     [analyticsPost c_setObject: [GWExperiment variationId] forKey: @"VariationId"];
     [analyticsPost c_setObject: [UserDefaults isNewInstall] forKey: @"IsNewInstall"];
     
-    
 
     [GWAnalyticsStore addAnalyticsPost: analyticsPost];
     

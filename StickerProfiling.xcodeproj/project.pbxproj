@@ -34,7 +34,6 @@
 		4E5557461DE62EC2008FD841 /* MAXBlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557451DE62EC2008FD841 /* MAXBlockButton.m */; };
 		4E5557491DE62EC7008FD841 /* MAXFadeBlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557481DE62EC7008FD841 /* MAXFadeBlockButton.m */; };
 		4E55574C1DE62ECF008FD841 /* MAXSelectedContentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55574B1DE62ECF008FD841 /* MAXSelectedContentButton.m */; };
-		4E5557511DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E55574E1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m */; };
 		4E5557521DE62ED9008FD841 /* MAXCollectionViewImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557501DE62ED9008FD841 /* MAXCollectionViewImageAndText.m */; };
 		4E5557551DE62EE7008FD841 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557541DE62EE7008FD841 /* UIColor+Extension.m */; };
 		4E55575A1DE62F05008FD841 /* UIFont+MAXSystemFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557591DE62F05008FD841 /* UIFont+MAXSystemFonts.m */; };
@@ -286,6 +285,7 @@
 		4E5559A81DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E5559431DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg */; };
 		4E5559A91DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E5559441DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg */; };
 		4EDD4ECB1DF6376900D40DC4 /* GWExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD4ECA1DF6376900D40DC4 /* GWExperiment.m */; };
+		4EE6876C1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6876B1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m */; };
 		4EEECC0E1DE673DD0095A65D /* PopularStickersLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EEECC0C1DE673DD0095A65D /* PopularStickersLocalization.strings */; };
 		4EEECC121DE674F30095A65D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEECC111DE674F30095A65D /* Main.storyboard */; };
 		7B413C6F4073A8FE3C897B66 /* Pods_StickerProfilingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2432E7750568AFDA8787871 /* Pods_StickerProfilingUITests.framework */; };
@@ -352,8 +352,6 @@
 		4E5557481DE62EC7008FD841 /* MAXFadeBlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXFadeBlockButton.m; sourceTree = "<group>"; };
 		4E55574A1DE62ECF008FD841 /* MAXSelectedContentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXSelectedContentButton.h; sourceTree = "<group>"; };
 		4E55574B1DE62ECF008FD841 /* MAXSelectedContentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXSelectedContentButton.m; sourceTree = "<group>"; };
-		4E55574D1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXCollectionViewCellImageAndText.h; sourceTree = "<group>"; };
-		4E55574E1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXCollectionViewCellImageAndText.m; sourceTree = "<group>"; };
 		4E55574F1DE62ED9008FD841 /* MAXCollectionViewImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXCollectionViewImageAndText.h; sourceTree = "<group>"; };
 		4E5557501DE62ED9008FD841 /* MAXCollectionViewImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXCollectionViewImageAndText.m; sourceTree = "<group>"; };
 		4E5557531DE62EE7008FD841 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
@@ -660,6 +658,8 @@
 		4E5559441DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ":themes:emoticons:small:iStock_000065868013_Medium.jpg"; sourceTree = "<group>"; };
 		4EDD4EC91DF6376900D40DC4 /* GWExperiment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWExperiment.h; sourceTree = "<group>"; };
 		4EDD4ECA1DF6376900D40DC4 /* GWExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWExperiment.m; sourceTree = "<group>"; };
+		4EE6876A1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXCollectionViewCellImageAndText.h; sourceTree = "<group>"; };
+		4EE6876B1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXCollectionViewCellImageAndText.m; sourceTree = "<group>"; };
 		4EEECC0D1DE673DD0095A65D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
 		4EEECC0F1DE674450095A65D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
 		4EEECC101DE674560095A65D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
@@ -838,8 +838,8 @@
 		4E5557321DE62DDE008FD841 /* Collection View Image and Text */ = {
 			isa = PBXGroup;
 			children = (
-				4E55574D1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.h */,
-				4E55574E1DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m */,
+				4EE6876A1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.h */,
+				4EE6876B1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m */,
 				4E55574F1DE62ED9008FD841 /* MAXCollectionViewImageAndText.h */,
 				4E5557501DE62ED9008FD841 /* MAXCollectionViewImageAndText.m */,
 			);
@@ -2044,7 +2044,6 @@
 				4E5557A31DE63125008FD841 /* PopularStickersLocalization.m in Sources */,
 				4E5556E71DE626E3008FD841 /* StickerProfiling.xcdatamodeld in Sources */,
 				4E5557BC1DE63340008FD841 /* NSString+MNFExtension.m in Sources */,
-				4E5557511DE62ED9008FD841 /* MAXCollectionViewCellImageAndText.m in Sources */,
 				4E5557161DE62B39008FD841 /* MBSwitch.m in Sources */,
 				4E5558061DE635F1008FD841 /* GWAreaCulture+CoreDataProperties.m in Sources */,
 				4E5557FB1DE635AA008FD841 /* GWImageWithThumb.m in Sources */,
@@ -2064,6 +2063,7 @@
 				4E5558001DE635AA008FD841 /* GWText+CoreDataProperties.m in Sources */,
 				4E55584A1DE6652F008FD841 /* IntentionPickerViewController.swift in Sources */,
 				4E5557CF1DE6352F008FD841 /* GWFramework1.xcdatamodeld in Sources */,
+				4EE6876C1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m in Sources */,
 				4E5558441DE66520008FD841 /* RecipientPickerViewController.swift in Sources */,
 				4E55581C1DE637F4008FD841 /* GWCoreDataManager.m in Sources */,
 				4E5557781DE62F1C008FD841 /* NSString+MAXHeightExtension.m in Sources */,

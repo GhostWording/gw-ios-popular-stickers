@@ -49,6 +49,11 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 /**
+ @abstract If you want to have ad at the bottom.
+ */
+@property (nonatomic) BOOL hasAdAtBottom;
+
+/**
  @bastract used as the simplified datasource of the collection view instead of exposing the complex datasource of the collection view
  */
 @property (nonatomic, strong) id <MAXCollectionViewImageAndTextDataSource> datasource;

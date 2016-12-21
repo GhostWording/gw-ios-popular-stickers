@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
                 experimentId, variationId, error in
                 
                 AnalyticsManager.sharedManager().postActionWithType(kGAReadVariation, targetType: kGATargetTypeApp, targetId:  String(variationId), targetParameter: nil, actionLocation: nil)
-                print("experiment Id is\(experimentId) variation id: \(variationId) error \(error)")
                 
             })
         }

@@ -16,7 +16,7 @@ class StickersImageAndPathObject: NSObject {
     
 }
 
-class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource {
+class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource, FBNativeAdDelegate {
 
     var imagePath: String?
     var imagesToDownload: [StickersImageAndPathObject]?
@@ -24,11 +24,22 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
     var indexPathClosure: ((indexPath: NSIndexPath) -> Void)?
     var selectedImageClosure: ((imageName: String?, image: UIImage?) -> Void)?
     var itemSize: Float?
+    var bottomAdView: FBNativeAd?
+    var viewController : StickersDetailViewController?
     
     override init() {
         super.init()
         
         imagesToDownload = [StickersImageAndPathObject]()
+        
+        if let _ = GWExperiment.variationId() {
+            
+            bottomAdView = FBNativeAd(placementID: bottomStickerGalleryPlacementId)
+            bottomAdView?.delegate = self
+            bottomAdView?.mediaCachePolicy = FBNativeAdsCachePolicy.All
+            bottomAdView?.loadAd()
+            
+        }
         
     }
     
@@ -61,8 +72,6 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
         
         GWImageManager.downloadPopularImagesWithArea(area, intentionId: intentionId, completion: {
             allPopularImages, error -> Void in
-            
-            print("popular images are \(allPopularImages)")
             
             completion(error: error)
             
@@ -103,24 +112,6 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
                         
                         persistedImages = self.randomizeImages( persistedImages )
                         
-                            /*
-                        else {
-                            
-                            for var i = 0; i < imagePaths.count; i += 1 {
-                            
-                                let currentPath = imagePaths[i]
-                                let imageIndexForPath = self.imageIndex(currentPath)
-                                
-                                if let index = imageIndexForPath where i != imageIndexForPath {
-                                    
-                                    swap( &self.imagesToDownload![i] , &self.imagesToDownload![index] )
-                                    
-                                }
-                                
-                                
-                            }
- 
-                        }*/
                         
                         for persistedImage in persistedImages {
                             for stickerImage in self.imagesToDownload! {
@@ -212,13 +203,18 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
     func MAXCollectionViewImageAndTextNumItemsInSection(theSection: Int) -> Int {
         
         if let count = imagesToDownload?.count {
-            return count
+            return count + 1
         }
         
         return 0
     }
     
     func MAXCollectionViewSizeAtIndexPath(theIndexPath: NSIndexPath!) -> CGSize {
+        
+        if theIndexPath.row == imagesToDownload?.count {
+            
+            return CGSizeMake(UIScreen.mainScreen().bounds.width, 340)
+        }
         
         if let size = self.itemSize {
             return CGSizeMake(CGFloat(size), CGFloat(size))
@@ -232,6 +228,67 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
         
         theCell.imageView.contentMode = UIViewContentMode.ScaleAspectFill
         theCell.layer.masksToBounds = true
+        
+        if theIndexPath.row == imagesToDownload!.count {
+            
+            theCell.type = MAXCellType.Advert
+            
+            theCell.imageView.image = nil
+            
+            
+            if let nonNilAd = bottomAdView {
+                if nonNilAd.adValid == true {
+                    
+                    nonNilAd.registerViewForInteraction( theCell, withViewController: self.viewController)
+                    nonNilAd.icon?.loadImageAsyncWithBlock({
+                        image in
+                        
+                        theCell.logoImageView.contentMode = UIViewContentMode.ScaleAspectFit
+                        theCell.logoImageView.layer.masksToBounds = true
+                        theCell.logoImageView.image = image
+                        
+                    })
+                    
+                    theCell.adChoiceLabel.nativeAd = nonNilAd
+                    theCell.adMediaView.nativeAd = nonNilAd
+                    
+                    theCell.titleLabel.text = nonNilAd.title
+                    theCell.titleLabel.font = UIFont.c_robotoBoldWithSize( 14.0 )
+                    theCell.titleLabel.textAlignment = .Left
+                    theCell.titleLabel.textColor = UIColor.c_textDarkGrayColor()
+                    
+                    theCell.sponsoredLabel.text = "Sponsored"
+                    theCell.sponsoredLabel.textAlignment = .Left
+                    theCell.sponsoredLabel.font = UIFont.c_robotoLightWithSize( 12.0 )
+                    theCell.sponsoredLabel.textColor = UIColor.c_textLightGrayColor()
+                    
+                    theCell.adSocialContextLabel.text = nonNilAd.socialContext
+                    theCell.adSocialContextLabel.textAlignment = .Left
+                    theCell.adSocialContextLabel.textColor = UIColor.c_textLightGrayColor()
+                    theCell.adSocialContextLabel.font = UIFont.c_robotoLightWithSize( 12.0 )
+                    
+                    theCell.adBodyLabel.text = nonNilAd.body
+                    theCell.adBodyLabel.textAlignment = .Left
+                    theCell.adBodyLabel.font = UIFont.c_robotoMediumWithSize( 12.0 )
+                    theCell.adBodyLabel.textColor = UIColor.c_textLightGrayColor()
+                    theCell.adBodyLabel.numberOfLines = 0
+                    
+                    theCell.adChoiceLabel.corner = UIRectCorner.TopRight
+                    
+                    theCell.callToActionButton.setTitle(nonNilAd.callToAction, forState: UIControlState.Normal)
+                    theCell.callToActionButton.layer.cornerRadius = 4.0
+                    theCell.callToActionButton.layer.backgroundColor = UIColor.c_blueColor().CGColor
+                    theCell.callToActionButton.titleLabel?.font = UIFont.c_robotoMediumWithSize( 12.0)
+                    
+                }
+                
+            }
+            
+            
+            return
+        }
+        
+        theCell.type = MAXCellType.Image
         
         if let image = self.imagesToDownload?[theIndexPath.row].image {
             

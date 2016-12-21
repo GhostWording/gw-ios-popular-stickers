@@ -404,12 +404,10 @@ class PersonalityIntroViewController: UIViewController {
     
     func moveToOverviewVC() {
         
-        if let nonNilVariationId = GWExperiment.variationId() where GWExperiment.experimentId() != nil {
+        if let _ = GWExperiment.variationId() where GWExperiment.experimentId() != nil {
             
-            if nonNilVariationId.integerValue > 1 {
-                let applicationDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                applicationDelegate.showFirstTimeMainScreenReachedAd()
-            }
+            let applicationDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            applicationDelegate.showFirstTimeMainScreenReachedAd()
             
         }
         

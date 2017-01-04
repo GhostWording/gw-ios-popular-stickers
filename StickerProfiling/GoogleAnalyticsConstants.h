@@ -51,6 +51,7 @@ static const NSString *kGAMoodItemPressed = @"MoodItemPressed";
 static const NSString *kGAFirstLaunch = @"FirstAppLaunch";
 static const NSString *kGANotificationReceived = @"NotificationReceived";
 static const NSString *kGAShareViaIntent = @"ShareViaIntent";
+static const NSString *kGASendWith = @"SendWith";
 static const NSString *kGAShareOnFbWall = @"ShareOnFbWall";
 static const NSString *kGALinkEvents = @"LinkEvents";
 static const NSString *kGAOptionMenu = @"OptionMenu";

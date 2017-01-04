@@ -8,6 +8,10 @@
 
 "<AppName>" = "Sticker Profiling";
 
+// MARK: Tab Bar Strings
+"<CategoryTabBarString>" = "Catégories";
+"<DailyIdeaTabBarString>" = "Idées du jour";
+
 // MARK: Send Method
 "<ChooseSendMethodSettings>" = "Envoyer les messages avec";
 "<ChooseSendMethod>" = "Envoyer avec";

@@ -35,7 +35,7 @@ class PersonalityIntroductionModel: NSObject {
         
     }
     
-    func downloadPersonalQuestions(_ completion: @escaping (NSError?) -> Void ) {
+    func downloadPersonalQuestions(_ completion: @escaping (Error?) -> Void ) {
         
         if self.questionType == PersonalityViewControllerType.intro {
             
@@ -52,7 +52,7 @@ class PersonalityIntroductionModel: NSObject {
                         self.personalQuestions = GWDataManager().fetchPersonalityQuestions( withIds: self.personalQuestionIds )
                         print("personal questions \(self.personalQuestions)")
                         self.orderQuestionsById( questionIds )
-                        completion(error as NSError?)
+                        completion(error as Error?)
                         
                     })
                     
@@ -84,7 +84,7 @@ class PersonalityIntroductionModel: NSObject {
                     }
                     else {
                         // error occurred
-                        completion( error as NSError? )
+                        completion( error as Error? )
                     }
                     
                 })
@@ -163,7 +163,7 @@ class PersonalityIntroductionModel: NSObject {
         
     }
     
-    func image(at index: Int, completion: @escaping (UIImage?, NSError?) -> Void) {
+    func image(at index: Int, completion: @escaping (UIImage?, Error?) -> Void) {
         
         if index < self.personalQuestions?.count {
         
@@ -178,7 +178,7 @@ class PersonalityIntroductionModel: NSObject {
                         completion(UIImage(data:  nonNilImageData), nil)
                     }
                     else {
-                        completion(nil, error as NSError?)
+                        completion(nil, error as Error?)
                     }
                     
                 })

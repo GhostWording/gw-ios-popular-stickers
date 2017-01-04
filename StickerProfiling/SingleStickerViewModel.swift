@@ -150,7 +150,7 @@ class SingleStickerViewModel: NSObject {
     }
     
     
-    func downloadPopularTexts(_ imageName: String?, completion: @escaping (_ error: NSError?) -> Void) {
+    func downloadPopularTexts(_ imageName: String?, completion: @escaping (_ error: Error?) -> Void) {
         
         if imagePath != "themes/emoticons" {
             let lastImagePathName = self.getImageName(imageName)
@@ -169,7 +169,7 @@ class SingleStickerViewModel: NSObject {
                         
                     }
                     
-                    completion(error as NSError?)
+                    completion(error as Error?)
                 })
                 
             })

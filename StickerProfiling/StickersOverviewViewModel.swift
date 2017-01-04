@@ -216,20 +216,20 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
     
     // MARK: Downlad intentions
     
-    func downloadIntentions(_ completion: @escaping (_ error: NSError?) -> Void) {
+    func downloadIntentions(_ completion: @escaping (_ error: Error?) -> Void) {
         GWDataManager().downloadIntentions(withArea: "stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
             intentions, error -> Void in
             
             DispatchQueue.main.async(execute: {
                 
                 self.reloadData()
-                completion(error as NSError?)
+                completion(error as Error?)
             })
             
         })
     }
     
-    func downloadThemes(_ completion: @escaping (_ error: NSError?) -> Void) {
+    func downloadThemes(_ completion: @escaping (_ error: Error?) -> Void) {
         
         GWDataManager().downloadImageThemes(withPath: "http://gw-static-apis.azurewebsites.net/data/stickers/moodthemes.json", withCompletion: {
             themes, error -> Void in
@@ -241,14 +241,14 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
             DispatchQueue.main.async(execute: {
                 
                 self.reloadData()
-                completion(error as NSError?)
+                completion(error as Error?)
             })
             
         })
         
     }
     
-    func downloadImage(_ path: String, completion: @escaping (_ image: GWImage?, _ error: NSError?) -> Void) {
+    func downloadImage(_ path: String, completion: @escaping (_ image: GWImage?, _ error: Error?) -> Void) {
         
         DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low).async(execute: {
             GWDataManager().downloadImagesAndPersistIfNotExist( withUrls: [path] , withCompletion: {
@@ -256,7 +256,7 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
                 
                 DispatchQueue.main.async(execute: {
                     let firstImage = GWDataManager().fetchImages( withImagePaths: [path] ).first as? GWImage
-                    completion(firstImage, error as NSError?)
+                    completion(firstImage, error as Error?)
                 })
             })
         })

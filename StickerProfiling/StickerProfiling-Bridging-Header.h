@@ -46,6 +46,7 @@
 #import "MAXPageControl.h"
 #import "MAXPagingScrollView.h"
 #import "MBSwitch.h"
+#import "GWDailyIdea.h"
 
 #import <FBAudienceNetwork/FBAudienceNetwork.h>
 

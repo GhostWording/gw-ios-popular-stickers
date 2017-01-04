@@ -443,10 +443,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             self.present( PersonalityIntroViewController(type: PersonalityViewControllerType.intro), animated: true, completion: nil)
         }
         else {
-            
-            let stickersOverview = StickersOverviewController()
-            
-            self.present( stickersOverview, animated: true, completion: nil)
+                        
+            self.present( UITabBarController.createTabBarController(), animated: true, completion: nil)
         }
         
         UserDefaults.setIsFirstLaunch(false)

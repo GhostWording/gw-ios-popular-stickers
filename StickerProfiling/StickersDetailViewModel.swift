@@ -68,18 +68,18 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
     
     // MARK: Download
     
-    func downloadPopularImageIds(_ area: String, intentionId: String, completion: @escaping (_ error: NSError?) -> Void) {
+    func downloadPopularImageIds(_ area: String, intentionId: String, completion: @escaping (_ error: Error?) -> Void) {
         
         GWImageManager.downloadPopularImages(withArea: area, intentionId: intentionId, completion: {
             allPopularImages, error -> Void in
             
-            completion(error as NSError?)
+            completion(error as Error?)
             
         })
         
     }
     
-    func downloadImageIds(_ completion: @escaping (_ error: NSError?) -> Void) {
+    func downloadImageIds(_ completion: @escaping (_ error: Error?) -> Void) {
         
         if let imageDownloadPath = self.imagePath {
             
@@ -124,7 +124,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
                         
                     }
                     
-                    completion(error as NSError?)
+                    completion(error as Error?)
                 })
                 
             })

@@ -288,6 +288,14 @@
 		4EE6876C1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6876B1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m */; };
 		4EEECC0E1DE673DD0095A65D /* PopularStickersLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EEECC0C1DE673DD0095A65D /* PopularStickersLocalization.strings */; };
 		4EEECC121DE674F30095A65D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEECC111DE674F30095A65D /* Main.storyboard */; };
+		4EF37FEA1E1DB2290078272C /* GWDailyIdea.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FE91E1DB2290078272C /* GWDailyIdea.m */; };
+		4EF37FEF1E1DB2BB0078272C /* DailyIdeasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FED1E1DB2BB0078272C /* DailyIdeasCollectionViewCell.swift */; };
+		4EF37FF01E1DB2BB0078272C /* DailyIdeasSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FEE1E1DB2BB0078272C /* DailyIdeasSectionHeaderView.swift */; };
+		4EF37FF31E1DB2CB0078272C /* LMDailyIdeasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FF11E1DB2CB0078272C /* LMDailyIdeasViewController.swift */; };
+		4EF37FF41E1DB2CB0078272C /* DailyIdeasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FF21E1DB2CB0078272C /* DailyIdeasViewModel.swift */; };
+		4EF37FF71E1DB32F0078272C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FF61E1DB32F0078272C /* RootViewController.swift */; };
+		4EF37FFA1E1DB6980078272C /* TabBarControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FF91E1DB6980078272C /* TabBarControllerExtensions.swift */; };
+		4EF37FFC1E1DB6FC0078272C /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF37FFB1E1DB6FC0078272C /* UIImageExtension.swift */; };
 		7B413C6F4073A8FE3C897B66 /* Pods_StickerProfilingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2432E7750568AFDA8787871 /* Pods_StickerProfilingUITests.framework */; };
 		AF4474D5BCEDAE1BB53E3BBF /* Pods_StickerProfilingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D94D935D80854EB8FEF50D9 /* Pods_StickerProfilingTests.framework */; };
 		F65AB8F9953FEA26C84EDEFB /* Pods_StickerProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */; };
@@ -664,6 +672,15 @@
 		4EEECC0F1DE674450095A65D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
 		4EEECC101DE674560095A65D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PopularStickersLocalization.strings; sourceTree = "<group>"; };
 		4EEECC111DE674F30095A65D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4EF37FE81E1DB2290078272C /* GWDailyIdea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWDailyIdea.h; sourceTree = "<group>"; };
+		4EF37FE91E1DB2290078272C /* GWDailyIdea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWDailyIdea.m; sourceTree = "<group>"; };
+		4EF37FED1E1DB2BB0078272C /* DailyIdeasCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyIdeasCollectionViewCell.swift; sourceTree = "<group>"; };
+		4EF37FEE1E1DB2BB0078272C /* DailyIdeasSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyIdeasSectionHeaderView.swift; sourceTree = "<group>"; };
+		4EF37FF11E1DB2CB0078272C /* LMDailyIdeasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMDailyIdeasViewController.swift; sourceTree = "<group>"; };
+		4EF37FF21E1DB2CB0078272C /* DailyIdeasViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyIdeasViewModel.swift; sourceTree = "<group>"; };
+		4EF37FF61E1DB32F0078272C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		4EF37FF91E1DB6980078272C /* TabBarControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarControllerExtensions.swift; sourceTree = "<group>"; };
+		4EF37FFB1E1DB6FC0078272C /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		57E24219279856AE3C55FCB5 /* Pods-StickerProfilingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfilingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfilingTests/Pods-StickerProfilingTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A815A13C9793E736F0B1CBD /* Pods-StickerProfiling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerProfiling.release.xcconfig"; path = "Pods/Target Support Files/Pods-StickerProfiling/Pods-StickerProfiling.release.xcconfig"; sourceTree = "<group>"; };
 		7C43EDED1BC819493F7CDB0E /* Pods_StickerProfiling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickerProfiling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -748,7 +765,8 @@
 				4E5557A51DE631C3008FD841 /* Messenger Share State */,
 				4E5557A81DE63303008FD841 /* Data Layer */,
 				4E5556DE1DE626E3008FD841 /* AppDelegate.swift */,
-				4E2701381DEA88D10056133B /* StringExtension.swift */,
+				4EF37FF81E1DB66E0078272C /* Extension */,
+				4EF37FF51E1DB31D0078272C /* Root View Controller */,
 				4E5558281DE663C9008FD841 /* View Controllers */,
 				4E5556E01DE626E3008FD841 /* ViewController.swift */,
 				4E5558511DE66730008FD841 /* Pictures */,
@@ -1220,6 +1238,7 @@
 		4E5558281DE663C9008FD841 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4EF37FE71E1DB20F0078272C /* Daily Ideas VC */,
 				4E55584C1DE6654A008FD841 /* Personality Intro VC */,
 				4E5558451DE66522008FD841 /* Intention Picker VC */,
 				4E5558401DE66513008FD841 /* Recipient Picker VC */,
@@ -1496,6 +1515,53 @@
 				4E5559441DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg */,
 			);
 			name = Emoji;
+			sourceTree = "<group>";
+		};
+		4EF37FE71E1DB20F0078272C /* Daily Ideas VC */ = {
+			isa = PBXGroup;
+			children = (
+				4EF37FEC1E1DB2AB0078272C /* Cells */,
+				4EF37FEB1E1DB29F0078272C /* Cached Daily Ideas */,
+				4EF37FF11E1DB2CB0078272C /* LMDailyIdeasViewController.swift */,
+				4EF37FF21E1DB2CB0078272C /* DailyIdeasViewModel.swift */,
+			);
+			name = "Daily Ideas VC";
+			sourceTree = "<group>";
+		};
+		4EF37FEB1E1DB29F0078272C /* Cached Daily Ideas */ = {
+			isa = PBXGroup;
+			children = (
+				4EF37FE81E1DB2290078272C /* GWDailyIdea.h */,
+				4EF37FE91E1DB2290078272C /* GWDailyIdea.m */,
+			);
+			name = "Cached Daily Ideas";
+			sourceTree = "<group>";
+		};
+		4EF37FEC1E1DB2AB0078272C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4EF37FED1E1DB2BB0078272C /* DailyIdeasCollectionViewCell.swift */,
+				4EF37FEE1E1DB2BB0078272C /* DailyIdeasSectionHeaderView.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		4EF37FF51E1DB31D0078272C /* Root View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4EF37FF61E1DB32F0078272C /* RootViewController.swift */,
+			);
+			name = "Root View Controller";
+			sourceTree = "<group>";
+		};
+		4EF37FF81E1DB66E0078272C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4EF37FFB1E1DB6FC0078272C /* UIImageExtension.swift */,
+				4EF37FF91E1DB6980078272C /* TabBarControllerExtensions.swift */,
+				4E2701381DEA88D10056133B /* StringExtension.swift */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 		9A4D69303D7A653A4F4E638C /* Pods */ = {
@@ -2022,22 +2088,28 @@
 				4E5557F91DE635AA008FD841 /* GWArea.m in Sources */,
 				4E5558431DE66520008FD841 /* RecipientPickerViewModel.swift in Sources */,
 				4E5558301DE66456008FD841 /* StickersOverviewController.swift in Sources */,
+				4EF37FF01E1DB2BB0078272C /* DailyIdeasSectionHeaderView.swift in Sources */,
 				4E55583D1DE664E4008FD841 /* SingleStickerViewModel.swift in Sources */,
 				4E5557B91DE63340008FD841 /* MNFJsonAdapterSubclassedProperty.m in Sources */,
 				4E5558371DE664CB008FD841 /* StickersDetailViewModel.swift in Sources */,
+				4EF37FEF1E1DB2BB0078272C /* DailyIdeasCollectionViewCell.swift in Sources */,
 				4E55582C1DE66449008FD841 /* SettingsViewController.swift in Sources */,
 				4E5557951DE6306B008FD841 /* GWAnalyticsStore.m in Sources */,
 				4E5557461DE62EC2008FD841 /* MAXBlockButton.m in Sources */,
 				4E5557C41DE63390008FD841 /* NotificationManager.m in Sources */,
 				4E5557FA1DE635AA008FD841 /* GWImageWithThumb+CoreDataProperties.m in Sources */,
+				4EF37FF31E1DB2CB0078272C /* LMDailyIdeasViewController.swift in Sources */,
 				4E5557751DE62F0E008FD841 /* UIFont+MAXRobotoExtension.m in Sources */,
+				4EF37FF71E1DB32F0078272C /* RootViewController.swift in Sources */,
 				4E5557F81DE635AA008FD841 /* GWArea+CoreDataProperties.m in Sources */,
 				4E5558271DE662FB008FD841 /* GWTextFilter.m in Sources */,
 				4E5557FD1DE635AA008FD841 /* GWIntention.m in Sources */,
 				4E55583E1DE664E4008FD841 /* SingleStickerDetailViewController.swift in Sources */,
 				4E5558501DE66555008FD841 /* PersonalityIntroductionModel.swift in Sources */,
+				4EF37FFA1E1DB6980078272C /* TabBarControllerExtensions.swift in Sources */,
 				4EDD4ECB1DF6376900D40DC4 /* GWExperiment.m in Sources */,
 				4E5557F51DE635AA008FD841 /* GWRecipient.m in Sources */,
+				4EF37FEA1E1DB2290078272C /* GWDailyIdea.m in Sources */,
 				4E5557F41DE635AA008FD841 /* GWRecipient+CoreDataProperties.m in Sources */,
 				4E5556E11DE626E3008FD841 /* ViewController.swift in Sources */,
 				4E55577D1DE62F2A008FD841 /* UIView+MAXExtension.m in Sources */,
@@ -2052,6 +2124,7 @@
 				4E5557FB1DE635AA008FD841 /* GWImageWithThumb.m in Sources */,
 				4E5558011DE635AA008FD841 /* GWText.m in Sources */,
 				4E5557551DE62EE7008FD841 /* UIColor+Extension.m in Sources */,
+				4EF37FFC1E1DB6FC0078272C /* UIImageExtension.swift in Sources */,
 				4E5557A21DE63125008FD841 /* GWLocalizedBundle.m in Sources */,
 				4E5557BA1DE63340008FD841 /* MNFJsonAdapterValueTransformer.m in Sources */,
 				4E5557B71DE63340008FD841 /* MNFJsonAdapter.m in Sources */,
@@ -2064,6 +2137,7 @@
 				4E5557F71DE635AA008FD841 /* GWImage.m in Sources */,
 				4E5558381DE664CB008FD841 /* StickersDetailViewController.swift in Sources */,
 				4E5558001DE635AA008FD841 /* GWText+CoreDataProperties.m in Sources */,
+				4EF37FF41E1DB2CB0078272C /* DailyIdeasViewModel.swift in Sources */,
 				4E55584A1DE6652F008FD841 /* IntentionPickerViewController.swift in Sources */,
 				4E5557CF1DE6352F008FD841 /* GWFramework1.xcdatamodeld in Sources */,
 				4EE6876C1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m in Sources */,

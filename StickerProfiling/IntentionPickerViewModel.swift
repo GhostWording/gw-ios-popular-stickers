@@ -223,7 +223,7 @@ class IntentionPickerViewModel: NSObject {
         return nil
     }
     
-    func downloadImage(_ index: Int, completion: @escaping (_ error: NSError?) -> Void) {
+    func downloadImage(_ index: Int, completion: @escaping (_ error: Error?) -> Void) {
         
         if index < intentionItems?.count && intentionItems != nil {
             
@@ -241,7 +241,7 @@ class IntentionPickerViewModel: NSObject {
                         if imageData != nil {
                             
                             intentionItem.intentionImage = UIImage(data: imageData!)
-                            completion(error as NSError?)
+                            completion(error as Error?)
                         }
                         
                     })

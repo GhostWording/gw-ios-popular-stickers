@@ -404,16 +404,14 @@ class PersonalityIntroViewController: UIViewController {
     
     func moveToOverviewVC() {
         
-        if let _ = GWExperiment.variationId(), GWExperiment.experimentId() != nil {
-            
-            let applicationDelegate = UIApplication.shared.delegate as! AppDelegate
-            applicationDelegate.showFirstTimeMainScreenReachedAd()
-            
+        self.present( UITabBarController.createTabBarController(), animated: false, completion: nil)
+        
+        
+        let applicationDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        if let nonNilAd = applicationDelegate.firstTimeMainScreenReachedInterstitialAd {
+            nonNilAd.show( fromRootViewController: applicationDelegate.window?.rootViewController )
         }
-        
-        let stickersOverview = StickersOverviewController()        
-        
-        self.present( stickersOverview, animated: true, completion: nil)
         
     }
 

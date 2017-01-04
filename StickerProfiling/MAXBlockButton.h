@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface MAXBlockButton : UIButton
 
+@property (nonatomic, strong, nullable) void (^buttonTouchDownCompletionBlock)(void);
+@property (nonatomic, strong, nullable) void (^buttonTouchUpCompletionBlock)(void);
 
 // completion blocks for touch events
 -(void)buttonTouchDownWithCompletion:(void (^)(void))block;
@@ -24,3 +28,5 @@
 -(void)buttonTouchAllEventsWithCompletion:(void (^)(void))block;
 
 @end
+
+NS_ASSUME_NONNULL_END

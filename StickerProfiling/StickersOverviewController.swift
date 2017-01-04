@@ -100,6 +100,11 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         
         self.view.addSubview(collectionView)
         
+        if self.tabBarController != nil {
+            collectionView?.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
+        }
+        
+        
         let progressHud = MBProgressHUD.showAdded(to: self.view, animated: true)
         progressHud.mode = MBProgressHUDMode.indeterminate
         

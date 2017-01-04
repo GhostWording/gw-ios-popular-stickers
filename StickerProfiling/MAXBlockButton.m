@@ -86,6 +86,11 @@ typedef void (^CompletionBlock)(void);
     for (CompletionBlock block in _touchDownBlocks) {
         block();
     }
+    
+    if (self.buttonTouchDownCompletionBlock != nil) {
+        self.buttonTouchDownCompletionBlock();
+    }
+    
 }
 
 -(void)buttonTouchDownRepeatAction {
@@ -122,6 +127,11 @@ typedef void (^CompletionBlock)(void);
     for (CompletionBlock block in _touchUpInsideBlocks) {
         block();
     }
+    
+    if (self.buttonTouchUpCompletionBlock != nil) {
+        self.buttonTouchUpCompletionBlock();
+    }
+    
 }
 
 -(void)buttonTouchUpOutsideAction {

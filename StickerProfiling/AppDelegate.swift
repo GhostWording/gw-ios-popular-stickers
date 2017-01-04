@@ -19,6 +19,8 @@ let sessionResumesPlacementId = "1594200494225037_1684892605155825"
 let firstTimeMainScreenReachedPlacementId = "1594200494225037_1684883995156686"
 let bottomStickerGalleryPlacementId = "1594200494225037_1688239298154489"
 
+var s_sentWithMessengerInDailyIdeas = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerDelegate, FBInterstitialAdDelegate {
 
@@ -84,9 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             
             AnalyticsManager.shared().postAction(withType: kGAAppLaunch, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
             
-            let stickersOverview = StickersOverviewController()
             
-            self.window?.rootViewController = stickersOverview
+            self.window?.rootViewController = UITabBarController.createTabBarController()
             self.showGlobalAdIfAppropriate()
         }
         
@@ -124,6 +125,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         
         FBSDKAppEvents.activateApp()
         
+        if s_sentWithMessengerInDailyIdeas == true {
+            
+            if UserDefaults.isNotificationRegistered() == false {
+                let application = UIApplication.shared
+                application.registerUserNotificationSettings( UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound] , categories: nil))
+            }
+            
+            s_sentWithMessengerInDailyIdeas = false
+            
+        }
+        
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -151,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
     @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         
-        return self.application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        return self.application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options [UIApplicationOpenURLOptionsKey.annotation] as Any)
     }
     
     
@@ -231,7 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         
     }
     
-    func interstitialAd(_ interstitialAd: FBInterstitialAd, didFailWithError error: NSError) {
+    func interstitialAd(_ interstitialAd: FBInterstitialAd, didFailWithError error: Error) {
         print("add error \(error) with ad placement id \(interstitialAd.placementID)")
     }
     

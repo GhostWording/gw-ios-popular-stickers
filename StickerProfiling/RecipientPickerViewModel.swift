@@ -58,7 +58,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         super.init()
     }
     
-    func downloadRecipients(_ completion: @escaping (_ error: NSError?) -> Void) {
+    func downloadRecipients(_ completion: @escaping (_ error: Error?) -> Void) {
         
         GWDataManager().downloadRecipients(withArea: self.area, completion: {
             downloadedRecipients, error in
@@ -71,7 +71,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
                     
                 }
                 
-                completion(error as NSError?)
+                completion(error as Error?)
                 
             })
             

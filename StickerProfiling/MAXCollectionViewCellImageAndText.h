@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FBAudienceNetwork/FBAudienceNetwork.h>
+
+@import FBAudienceNetwork;
 
 typedef NS_ENUM(NSInteger, MAXCellType) {
     MAXCellTypeImage = 0,

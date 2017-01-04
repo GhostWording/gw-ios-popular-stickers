@@ -38,15 +38,15 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         if let nonNilViewControllerToShow = self.viewControllerToShow {
-            self.presentViewController(nonNilViewControllerToShow, animated: false, completion: nil)
+            self.present(nonNilViewControllerToShow, animated: false, completion: nil)
             self.viewControllerToShow = nil
         }
         
         if UserDefaults.isMainScreenReached() == false {
-            AnalyticsManager().postActionWithType(kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager().postAction(withType: kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         }
         
     }
@@ -54,43 +54,43 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backToMessengerButton = MAXBlockButton(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40))
-        backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBannerColor()
+        backToMessengerButton = MAXBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBanner()
         backToMessengerButton?.titleEdgeInsets = UIEdgeInsetsMake(20, 0, 0, 0)
-        backToMessengerButton?.setTitle("Touch to return to messenger", forState: UIControlState.Normal)
-        backToMessengerButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        backToMessengerButton?.titleLabel?.font = UIFont.c_robotoWithSize(13.0)
+        backToMessengerButton?.setTitle("Touch to return to messenger", for: UIControlState())
+        backToMessengerButton?.setTitleColor(UIColor.white, for: UIControlState())
+        backToMessengerButton?.titleLabel?.font = UIFont.c_roboto(withSize: 13.0)
         
-        backToMessengerButton?.buttonTouchUpInsideWithCompletion({
+        backToMessengerButton?.buttonTouchUpInside(completion: {
             
             FBSDKMessengerSharer.openMessenger()
             
         })
         
-        collectionView = MAXCollectionViewImageAndText(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)))
+        collectionView = MAXCollectionViewImageAndText(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         collectionView.datasource = viewModel
-        collectionView.headerView.backgroundColor = UIColor.c_blueColor()
+        collectionView.headerView.backgroundColor = UIColor.c_blue()
         
-        let stickersTitleLabel = UILabel(frame: CGRectMake(CGRectGetWidth(self.view.frame) * 0.05, 20, CGRectGetWidth(self.view.frame), 44))
-        stickersTitleLabel.textAlignment = .Left
-        stickersTitleLabel.textColor = UIColor.whiteColor()
+        let stickersTitleLabel = UILabel(frame: CGRect(x: self.view.frame.width * 0.05, y: 20, width: self.view.frame.width, height: 44))
+        stickersTitleLabel.textAlignment = .left
+        stickersTitleLabel.textColor = UIColor.white
         stickersTitleLabel.text = PopularStickersLocalizedString("<AppName>", nil)
-        stickersTitleLabel.font = UIFont.c_robotoWithSize(Float(CGRectGetHeight(self.view.frame) * 0.03))
+        stickersTitleLabel.font = UIFont.c_roboto(withSize: Float(self.view.frame.height * 0.03))
         collectionView.headerView.addSubview(stickersTitleLabel)
         
         var settingsImage = UIImage(named: "SettingsIcon")
-        settingsImage = settingsImage?.imageWithRenderingMode(.AlwaysTemplate)
+        settingsImage = settingsImage?.withRenderingMode(.alwaysTemplate)
         
-        let headerViewHeightWithoutStatusBar = CGRectGetHeight(collectionView.headerView.frame) - 20
+        let headerViewHeightWithoutStatusBar = collectionView.headerView.frame.height - 20
         
-        let settingsButton = MAXFadeBlockButton(frame: CGRectMake(CGRectGetWidth(self.view.frame) - headerViewHeightWithoutStatusBar * 1.5, 20, headerViewHeightWithoutStatusBar * 1.5, headerViewHeightWithoutStatusBar))
+        let settingsButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.width - headerViewHeightWithoutStatusBar * 1.5, y: 20, width: headerViewHeightWithoutStatusBar * 1.5, height: headerViewHeightWithoutStatusBar))
         settingsButton.imageEdgeInsets = UIEdgeInsetsMake(headerViewHeightWithoutStatusBar * 0, headerViewHeightWithoutStatusBar * 0.15, headerViewHeightWithoutStatusBar * 0, headerViewHeightWithoutStatusBar * 0.15)
-        settingsButton.setImage(settingsImage, forState: UIControlState.Normal)
-        settingsButton.tintColor = UIColor.whiteColor()
+        settingsButton.setImage(settingsImage, for: UIControlState())
+        settingsButton.tintColor = UIColor.white
         
-        settingsButton.buttonTouchUpInsideWithCompletion({
+        settingsButton.buttonTouchUpInside(completion: {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAOptionMenu, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
+            AnalyticsManager.shared().postAction( withType: kGAOptionMenu, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
             
             self.showSettingsView()
         })
@@ -100,8 +100,8 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         
         self.view.addSubview(collectionView)
         
-        let progressHud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        progressHud.mode = MBProgressHUDMode.Indeterminate
+        let progressHud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHud.mode = MBProgressHUDMode.indeterminate
         
         viewModel.downloadIntentions({
             error -> Void in
@@ -110,7 +110,7 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
                 error -> Void in
                 
                 self.collectionView.collectionView.reloadData()
-                progressHud.hideAnimated( true )
+                progressHud.hide( animated: true )
                 
             })
             
@@ -119,7 +119,7 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         viewModel.reloadCellAtIndexPath({
             indexPath -> Void in
             
-            self.collectionView.collectionView.reloadItemsAtIndexPaths([indexPath])
+            self.collectionView.collectionView.reloadItems(at: [indexPath])
             
         })
         
@@ -155,9 +155,9 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
     
     func addOrRemoveBackToMessengerButton() {
         
-        if AppFlow.currentMessengerFlow == MessengerFlow.Send {
+        if AppFlow.currentMessengerFlow == MessengerFlow.send {
             self.backToMessengerButton?.removeFromSuperview()
-            self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
+            self.collectionView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         }
         else {
             
@@ -167,22 +167,22 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
             
             // to hide some of the header view of the collection view that is allocated for the status bar we have 20 in height
             // to remove the other 20
-            self.collectionView.frame = CGRectMake(0, 20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 20)
+            self.collectionView.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 20)
             
         }
         
     }
     
     // MARK: Navigation
-    func showStickerDetailView(label: String?, imagePath: String?, intentionId: String?) {
+    func showStickerDetailView(_ label: String?, imagePath: String?, intentionId: String?) {
         
         if UserDefaults.isFirstMoodItemPressed() == false {
             
             if intentionId != nil {
-                AnalyticsManager.sharedManager().postActionWithType( kGAFirstMoodItemPressed, targetType: kGATargetTypeIntention, targetId: intentionId, targetParameter: nil, actionLocation: kGAMainScreen)
+                AnalyticsManager.shared().postAction( withType: kGAFirstMoodItemPressed, targetType: kGATargetTypeIntention, targetId: intentionId, targetParameter: nil, actionLocation: kGAMainScreen)
             }
             else {
-                AnalyticsManager.sharedManager().postActionWithType( kGAMoodItemPressed, targetType: kGATargetTypeTheme, targetId: imagePath, targetParameter: nil, actionLocation: kGAMainScreen)
+                AnalyticsManager.shared().postAction( withType: kGAMoodItemPressed, targetType: kGATargetTypeTheme, targetId: imagePath, targetParameter: nil, actionLocation: kGAMainScreen)
             }
                         
         }
@@ -192,13 +192,13 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         stickerDetailVC.selectedImagePath = imagePath
         stickerDetailVC.selectedIntentionId = intentionId
         
-        self.presentViewController(stickerDetailVC, animated: true, completion: nil)
+        self.present(stickerDetailVC, animated: true, completion: nil)
         
     }
     
     func showSettingsView() {
         
-        self.presentViewController(SettingsViewController(), animated: true, completion: nil)
+        self.present(SettingsViewController(), animated: true, completion: nil)
         
     }
     

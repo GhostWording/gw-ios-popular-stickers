@@ -29,8 +29,8 @@ class IntentionCell: UITableViewCell {
         
         super.layoutSubviews()
         
-        intentionImageView.frame = CGRectMake(15, CGRectGetHeight(self.frame) * 0.12, CGRectGetHeight(self.frame) * 0.76, CGRectGetHeight(self.frame) * 0.76)
-        intentionLabel.frame = CGRectMake(CGRectGetMaxX(intentionImageView.frame) + 15, 0, CGRectGetWidth(self.frame) - CGRectGetMinX(intentionImageView.frame) - 15, CGRectGetHeight(self.frame))
+        intentionImageView.frame = CGRect(x: 15, y: self.frame.height * 0.12, width: self.frame.height * 0.76, height: self.frame.height * 0.76)
+        intentionLabel.frame = CGRect(x: intentionImageView.frame.maxX + 15, y: 0, width: self.frame.width - intentionImageView.frame.minX - 15, height: self.frame.height)
         
     }
     

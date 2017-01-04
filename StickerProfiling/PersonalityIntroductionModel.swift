@@ -7,6 +7,19 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class PersonalityIntroductionModel: NSObject {
     
@@ -22,24 +35,24 @@ class PersonalityIntroductionModel: NSObject {
         
     }
     
-    func downloadPersonalQuestions(completion: (NSError?) -> Void ) {
+    func downloadPersonalQuestions(_ completion: @escaping (NSError?) -> Void ) {
         
-        if self.questionType == PersonalityViewControllerType.Intro {
+        if self.questionType == PersonalityViewControllerType.intro {
             
-            ServerCommunication.downloadPersonalityQuestionsToAskWithPath(nil, completion: {
+            ServerCommunication.downloadPersonalityQuestionsToAsk(withPath: nil, completion: {
                 questionIds, error in
                 
                 self.personalQuestionIds = questionIds
                 
-                GWDataManager().downloadPersonalityQuestionsWithPath(nil, completion: {
+                GWDataManager().downloadPersonalityQuestions(withPath: nil, completion: {
                     questions, error in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         
-                        self.personalQuestions = GWDataManager().fetchPersonalityQuestionsWithIds( self.personalQuestionIds )
+                        self.personalQuestions = GWDataManager().fetchPersonalityQuestions( withIds: self.personalQuestionIds )
                         print("personal questions \(self.personalQuestions)")
                         self.orderQuestionsById( questionIds )
-                        completion(error)
+                        completion(error as NSError?)
                         
                     })
                     
@@ -51,10 +64,10 @@ class PersonalityIntroductionModel: NSObject {
         }
         else {
             
-            GWDataManager().downloadPersonalityQuestionsWithPath(nil, completion: {
+            GWDataManager().downloadPersonalityQuestions(withPath: nil, completion: {
                 questions, error in
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     if error == nil && questions != nil {
                         
@@ -63,7 +76,7 @@ class PersonalityIntroductionModel: NSObject {
                             personalityQuestionsOrder.append(currentQuestion.personalityQuestionId!)
                         }
                         
-                        self.personalQuestions = GWDataManager().fetchPersonalityQuestionsWithIds( nil )
+                        self.personalQuestions = GWDataManager().fetchPersonalityQuestions( withIds: nil )
                         self.orderQuestionsById( personalityQuestionsOrder )
                         completion( nil )
                         
@@ -71,7 +84,7 @@ class PersonalityIntroductionModel: NSObject {
                     }
                     else {
                         // error occurred
-                        completion( error )
+                        completion( error as NSError? )
                     }
                     
                 })
@@ -82,7 +95,7 @@ class PersonalityIntroductionModel: NSObject {
         
     }
     
-    func orderQuestionsById(ids: [String]?) {
+    func orderQuestionsById(_ ids: [String]?) {
         
         if let nonNilIds = ids, let nonNilPersonalQuesitons = self.personalQuestions {
             
@@ -112,7 +125,7 @@ class PersonalityIntroductionModel: NSObject {
         
         if self.personalQuestions != nil {
             
-            if self.questionType == PersonalityViewControllerType.Settings {
+            if self.questionType == PersonalityViewControllerType.settings {
                 
                 return self.personalQuestions!.count + 1
             }
@@ -129,7 +142,7 @@ class PersonalityIntroductionModel: NSObject {
             
             let question = self.personalQuestions![index];
             
-            return question.questionWithCulture( GWLocalizedBundle.currentLocaleAPIString() )
+            return question.question( withCulture: GWLocalizedBundle.currentLocaleAPIString() )
             
         }
         
@@ -142,7 +155,7 @@ class PersonalityIntroductionModel: NSObject {
             
             let question = self.personalQuestions![index]
             
-            return question.answerWithCulture( GWLocalizedBundle.currentLocaleAPIString(), atIndex: questionIndex, completion: nil)
+            return question.answer( withCulture: GWLocalizedBundle.currentLocaleAPIString(), at: questionIndex, completion: nil)
             
         }
         
@@ -150,7 +163,7 @@ class PersonalityIntroductionModel: NSObject {
         
     }
     
-    func image(at index: Int, completion: (UIImage?, NSError?) -> Void) {
+    func image(at index: Int, completion: @escaping (UIImage?, NSError?) -> Void) {
         
         if index < self.personalQuestions?.count {
         
@@ -158,14 +171,14 @@ class PersonalityIntroductionModel: NSObject {
             
             if let nonNilImagePath = question.defaultImage {
                 
-                GWImageManager.downloadImageIfNotExistsWithPath(nonNilImagePath, imageDataCompletion: {
+                GWImageManager.downloadImageIfNotExists(withPath: nonNilImagePath, imageDataCompletion: {
                     imageId, imageData, error in
                     
                     if let nonNilImageData = imageData {
                         completion(UIImage(data:  nonNilImageData), nil)
                     }
                     else {
-                        completion(nil, error)
+                        completion(nil, error as NSError?)
                     }
                     
                 })
@@ -183,26 +196,26 @@ class PersonalityIntroductionModel: NSObject {
         let answerOne = question.answers![0] as! NSDictionary
         let answerTwo = question.answers![1] as! NSDictionary
         
-        return self.hasAnswered( answerOne.objectForKey( "Id" ) as! String, answerIdTwo: answerTwo.objectForKey( "Id" ) as! String )
+        return self.hasAnswered( answerOne.object( forKey: "Id" ) as! String, answerIdTwo: answerTwo.object( forKey: "Id" ) as! String )
     }
     
-    func hasAnswered(answerIdOne: String, answerIdTwo: String) -> Bool {
+    func hasAnswered(_ answerIdOne: String, answerIdTwo: String) -> Bool {
         
         
         return (UserDefaults.hasPersonalityAnswer( answerIdOne ) || UserDefaults.hasPersonalityAnswer( answerIdTwo ) )
     }
     
-    func hasAnsweredQuestion(questionIndex: Int, answerIndex: Int) -> Bool {
+    func hasAnsweredQuestion(_ questionIndex: Int, answerIndex: Int) -> Bool {
         
         let question = self.personalQuestions![questionIndex]
         
         let answer = question.answers![answerIndex] as! NSDictionary
         
-        return UserDefaults.hasPersonalityAnswer( answer.objectForKey("Id") as! String )
+        return UserDefaults.hasPersonalityAnswer( answer.object(forKey: "Id") as! String )
         
     }
     
-    func sendEventAtQuestionIndex(questionIndex: Int, answerIndex: Int) {
+    func sendEventAtQuestionIndex(_ questionIndex: Int, answerIndex: Int) {
         
         if questionIndex < self.personalQuestions?.count {
             
@@ -214,19 +227,19 @@ class PersonalityIntroductionModel: NSObject {
                 otherAnswerIndex = 1
             }
             
-            question.answerWithCulture( GWLocalizedBundle.currentLocaleAPIString(), atIndex: answerIndex, completion: {
+            question.answer( withCulture: GWLocalizedBundle.currentLocaleAPIString(), at: answerIndex, completion: {
                 answer, answerId in
                 
                 if answer != nil && answerId != nil {
                     
-                    AnalyticsManager.sharedManager().postActionWithType(question.personalityQuestionId, targetType: kGATargetTypeApp, targetId: answerId, targetParameter: nil, actionLocation: kGAPersonalityScreen)
+                    AnalyticsManager.shared().postAction(withType: question.personalityQuestionId, targetType: kGATargetTypeApp, targetId: answerId, targetParameter: nil, actionLocation: kGAPersonalityScreen)
                     UserDefaults.addPersonalityAnswer( answerId! )
                     
                 }
                 
             })
             
-            question.answerWithCulture( GWLocalizedBundle.currentLocaleAPIString(), atIndex: otherAnswerIndex, completion: {
+            question.answer( withCulture: GWLocalizedBundle.currentLocaleAPIString(), at: otherAnswerIndex, completion: {
                 answer, answerId in
                 
                 if answer != nil && answerId != nil {

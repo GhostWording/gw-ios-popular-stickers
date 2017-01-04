@@ -10,25 +10,25 @@ import UIKit
 import FBSDKMessengerShareKit
 
 enum MessengerFlow {
-    case Reply
-    case Compose
-    case Send
+    case reply
+    case compose
+    case send
 }
 
 class AppFlow: NSObject {
 
-    static var currentMessengerFlow = MessengerFlow.Send
+    static var currentMessengerFlow = MessengerFlow.send
     
     static var replyContext: FBSDKMessengerContext?
     static var composeContext: FBSDKMessengerContext?
     
     static func currentContext() -> FBSDKMessengerContext {
         
-        if  let context = replyContext where self.currentMessengerFlow == MessengerFlow.Reply {
+        if  let context = replyContext, self.currentMessengerFlow == MessengerFlow.reply {
             return context
         }
         
-        if let context = composeContext where self.currentMessengerFlow == MessengerFlow.Compose {
+        if let context = composeContext, self.currentMessengerFlow == MessengerFlow.compose {
             return context
         }
         
@@ -41,7 +41,7 @@ class AppFlow: NSObject {
      
      
      */
-    static func shouldAnswerWithSameIntention(intentionId: String) -> Bool {
+    static func shouldAnswerWithSameIntention(_ intentionId: String) -> Bool {
         
         if intentionId == "64B504" || intentionId == "5CDCF2" || intentionId == "8ED62C" || intentionId == "030FD0" || intentionId == "D392C1" || intentionId == "938493" || intentionId == "BD7387" || intentionId == "016E91" || intentionId == "8ED62C" || intentionId == "F4566D" || intentionId == "0B1EA1" || intentionId == "2E2986" || intentionId == "0ECC82" {
             return true
@@ -55,7 +55,7 @@ class AppFlow: NSObject {
      to thank you to answer the message: Happy birthday (A730B4), Have a nice trip (EEDAC3), I'm here for you (03B6E4),
      Come over for dinner (D19840), Celebrate the occasion (EB020F), Retirement congratulation (577D28), congratulations on the birth of your baby (63BF3A), Wedding congratulations (764A35), Condolences (B47AE0)
      */
-    static func shouldAnswerWithThankYou(intentionId: String?) -> Bool {
+    static func shouldAnswerWithThankYou(_ intentionId: String?) -> Bool {
         
         
         if intentionId == "A730B4" || intentionId == "EEDAC3" || intentionId == "03B6E4" || intentionId == "D19840" || intentionId == "EB020F" || intentionId == "577D28" || intentionId == "63BF3A" || intentionId == "764A35" || intentionId == "B47AE0" {

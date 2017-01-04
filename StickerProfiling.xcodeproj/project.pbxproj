@@ -1611,13 +1611,16 @@
 				TargetAttributes = {
 					4E5556DA1DE626E3008FD841 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 					};
 					4E5556F11DE626E3008FD841 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 4E5556DA1DE626E3008FD841;
 					};
 					4E5556FC1DE626E3008FD841 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 4E5556DA1DE626E3008FD841;
 					};
 				};
@@ -2238,6 +2241,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "df17ab64-4b9f-4f63-86d0-0e4f14a77d30";
 				SWIFT_OBJC_BRIDGING_HEADER = "StickerProfiling/StickerProfiling-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2259,6 +2263,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a66d35e4-48d1-4816-b3e2-82407fc10782";
 				SWIFT_OBJC_BRIDGING_HEADER = "StickerProfiling/StickerProfiling-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -2271,6 +2276,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ghostwording.StickerProfilingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StickerProfiling.app/StickerProfiling";
 			};
 			name = Debug;
@@ -2284,6 +2290,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ghostwording.StickerProfilingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StickerProfiling.app/StickerProfiling";
 			};
 			name = Release;
@@ -2296,6 +2303,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ghostwording.StickerProfilingUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = StickerProfiling;
 			};
 			name = Debug;
@@ -2308,6 +2316,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ghostwording.StickerProfilingUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = StickerProfiling;
 			};
 			name = Release;

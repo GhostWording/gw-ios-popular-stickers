@@ -28,11 +28,11 @@ class PopularTextsTableViewCell: UITableViewCell {
         self.setup()
     }
     
-    private func setup() {
+    fileprivate func setup() {
         
-        popularTextLabel.textAlignment = .Center
-        popularTextLabel.textColor = UIColor.blackColor()
-        popularTextLabel.font = UIFont.c_robotoMediumWithSize(15.0)
+        popularTextLabel.textAlignment = .center
+        popularTextLabel.textColor = UIColor.black
+        popularTextLabel.font = UIFont.c_robotoMedium(withSize: 15.0)
         popularTextLabel.numberOfLines = 0
         
         self.addSubview(popularTextLabel)
@@ -47,7 +47,7 @@ class PopularTextsTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    private func messengerButtonTouchedDown() {
+    fileprivate func messengerButtonTouchedDown() {
         
 //        self.messengerButtonPressed?()
         
@@ -58,23 +58,23 @@ class PopularTextsTableViewCell: UITableViewCell {
         
 
         
-        nbSharesImageView.frame = CGRectMake(CGRectGetMidX(self.frame) - 20 - 8, CGRectGetHeight(self.frame) - 24, 16, 16)
+        nbSharesImageView.frame = CGRect(x: self.frame.midX - 20 - 8, y: self.frame.height - 24, width: 16, height: 16)
         
-        nbSharesLabel.frame = CGRectMake(CGRectGetMaxX(nbSharesImageView.frame) + 4, CGRectGetMinY(nbSharesImageView.frame), 40, 16)
+        nbSharesLabel.frame = CGRect(x: nbSharesImageView.frame.maxX + 4, y: nbSharesImageView.frame.minY, width: 40, height: 16)
         
         
         
-        if nbSharesImageView.hidden == false {
-            popularTextLabel.frame = CGRectMake(CGRectGetWidth(self.frame) * 0.1, 15, CGRectGetWidth(self.frame) * 0.8, CGRectGetHeight(self.frame) - 50)
+        if nbSharesImageView.isHidden == false {
+            popularTextLabel.frame = CGRect(x: self.frame.width * 0.1, y: 15, width: self.frame.width * 0.8, height: self.frame.height - 50)
         }
         else {
-            popularTextLabel.frame = CGRectMake(CGRectGetWidth(self.frame) * 0.1, 15, CGRectGetWidth(self.frame) * 0.8, CGRectGetHeight(self.frame) - 30)
+            popularTextLabel.frame = CGRect(x: self.frame.width * 0.1, y: 15, width: self.frame.width * 0.8, height: self.frame.height - 30)
         }
         
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

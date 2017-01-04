@@ -7,6 +7,19 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class IntentionItem : NSObject {
     
@@ -40,12 +53,12 @@ class IntentionPickerViewModel: NSObject {
         super.init()
     }
     
-    func downloadIntentions(completion: () -> Void) {
+    func downloadIntentions(_ completion: @escaping () -> Void) {
         
-        GWDataManager().downloadIntentionsWithArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
+        GWDataManager().downloadIntentions(withArea: "stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
             intentionIds, error in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 self.reloadIntentions()
                 
@@ -59,14 +72,14 @@ class IntentionPickerViewModel: NSObject {
     
     func reloadIntentions() {
         
-        self.intentions = GWDataManager().fetchIntentionsWithAreaName("stickers", culture: GWLocalizedBundle.currentLocaleAPIString(), withIntentionsIds: nil)
+        self.intentions = GWDataManager().fetchIntentions(withAreaName: "stickers", culture: GWLocalizedBundle.currentLocaleAPIString(), withIntentionsIds: nil)
         
         print("intention sort order before: \(self.intentions)")
         
-        self.intentions?.sortInPlace({
+        self.intentions?.sort(by: {
             intentionOne, intentionTwo -> Bool in
             
-            return intentionOne.sortOrderInArea?.intValue < intentionTwo.sortOrderInArea?.intValue
+            return intentionOne.sortOrderInArea?.int32Value < intentionTwo.sortOrderInArea?.int32Value
             
         })
         
@@ -82,7 +95,7 @@ class IntentionPickerViewModel: NSObject {
     
     // MARK: Filter intentions
     
-    func filterIntentions(intentions: [GWIntention]?) -> [GWIntention]? {
+    func filterIntentions(_ intentions: [GWIntention]?) -> [GWIntention]? {
         
         if intentions != nil {
             
@@ -93,7 +106,7 @@ class IntentionPickerViewModel: NSObject {
                 
                 print("relation types string \(currentIntention.relationTypesString) and recipient id \(selectedRecipient.relationTypeTag)")
                 
-                if currentIntention.relationTypesString?.containsString(selectedRecipient.relationTypeTag!) == true {
+                if currentIntention.relationTypesString?.contains(selectedRecipient.relationTypeTag!) == true {
                     filteredIntentions.append(currentIntention)
                 }
                 
@@ -106,7 +119,7 @@ class IntentionPickerViewModel: NSObject {
         return nil
     }
     
-    func createIntentionItems(intentions: [GWIntention]) -> [IntentionItem] {
+    func createIntentionItems(_ intentions: [GWIntention]) -> [IntentionItem] {
         
         let intentionImages = self.fetchIntentionImages(intentions)
         
@@ -122,11 +135,11 @@ class IntentionPickerViewModel: NSObject {
         return intentionItems
     }
     
-    private func matchImageWithIntention(intention: GWIntention, images: [GWImage]) -> UIImage? {
+    fileprivate func matchImageWithIntention(_ intention: GWIntention, images: [GWImage]) -> UIImage? {
         
         if let nonNilIntentionImageUrl = intention.mediaUrl {
             
-            let intentionUrlWithoutPath = NSString.removeApiPathFromImagePath(nonNilIntentionImageUrl)
+            let intentionUrlWithoutPath = NSString.removeApiPath(fromImagePath: nonNilIntentionImageUrl)
             
             for currentImage in images {
                 
@@ -143,15 +156,15 @@ class IntentionPickerViewModel: NSObject {
         
     }
     
-    private func fetchIntentionImages(intentions: [GWIntention]) -> [GWImage] {
+    fileprivate func fetchIntentionImages(_ intentions: [GWIntention]) -> [GWImage] {
         
         let intentionImagePaths = self.getImagePaths(intentions)
         
-        return GWImageManager.fetchImagesWithPaths(intentionImagePaths)
+        return GWImageManager.fetchImages(withPaths: intentionImagePaths)
         
     }
     
-    private func getImagePaths(intentions: [GWIntention]) -> [String] {
+    fileprivate func getImagePaths(_ intentions: [GWIntention]) -> [String] {
         
         var imagePaths = [String]()
         
@@ -171,7 +184,7 @@ class IntentionPickerViewModel: NSObject {
     
     // MARK: Table View Getters 
     
-    func intention(index: Int) -> GWIntention? {
+    func intention(_ index: Int) -> GWIntention? {
         
         if index < intentionItems?.count && intentionItems != nil {
             return intentionItems![index].intention
@@ -190,7 +203,7 @@ class IntentionPickerViewModel: NSObject {
         return intentionItems!.count
     }
     
-    func intentionTitle(index: Int) -> String? {
+    func intentionTitle(_ index: Int) -> String? {
         
         if let intention = self.intention(index) {
             
@@ -200,7 +213,7 @@ class IntentionPickerViewModel: NSObject {
         return nil
     }
     
-    func intentionImage(index: Int) -> UIImage? {
+    func intentionImage(_ index: Int) -> UIImage? {
         
         if index < intentionItems?.count && intentionItems != nil {
             
@@ -210,7 +223,7 @@ class IntentionPickerViewModel: NSObject {
         return nil
     }
     
-    func downloadImage(index: Int, completion: (error: NSError?) -> Void) {
+    func downloadImage(_ index: Int, completion: @escaping (_ error: NSError?) -> Void) {
         
         if index < intentionItems?.count && intentionItems != nil {
             
@@ -220,15 +233,15 @@ class IntentionPickerViewModel: NSObject {
                 
                 intentionItem.isDownloadingImage = true
                 
-                GWImageManager.downloadImageWithPath(intentionItem.intention.mediaUrl!, completion: {
+                GWImageManager.downloadImage(withPath: intentionItem.intention.mediaUrl!, completion: {
                     imageId, imageData, error in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         
                         if imageData != nil {
                             
                             intentionItem.intentionImage = UIImage(data: imageData!)
-                            completion(error: error)
+                            completion(error as NSError?)
                         }
                         
                     })

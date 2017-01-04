@@ -7,6 +7,30 @@
 ///
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class ScoreObject: NSObject {
     
@@ -37,7 +61,7 @@ class SingleStickerViewModel: NSObject {
         
         if  self.textFilter != nil {
             
-            var texts = GWDataManager().fetchTextsWithIntentionIds(nil, withTagsStrings: nil, withCulture: GWLocalizedBundle.currentLocaleAPIString())
+            var texts = GWDataManager().fetchTexts(withIntentionIds: nil, withTagsStrings: nil, withCulture: GWLocalizedBundle.currentLocaleAPIString())
             
             texts = self.textFilter!.filterTexts(texts)
             
@@ -52,7 +76,7 @@ class SingleStickerViewModel: NSObject {
         
         if let nonNilIntentionId = intentionId {
             
-            var texts = GWDataManager().fetchTextsWithIntentionIds( [nonNilIntentionId], withTagsStrings: nil, withCulture: GWLocalizedBundle.currentLocaleAPIString())
+            var texts = GWDataManager().fetchTexts( withIntentionIds: [nonNilIntentionId], withTagsStrings: nil, withCulture: GWLocalizedBundle.currentLocaleAPIString())
             
             
             let filter = GWTextFilter()
@@ -67,7 +91,7 @@ class SingleStickerViewModel: NSObject {
         }
         else if imagePath == "themes/emoticons" {
             
-            var texts = GWDataManager().fetchTextsWithIntentionIds(["2E2986"], withTagsStrings: nil, withCulture: GWLocalizedBundle.currentLocaleAPIString())
+            var texts = GWDataManager().fetchTexts(withIntentionIds: ["2E2986"], withTagsStrings: nil, withCulture: GWLocalizedBundle.currentLocaleAPIString())
             
             
             let textFilter = GWTextFilter()
@@ -83,7 +107,7 @@ class SingleStickerViewModel: NSObject {
         
     }
     
-    func addRandomTexts(texts: [GWText]) {
+    func addRandomTexts(_ texts: [GWText]) {
         
         for text in texts {
             
@@ -96,11 +120,11 @@ class SingleStickerViewModel: NSObject {
     }
     
     
-    func randomTexts(numTexts: Int, texts: [GWText]) -> [GWText] {
+    func randomTexts(_ numTexts: Int, texts: [GWText]) -> [GWText] {
         
         var textsLessThan29 = [GWText]()
         for text in texts {
-            if text.sortBy?.intValue <= 29 {
+            if text.sortBy?.int32Value <= 29 {
                 textsLessThan29.append(text)
             }
         }
@@ -113,7 +137,7 @@ class SingleStickerViewModel: NSObject {
                 
                 let index = Int( arc4random_uniform(UInt32(textsLessThan29.count)) )
                 randomTexts.append(textsLessThan29[index])
-                textsLessThan29.removeAtIndex(index)
+                textsLessThan29.remove(at: index)
                 
             }
             else {
@@ -126,26 +150,26 @@ class SingleStickerViewModel: NSObject {
     }
     
     
-    func downloadPopularTexts(imageName: String?, completion: (error: NSError?) -> Void) {
+    func downloadPopularTexts(_ imageName: String?, completion: @escaping (_ error: NSError?) -> Void) {
         
         if imagePath != "themes/emoticons" {
             let lastImagePathName = self.getImageName(imageName)
-            ServerCommunication.downloadMatchingTextsForImageWithAreaName("stickers", imageName: lastImagePathName, culture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
+            ServerCommunication.downloadMatchingTextsForImage(withAreaName: "stickers", imageName: lastImagePathName, culture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                 matchingTextsDict, error -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     if error == nil {
 
                         if let textDict = matchingTextsDict {
                             let castTextDict = textDict["Texts"] as? [NSDictionary]
-                            self.textsAndRanking?.insertContentsOf(self.createScoredTexts(castTextDict!), at: 0)
+                            self.textsAndRanking?.insert(contentsOf: self.createScoredTexts(castTextDict!), at: 0)
                         }
                         
                         
                     }
                     
-                    completion(error: error)
+                    completion(error as NSError?)
                 })
                 
             })
@@ -161,7 +185,7 @@ class SingleStickerViewModel: NSObject {
         return 0
     }
     
-    func textContent(atIndex: Int) -> String? {
+    func textContent(_ atIndex: Int) -> String? {
         
         if let textContent = self.textsAndRanking?[atIndex].text?.content {
             return textContent
@@ -170,7 +194,7 @@ class SingleStickerViewModel: NSObject {
         return nil
     }
     
-    func textId(atIndex: Int) -> String? {
+    func textId(_ atIndex: Int) -> String? {
         
         if let textId = self.textsAndRanking?[atIndex].text?.textId {
             return textId
@@ -179,7 +203,7 @@ class SingleStickerViewModel: NSObject {
         return nil
     }
     
-    func textPrototypeId(atIndex: Int) -> String? {
+    func textPrototypeId(_ atIndex: Int) -> String? {
         
         if let textPrototypeId = self.textsAndRanking?[atIndex].text?.prototypeId {
             return textPrototypeId
@@ -188,17 +212,17 @@ class SingleStickerViewModel: NSObject {
         return nil
     }
     
-    func textHeight(atIndex: Int, width: CGFloat, font: UIFont) -> CGFloat {
+    func textHeight(_ atIndex: Int, width: CGFloat, font: UIFont) -> CGFloat {
         
         if let text = self.textContent(atIndex) {
-            return NSString.c_findHeightForText(text, havingWidth:width, andFont: font)
+            return NSString.c_findHeight(forText: text, havingWidth:width, andFont: font)
         }
         
         return 0
         
     }
     
-    func textNumberOfShares(atIndex: Int) -> String? {
+    func textNumberOfShares(_ atIndex: Int) -> String? {
         
         if let scoreObject = self.textsAndRanking?[atIndex] {
             
@@ -214,7 +238,7 @@ class SingleStickerViewModel: NSObject {
     }
     
     
-    func textIsDisplayedAndShared(atIndex: Int) -> Bool {
+    func textIsDisplayedAndShared(_ atIndex: Int) -> Bool {
         
         if let scoreObject = self.textsAndRanking?[atIndex] {
             if scoreObject.nbShares == 0 {
@@ -229,7 +253,7 @@ class SingleStickerViewModel: NSObject {
         
     }
     
-    private func createScoredTexts(texts: [NSDictionary]) -> [ScoreObject] {
+    fileprivate func createScoredTexts(_ texts: [NSDictionary]) -> [ScoreObject] {
         
         var scoredTexts = [ScoreObject]()
         
@@ -237,15 +261,15 @@ class SingleStickerViewModel: NSObject {
         
         for scoredTextDict: NSDictionary in texts {
             
-            let scoreDict = scoredTextDict.objectForKey("Scoring") as! NSDictionary
-            let textDict = scoredTextDict.objectForKey("Text") as! NSDictionary
+            let scoreDict = scoredTextDict.object(forKey: "Scoring") as! NSDictionary
+            let textDict = scoredTextDict.object(forKey: "Text") as! NSDictionary
             
-            if intentionId != nil && (scoreDict.objectForKey("NbShares") as! Int) > 1 && self.scoredTextContainsTag(intentionId, tagIds: textDict.objectForKey("TagIds") as? [String]) == true{
+            if intentionId != nil && (scoreDict.object(forKey: "NbShares") as! Int) > 1 && self.scoredTextContainsTag(intentionId, tagIds: textDict.object(forKey: "TagIds") as? [String]) == true{
                 
                 self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
                 
             }
-            else if hasMoreThanTwoDisplays == true && (scoreDict.objectForKey("NbShares") as! Int) > 1 && self.scoredTextContainsTag(intentionId, tagIds: textDict.objectForKey("TagIds") as? [String]) == true {
+            else if hasMoreThanTwoDisplays == true && (scoreDict.object(forKey: "NbShares") as! Int) > 1 && self.scoredTextContainsTag(intentionId, tagIds: textDict.object(forKey: "TagIds") as? [String]) == true {
                 
                 self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
                 
@@ -260,32 +284,32 @@ class SingleStickerViewModel: NSObject {
         return scoredTexts
     }
     
-    func populateScoredTexts(inout scoredTexts: [ScoreObject], scoredTextDict: NSDictionary) {
+    func populateScoredTexts(_ scoredTexts: inout [ScoreObject], scoredTextDict: NSDictionary) {
         
-        let scoreDict = scoredTextDict.objectForKey("Scoring") as? NSDictionary
-        let textDict = scoredTextDict.objectForKey("Text") as? NSDictionary
+        let scoreDict = scoredTextDict.object(forKey: "Scoring") as? NSDictionary
+        let textDict = scoredTextDict.object(forKey: "Text") as? NSDictionary
         
         let scoreText = ScoreObject()
-        scoreText.denseRank = scoreDict?.objectForKey("DenseRank") as! Int
-        scoreText.nbShares = scoreDict?.objectForKey("NbShares") as! Int
-        scoreText.rank = scoreDict?.objectForKey("Rank") as! Int
-        scoreText.score = scoreDict?.objectForKey("Score") as! Double
+        scoreText.denseRank = scoreDict?.object(forKey: "DenseRank") as! Int
+        scoreText.nbShares = scoreDict?.object(forKey: "NbShares") as! Int
+        scoreText.rank = scoreDict?.object(forKey: "Rank") as! Int
+        scoreText.score = scoreDict?.object(forKey: "Score") as! Double
         scoredTexts.append(scoreText)
         
-        if let text = GWDataManager().fetchTextWithTextId(textDict?.objectForKey("TextId") as? String, withCulture: GWLocalizedBundle.currentLocaleAPIString()) {
+        if let text = GWDataManager().fetchText(withTextId: textDict?.object(forKey: "TextId") as? String, withCulture: GWLocalizedBundle.currentLocaleAPIString()) {
             scoreText.text = text
         }
         else {
-            scoreText.text = GWText.createGWTextWithDict(textDict as! [NSObject : AnyObject], withContext: nil)
+            scoreText.text = GWText.createGWText(withDict: textDict as! [AnyHashable: Any], with: nil)
         }
         
     }
     
-    private func containsTextWithMoreThanTwoDisplays(scoredTextDictionaries: [NSDictionary] ) -> Bool {
+    fileprivate func containsTextWithMoreThanTwoDisplays(_ scoredTextDictionaries: [NSDictionary] ) -> Bool {
         
         for scoredTextDict: NSDictionary in scoredTextDictionaries {
-            let scoreDict = scoredTextDict.objectForKey("Scoring") as! NSDictionary
-            if (scoreDict.objectForKey("NbShares") as! Int) > 1 {
+            let scoreDict = scoredTextDict.object(forKey: "Scoring") as! NSDictionary
+            if (scoreDict.object(forKey: "NbShares") as! Int) > 1 {
                 return true
             }
         }
@@ -293,14 +317,14 @@ class SingleStickerViewModel: NSObject {
         return false
     }
     
-    private func getImageName(imageName: String?) -> String? {
+    fileprivate func getImageName(_ imageName: String?) -> String? {
     
-        let components = imageName?.componentsSeparatedByString("/")
+        let components = imageName?.components(separatedBy: "/")
         
         return components?.last
     }
     
-    func scoredTextContainsTag(tag: String?, tagIds: [String]?) -> Bool {
+    func scoredTextContainsTag(_ tag: String?, tagIds: [String]?) -> Bool {
         
         if let nonNilTagIds = tagIds {
             for currentTag in nonNilTagIds {

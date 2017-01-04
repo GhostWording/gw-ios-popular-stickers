@@ -12,7 +12,7 @@ class IntentionPickerViewController: UIViewController, UITableViewDataSource, UI
     
     let viewModel: IntentionPickerViewModel!
     
-    var selectedRecipientAndIntentionClosure: ((recipient: GWRecipient, intention: GWIntention) -> Void)?
+    var selectedRecipientAndIntentionClosure: ((_ recipient: GWRecipient, _ intention: GWIntention) -> Void)?
     
     init(recipient: GWRecipient) {
         
@@ -31,41 +31,41 @@ class IntentionPickerViewController: UIViewController, UITableViewDataSource, UI
         
         super.viewDidLoad()
         
-        let headerView = UIView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 64))
-        headerView.backgroundColor = UIColor.c_blueColor()
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 64))
+        headerView.backgroundColor = UIColor.c_blue()
         self.view.addSubview(headerView)
         
         var backButtonImage = UIImage(named: "BackArrow")
-        backButtonImage = backButtonImage?.imageWithRenderingMode(.AlwaysTemplate)
+        backButtonImage = backButtonImage?.withRenderingMode(.alwaysTemplate)
         
         
-        let backButton = MAXFadeBlockButton(frame: CGRectMake(0, 20, 44 * 1.5, 44))
-        backButton.setImage( backButtonImage, forState: UIControlState.Normal)
-        backButton.tintColor = UIColor.whiteColor()
+        let backButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 20, width: 44 * 1.5, height: 44))
+        backButton.setImage( backButtonImage, for: UIControlState())
+        backButton.tintColor = UIColor.white
         backButton.imageEdgeInsets = UIEdgeInsetsMake(44 * 0.3, 44 * 0.3, 44 * 0.3, 44 * 0.8)
         
-        backButton.buttonTouchUpInsideWithCompletion({
+        backButton.buttonTouchUpInside(completion: {
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             
         })
         
         headerView.addSubview( backButton )
         
         
-        let stickersTitleLabel = UILabel(frame: CGRectMake( CGRectGetMaxX(backButton.frame) + CGRectGetWidth(self.view.frame) * 0.05, 20, CGRectGetWidth(self.view.frame) - CGRectGetMaxX(backButton.frame) - CGRectGetWidth(self.view.frame) * 0.1, 44))
-        stickersTitleLabel.textAlignment = .Left
-        stickersTitleLabel.textColor = UIColor.whiteColor()
+        let stickersTitleLabel = UILabel(frame: CGRect( x: backButton.frame.maxX + self.view.frame.width * 0.05, y: 20, width: self.view.frame.width - backButton.frame.maxX - self.view.frame.width * 0.1, height: 44))
+        stickersTitleLabel.textAlignment = .left
+        stickersTitleLabel.textColor = UIColor.white
         stickersTitleLabel.text = PopularStickersLocalizedString("<SelectIntentionTitle>", nil)
-        stickersTitleLabel.font = UIFont.c_robotoWithSize(Float(CGRectGetHeight(self.view.frame) * 0.03))
+        stickersTitleLabel.font = UIFont.c_roboto(withSize: Float(self.view.frame.height * 0.03))
         
         headerView.addSubview(stickersTitleLabel)
 
         
-        let tableView = UITableView(frame: CGRectMake(0, 64, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 64))
+        let tableView = UITableView(frame: CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height - 64))
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorColor = UIColor.clearColor()
+        tableView.separatorColor = UIColor.clear
         
         self.view.addSubview(tableView)
         
@@ -77,31 +77,31 @@ class IntentionPickerViewController: UIViewController, UITableViewDataSource, UI
         
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return viewModel.numIntentionItems()
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 70
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier") as? IntentionCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as? IntentionCell
         
         if cell == nil {
-            cell = IntentionCell(style: UITableViewCellStyle.Default, reuseIdentifier: "reuseIdentifier")
+            cell = IntentionCell(style: UITableViewCellStyle.default, reuseIdentifier: "reuseIdentifier")
             
             let selectionView = UIView()
-            selectionView.backgroundColor = UIColor.c_lightBlueCellHighlightColor()
+            selectionView.backgroundColor = UIColor.c_lightBlueCellHighlight()
             
             cell?.selectedBackgroundView = selectionView
             
@@ -109,8 +109,8 @@ class IntentionPickerViewController: UIViewController, UITableViewDataSource, UI
         }
         
         cell?.intentionLabel.text = viewModel.intentionTitle(indexPath.row)
-        cell?.intentionLabel.textColor = UIColor.blackColor()
-        cell?.intentionLabel.font = UIFont.c_robotoWithSize(17.0)
+        cell?.intentionLabel.textColor = UIColor.black
+        cell?.intentionLabel.font = UIFont.c_roboto(withSize: 17.0)
         
         let image = viewModel.intentionImage(indexPath.row)
         
@@ -119,14 +119,14 @@ class IntentionPickerViewController: UIViewController, UITableViewDataSource, UI
             viewModel.downloadImage(indexPath.row, completion: {
                 error in
                 
-                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
                 
             })
             
         }
         else {
             
-            cell?.intentionImageView.contentMode = UIViewContentMode.ScaleAspectFill
+            cell?.intentionImageView.contentMode = UIViewContentMode.scaleAspectFill
             cell?.intentionImageView.image = image
             cell?.intentionImageView.layer.cornerRadius = 8.0
             cell?.intentionImageView.layer.masksToBounds = true
@@ -136,12 +136,12 @@ class IntentionPickerViewController: UIViewController, UITableViewDataSource, UI
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
         if let intention = self.viewModel.intention(indexPath.row) {
             
-            self.selectedRecipientAndIntentionClosure?(recipient: self.viewModel.selectedRecipient, intention: intention)
+            self.selectedRecipientAndIntentionClosure?(self.viewModel.selectedRecipient, intention)
             
         }
         

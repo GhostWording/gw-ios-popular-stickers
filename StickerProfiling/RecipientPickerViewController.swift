@@ -13,7 +13,7 @@ class RecipientPickerViewController: UIViewController {
     let viewModel: RecipientPickerViewModel!
     var collectionViewContainer: MAXCollectionViewImageAndText!
     
-    var selectedRecipientAndIntentionClosure: ((recipient: GWRecipient, intention: GWIntention) -> Void)?
+    var selectedRecipientAndIntentionClosure: ((_ recipient: GWRecipient, _ intention: GWIntention) -> Void)?
     
     var selectedRecipient: GWRecipient?
     var selectedIntention: GWIntention?
@@ -43,7 +43,7 @@ class RecipientPickerViewController: UIViewController {
         self.viewModel.downloadedRecipientImageClosure = {
             indexPath in
             
-            self.collectionViewContainer.collectionView.reloadItemsAtIndexPaths([indexPath])
+            self.collectionViewContainer.collectionView.reloadItems(at: [indexPath])
         }
         
         
@@ -56,49 +56,49 @@ class RecipientPickerViewController: UIViewController {
                 
                 
                 //intentionPicker.dismissViewControllerAnimated(true, completion: nil)
-                self.dismissViewControllerAnimated(false, completion: nil)
-                self.dismissViewControllerAnimated(true, completion: {
-                    self.selectedRecipientAndIntentionClosure?(recipient: recipient, intention: intention)
+                self.dismiss(animated: false, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    self.selectedRecipientAndIntentionClosure?(recipient, intention)
                 })
                 
             }
             
-            self.presentViewController(intentionPicker, animated: true, completion: {
+            self.present(intentionPicker, animated: true, completion: {
                 
             })
             
         }
         
-        self.collectionViewContainer = MAXCollectionViewImageAndText(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)))
+        self.collectionViewContainer = MAXCollectionViewImageAndText(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         self.collectionViewContainer.datasource = self.viewModel
-        self.collectionViewContainer.headerView.backgroundColor = UIColor.c_blueColor()
+        self.collectionViewContainer.headerView.backgroundColor = UIColor.c_blue()
         
         self.view.addSubview(self.collectionViewContainer)
         
         
         var backButtonImage = UIImage(named: "BackArrow")
-        backButtonImage = backButtonImage?.imageWithRenderingMode(.AlwaysTemplate)
+        backButtonImage = backButtonImage?.withRenderingMode(.alwaysTemplate)
         
         
-        let backButton = MAXFadeBlockButton(frame: CGRectMake(0, 20, 44 * 1.5, 44))
-        backButton.setImage( backButtonImage, forState: UIControlState.Normal)
-        backButton.tintColor = UIColor.whiteColor()
+        let backButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 20, width: 44 * 1.5, height: 44))
+        backButton.setImage( backButtonImage, for: UIControlState())
+        backButton.tintColor = UIColor.white
         backButton.imageEdgeInsets = UIEdgeInsetsMake(44 * 0.3, 44 * 0.3, 44 * 0.3, 44 * 0.8)
         
-        backButton.buttonTouchUpInsideWithCompletion({
+        backButton.buttonTouchUpInside(completion: {
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             
         })
 
         self.collectionViewContainer.headerView.addSubview( backButton )
         
         
-        let stickersTitleLabel = UILabel(frame: CGRectMake( CGRectGetMaxX(backButton.frame) + CGRectGetWidth(self.view.frame) * 0.05, 20, CGRectGetWidth(self.view.frame) - CGRectGetMaxX(backButton.frame) - CGRectGetWidth(self.view.frame) * 0.1, 44))
-        stickersTitleLabel.textAlignment = .Left
-        stickersTitleLabel.textColor = UIColor.whiteColor()
+        let stickersTitleLabel = UILabel(frame: CGRect( x: backButton.frame.maxX + self.view.frame.width * 0.05, y: 20, width: self.view.frame.width - backButton.frame.maxX - self.view.frame.width * 0.1, height: 44))
+        stickersTitleLabel.textAlignment = .left
+        stickersTitleLabel.textColor = UIColor.white
         stickersTitleLabel.text = PopularStickersLocalizedString("<SelectRecipientTitle>", nil)
-        stickersTitleLabel.font = UIFont.c_robotoWithSize(Float(CGRectGetHeight(self.view.frame) * 0.03))
+        stickersTitleLabel.font = UIFont.c_roboto(withSize: Float(self.view.frame.height * 0.03))
         
         collectionViewContainer.headerView.addSubview(stickersTitleLabel)
         

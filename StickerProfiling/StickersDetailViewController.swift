@@ -26,29 +26,29 @@ class StickersDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         //self.selectedStickerTitle = messengerMetadata?.objectForKey("stickerTitle") as? String
-        self.selectedImagePath = messengerMetadata?.objectForKey("imagePath") as? String
-        self.selectedIntentionId = messengerMetadata?.objectForKey("intentionId") as? String
+        self.selectedImagePath = messengerMetadata?.object(forKey: "imagePath") as? String
+        self.selectedIntentionId = messengerMetadata?.object(forKey: "intentionId") as? String
         
         // send events if messenger metadata is integrated
         if messengerMetadata != nil {
             
-            if let nonNilIntentionId = messengerMetadata?.objectForKey("imagePath") as? String {
-                AnalyticsManager.sharedManager().postActionWithType(kGAReplyingIntention, targetType: kGATargetTypeIntention, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            if let nonNilIntentionId = messengerMetadata?.object(forKey: "imagePath") as? String {
+                AnalyticsManager.shared().postAction(withType: kGAReplyingIntention, targetType: kGATargetTypeIntention, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGACategoryListScreen)
             }
             
-            if let nonNilPrototypeTextId = messengerMetadata?.objectForKey("prototypeId") as? String {
-                AnalyticsManager.sharedManager().postActionWithType(kGAReplyingTextPrototypeId, targetType: kGATargetTypeText, targetId: nonNilPrototypeTextId, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            if let nonNilPrototypeTextId = messengerMetadata?.object(forKey: "prototypeId") as? String {
+                AnalyticsManager.shared().postAction(withType: kGAReplyingTextPrototypeId, targetType: kGATargetTypeText, targetId: nonNilPrototypeTextId, targetParameter: nil, actionLocation: kGACategoryListScreen)
             }
             
-            if let nonNilImageId = messengerMetadata?.objectForKey("imageName") as? String {
-                AnalyticsManager.sharedManager().postActionWithType(kGAReplyingImageName, targetType: kGATargetTypeImage, targetId: nonNilImageId, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            if let nonNilImageId = messengerMetadata?.object(forKey: "imageName") as? String {
+                AnalyticsManager.shared().postAction(withType: kGAReplyingImageName, targetType: kGATargetTypeImage, targetId: nonNilImageId, targetParameter: nil, actionLocation: kGACategoryListScreen)
             }
             
         }
         
         if let nonNilIntentionId = self.selectedIntentionId {
             
-            let intentions = GWDataManager().fetchIntentionsOnMainThreadWithAreaName("stickers", withIntentionIds: [ nonNilIntentionId ] )
+            let intentions = GWDataManager().fetchIntentionsOnMainThread(withAreaName: "stickers", withIntentionIds: [ nonNilIntentionId ] )
 
             if let singleIntention = intentions.first {
 
@@ -59,13 +59,13 @@ class StickersDetailViewController: UIViewController {
             }
             else {
                 
-                GWDataManager().downloadIntentionsWithArea("stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
+                GWDataManager().downloadIntentions(withArea: "stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     intentions, error in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         
                         if error == nil {
-                            let fetchedIntentions = GWDataManager().fetchIntentionsOnMainThreadWithAreaName("stickers", culture: GWLocalizedBundle.currentLocaleAPIString(), withIntentionIds: [ nonNilIntentionId ] )
+                            let fetchedIntentions = GWDataManager().fetchIntentionsOnMainThread(withAreaName: "stickers", culture: GWLocalizedBundle.currentLocaleAPIString(), withIntentionIds: [ nonNilIntentionId ] )
                             self.stickersTitleLabel.text = fetchedIntentions.first?.label
                             self.selectedStickerTitle = fetchedIntentions.first?.label
                             self.selectedImagePath = fetchedIntentions.first?.imagePath
@@ -82,10 +82,10 @@ class StickersDetailViewController: UIViewController {
         }
         else if let nonNilImagePath = self.selectedImagePath {
             
-            GWDataManager().downloadImageThemesWithPath("http://gw-static-apis.azurewebsites.net/data/stickers/moodthemes.json", withCompletion: {
+            GWDataManager().downloadImageThemes(withPath: "http://gw-static-apis.azurewebsites.net/data/stickers/moodthemes.json", withCompletion: {
                 themeDict, error in
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     if let nonNilThemes = themeDict?["Themes"] as? [NSDictionary] {
                         print("non nil themes \(nonNilThemes) and image path \(nonNilImagePath)")
@@ -109,14 +109,14 @@ class StickersDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backToMessengerButton = MAXBlockButton(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40))
-        backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBannerColor()
+        backToMessengerButton = MAXBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBanner()
         backToMessengerButton?.titleEdgeInsets = UIEdgeInsetsMake(20, 0, 0, 0)
-        backToMessengerButton?.setTitle("Touch to return to messenger", forState: UIControlState.Normal)
-        backToMessengerButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        backToMessengerButton?.titleLabel?.font = UIFont.c_robotoWithSize(13.0)
+        backToMessengerButton?.setTitle("Touch to return to messenger", for: UIControlState())
+        backToMessengerButton?.setTitleColor(UIColor.white, for: UIControlState())
+        backToMessengerButton?.titleLabel?.font = UIFont.c_roboto(withSize: 13.0)
         
-        backToMessengerButton?.buttonTouchUpInsideWithCompletion({
+        backToMessengerButton?.buttonTouchUpInside(completion: {
             
             FBSDKMessengerSharer.openMessenger()
             
@@ -124,40 +124,40 @@ class StickersDetailViewController: UIViewController {
         
         if self.selectedIntentionId != nil {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAMoodIntention, targetType: kGATargetTypeIntention, targetId: selectedIntentionId, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            AnalyticsManager.shared().postAction( withType: kGAMoodIntention, targetType: kGATargetTypeIntention, targetId: selectedIntentionId, targetParameter: nil, actionLocation: kGACategoryListScreen)
         
         }
         else {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAMoodTheme, targetType: kGATargetTypeTheme, targetId: selectedImagePath, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            AnalyticsManager.shared().postAction( withType: kGAMoodTheme, targetType: kGATargetTypeTheme, targetId: selectedImagePath, targetParameter: nil, actionLocation: kGACategoryListScreen)
         
         }
         
         viewModel.imagePath = selectedImagePath
-        viewModel.itemSize = Float( CGRectGetWidth(self.view.frame) / 2.0 )
+        viewModel.itemSize = Float( self.view.frame.width / 2.0 )
         
-        collectionView = MAXCollectionViewImageAndText(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)))
+        collectionView = MAXCollectionViewImageAndText(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         collectionView.datasource = viewModel
         
         
-        collectionView.headerView.backgroundColor = UIColor.c_blueColor()
+        collectionView.headerView.backgroundColor = UIColor.c_blue()
         
         var backButtonImage = UIImage(named: "BackArrow")
-        backButtonImage = backButtonImage?.imageWithRenderingMode(.AlwaysTemplate)
+        backButtonImage = backButtonImage?.withRenderingMode(.alwaysTemplate)
         
         
-        let backButton = MAXFadeBlockButton(frame: CGRectMake(0, 20, 44 * 1.5, 44))
-        backButton.setImage( backButtonImage, forState: UIControlState.Normal)
-        backButton.tintColor = UIColor.whiteColor()
+        let backButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 20, width: 44 * 1.5, height: 44))
+        backButton.setImage( backButtonImage, for: UIControlState())
+        backButton.tintColor = UIColor.white
         backButton.imageEdgeInsets = UIEdgeInsetsMake(44 * 0.3, 44 * 0.3, 44 * 0.3, 44 * 0.8)
         
-        backButton.buttonTouchUpInsideWithCompletion({
+        backButton.buttonTouchUpInside(completion: {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGABackFromThemes, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            AnalyticsManager.shared().postAction( withType: kGABackFromThemes, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGACategoryListScreen)
             
             UserDefaults.incrementNumBackToMainMenu()
             
-            self.dismissViewControllerAnimated(true, completion: {
+            self.dismiss(animated: true, completion: {
                 
                 if (UserDefaults.numBackToMainMenu() == 4 || UserDefaults.numBackToMainMenu() == 10 || UserDefaults.numBackToMainMenu() == 20) && UserDefaults.wantsNotification() == false {
                     
@@ -165,7 +165,7 @@ class StickersDetailViewController: UIViewController {
                     
                     alertView.show()
                     
-                    alertView.buttonPressedWithCompletion({
+                    alertView.buttonPressed(completion: {
                         index, alertView -> Void in
                         
                         if index == 0 {
@@ -175,8 +175,8 @@ class StickersDetailViewController: UIViewController {
                         }
                         else {
                             // true statement, said in the alert view
-                            let application = UIApplication.sharedApplication()
-                            application.registerUserNotificationSettings( UIUserNotificationSettings(forTypes: [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound] , categories: nil))
+                            let application = UIApplication.shared
+                            application.registerUserNotificationSettings( UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound] , categories: nil))
                             
                             UserDefaults.setWantsNotification(true)
                             
@@ -191,11 +191,11 @@ class StickersDetailViewController: UIViewController {
         
         collectionView.headerView.addSubview(backButton)
         
-        stickersTitleLabel.frame = CGRectMake( CGRectGetMaxX(backButton.frame) + CGRectGetWidth(self.view.frame) * 0.05, 20, CGRectGetWidth(self.view.frame) - CGRectGetMaxX(backButton.frame) - CGRectGetWidth(self.view.frame) * 0.1, 44)
-        stickersTitleLabel.textAlignment = .Left
-        stickersTitleLabel.textColor = UIColor.whiteColor()
+        stickersTitleLabel.frame = CGRect( x: backButton.frame.maxX + self.view.frame.width * 0.05, y: 20, width: self.view.frame.width - backButton.frame.maxX - self.view.frame.width * 0.1, height: 44)
+        stickersTitleLabel.textAlignment = .left
+        stickersTitleLabel.textColor = UIColor.white
         stickersTitleLabel.text = self.selectedStickerTitle
-        stickersTitleLabel.font = UIFont.c_robotoWithSize(Float(CGRectGetHeight(self.view.frame) * 0.03))
+        stickersTitleLabel.font = UIFont.c_roboto(withSize: Float(self.view.frame.height * 0.03))
         collectionView.headerView.addSubview(stickersTitleLabel)
         
         self.view.addSubview(collectionView)
@@ -212,14 +212,14 @@ class StickersDetailViewController: UIViewController {
         viewModel.reloadIndexPath({
             indexPath -> Void in
 
-            self.collectionView.collectionView.reloadItemsAtIndexPaths([indexPath])
+            self.collectionView.collectionView.reloadItems(at: [indexPath])
             
         })
         
         viewModel.selectedImage({
             imageName, selectedImage -> Void in
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAImageSelected, targetType: kGATargetTypeImage, targetId: imageName, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            AnalyticsManager.shared().postAction( withType: kGAImageSelected, targetType: kGATargetTypeImage, targetId: imageName, targetParameter: nil, actionLocation: kGACategoryListScreen)
             
             self.showSingleStickerDetail(imageName, image: selectedImage)
             
@@ -236,9 +236,9 @@ class StickersDetailViewController: UIViewController {
     
     func addOrRemoveBackToMessengerButton() {
         
-        if AppFlow.currentMessengerFlow == MessengerFlow.Send {
+        if AppFlow.currentMessengerFlow == MessengerFlow.send {
             self.backToMessengerButton?.removeFromSuperview()
-            self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))
+            self.collectionView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         }
         else {
             
@@ -246,7 +246,7 @@ class StickersDetailViewController: UIViewController {
                 self.view.addSubview(self.backToMessengerButton!)
             }
             
-            self.collectionView.frame = CGRectMake(0, 20, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 20)
+            self.collectionView.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height - 20)
             
         }
         
@@ -255,7 +255,7 @@ class StickersDetailViewController: UIViewController {
     
     // MARK: Navigation
     
-    func showSingleStickerDetail(imageName: String?, image: UIImage?) -> Void {
+    func showSingleStickerDetail(_ imageName: String?, image: UIImage?) -> Void {
         
         let singleStickerVC = SingleStickerDetailViewController()
         singleStickerVC.imageToShow = image
@@ -265,7 +265,7 @@ class StickersDetailViewController: UIViewController {
         singleStickerVC.selectedStickerTitle = self.selectedStickerTitle
 
         
-        self.presentViewController(singleStickerVC, animated: true, completion: nil)
+        self.present(singleStickerVC, animated: true, completion: nil)
         
     }
     

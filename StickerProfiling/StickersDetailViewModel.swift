@@ -21,8 +21,8 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
     var imagePath: String?
     var imagesToDownload: [StickersImageAndPathObject]?
     
-    var indexPathClosure: ((indexPath: NSIndexPath) -> Void)?
-    var selectedImageClosure: ((imageName: String?, image: UIImage?) -> Void)?
+    var indexPathClosure: ((_ indexPath: IndexPath) -> Void)?
+    var selectedImageClosure: ((_ imageName: String?, _ image: UIImage?) -> Void)?
     var itemSize: Float?
     var bottomAdView: FBNativeAd?
     var viewController : StickersDetailViewController?
@@ -36,24 +36,24 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
             
             bottomAdView = FBNativeAd(placementID: bottomStickerGalleryPlacementId)
             bottomAdView?.delegate = self
-            bottomAdView?.mediaCachePolicy = FBNativeAdsCachePolicy.All
-            bottomAdView?.loadAd()
+            bottomAdView?.mediaCachePolicy = FBNativeAdsCachePolicy.all
+            bottomAdView?.load()
             
         }
         
     }
     
-    func nameForTheme(themes: Array <NSDictionary> , themePath: String) -> String? {
+    func nameForTheme(_ themes: Array <NSDictionary> , themePath: String) -> String? {
         
         for theme in themes {
             
-            if (theme.objectForKey("Path") as? String) == themePath  {
+            if (theme.object(forKey: "Path") as? String) == themePath  {
                 
-                if let labels = theme.objectForKey("Labels") as? [NSDictionary] {
+                if let labels = theme.object(forKey: "Labels") as? [NSDictionary] {
                     
                     for labelDict in labels {
-                        if (labelDict.objectForKey("Language") as? String) == GWLocalizedBundle.currentLocaleAPIString() {
-                            return (labelDict.objectForKey("Label") as? String)
+                        if (labelDict.object(forKey: "Language") as? String) == GWLocalizedBundle.currentLocaleAPIString() {
+                            return (labelDict.object(forKey: "Label") as? String)
                         }
                     }
                     
@@ -68,25 +68,25 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
     
     // MARK: Download
     
-    func downloadPopularImageIds(area: String, intentionId: String, completion: (error: NSError?) -> Void) {
+    func downloadPopularImageIds(_ area: String, intentionId: String, completion: @escaping (_ error: NSError?) -> Void) {
         
-        GWImageManager.downloadPopularImagesWithArea(area, intentionId: intentionId, completion: {
+        GWImageManager.downloadPopularImages(withArea: area, intentionId: intentionId, completion: {
             allPopularImages, error -> Void in
             
-            completion(error: error)
+            completion(error as NSError?)
             
         })
         
     }
     
-    func downloadImageIds(completion: (error: NSError?) -> Void) {
+    func downloadImageIds(_ completion: @escaping (_ error: NSError?) -> Void) {
         
         if let imageDownloadPath = self.imagePath {
             
-            GWDataManager().downloadImagePathsWithRelativePath(imageDownloadPath, withCompletion: {
+            GWDataManager().downloadImagePaths(withRelativePath: imageDownloadPath, withCompletion: {
                 theImagePaths, error -> Void in
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     
                     if let imagePaths = theImagePaths as? [String] {
@@ -108,14 +108,14 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
                             
                         }
                         
-                        var persistedImages = GWImageManager.fetchImagesWithPaths(allImagesPaths)
+                        var persistedImages = GWImageManager.fetchImages(withPaths: allImagesPaths)
                         
                         persistedImages = self.randomizeImages( persistedImages )
                         
                         
                         for persistedImage in persistedImages {
                             for stickerImage in self.imagesToDownload! {
-                                if let imageData = persistedImage.imageData where stickerImage.imagePath == persistedImage.imageId && stickerImage.image == nil {
+                                if let imageData = persistedImage.imageData, stickerImage.imagePath == persistedImage.imageId && stickerImage.image == nil {
                                     stickerImage.image = UIImage(data: imageData)
                                 }
                             }
@@ -124,7 +124,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
                         
                     }
                     
-                    completion(error: error)
+                    completion(error as NSError?)
                 })
                 
             })
@@ -161,15 +161,15 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
         
     }
     
-    func reloadIndexPath(closure: (indexPath: NSIndexPath) -> Void) {
+    func reloadIndexPath(_ closure: @escaping (_ indexPath: IndexPath) -> Void) {
         indexPathClosure = closure
     }
     
-    func selectedImage(closure: (imageName: String?, image: UIImage?) -> Void) {
+    func selectedImage(_ closure: @escaping (_ imageName: String?, _ image: UIImage?) -> Void) {
         selectedImageClosure = closure
     }
     
-    func imageExists(path: String) -> Bool {
+    func imageExists(_ path: String) -> Bool {
         
         for currentThemeOrIntention in imagesToDownload! {
             
@@ -182,7 +182,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
         return false
     }
     
-    func imageIndex(path: String) -> Int? {
+    func imageIndex(_ path: String) -> Int? {
         
         var index = 0
         for currentThemeOrIntention in imagesToDownload! {
@@ -200,7 +200,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
     
     // MARK: Collection View
     
-    func MAXCollectionViewImageAndTextNumItemsInSection(theSection: Int) -> Int {
+    func maxCollectionViewImageAndTextNumItems(inSection theSection: Int) -> Int {
         
         if let count = imagesToDownload?.count {
             return count + 1
@@ -209,41 +209,41 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
         return 0
     }
     
-    func MAXCollectionViewSizeAtIndexPath(theIndexPath: NSIndexPath!) -> CGSize {
+    func maxCollectionViewSize(at theIndexPath: IndexPath!) -> CGSize {
         
         if theIndexPath.row == imagesToDownload?.count {
             
-            return CGSizeMake(UIScreen.mainScreen().bounds.width, 340)
+            return CGSize(width: UIScreen.main.bounds.width, height: 340)
         }
         
         if let size = self.itemSize {
-            return CGSizeMake(CGFloat(size), CGFloat(size))
+            return CGSize(width: CGFloat(size), height: CGFloat(size))
         }
         
-        return CGSizeZero
+        return CGSize.zero
     }
     
 
-    func MAXCollectionViewCell(theCell: MAXCollectionViewCellImageAndText!, atIndex theIndexPath: NSIndexPath!) {
+    func maxCollectionViewCell(_ theCell: MAXCollectionViewCellImageAndText!, atIndex theIndexPath: IndexPath!) {
         
-        theCell.imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        theCell.imageView.contentMode = UIViewContentMode.scaleAspectFill
         theCell.layer.masksToBounds = true
         
         if theIndexPath.row == imagesToDownload!.count {
             
-            theCell.type = MAXCellType.Advert
+            theCell.type = MAXCellType.advert
             
             theCell.imageView.image = nil
             
             
             if let nonNilAd = bottomAdView {
-                if nonNilAd.adValid == true {
+                if nonNilAd.isAdValid == true {
                     
-                    nonNilAd.registerViewForInteraction( theCell, withViewController: self.viewController)
-                    nonNilAd.icon?.loadImageAsyncWithBlock({
+                    nonNilAd.registerView( forInteraction: theCell, with: self.viewController)
+                    nonNilAd.icon?.loadAsync(block: {
                         image in
                         
-                        theCell.logoImageView.contentMode = UIViewContentMode.ScaleAspectFit
+                        theCell.logoImageView.contentMode = UIViewContentMode.scaleAspectFit
                         theCell.logoImageView.layer.masksToBounds = true
                         theCell.logoImageView.image = image
                         
@@ -253,32 +253,32 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
                     theCell.adMediaView.nativeAd = nonNilAd
                     
                     theCell.titleLabel.text = nonNilAd.title
-                    theCell.titleLabel.font = UIFont.c_robotoBoldWithSize( 14.0 )
-                    theCell.titleLabel.textAlignment = .Left
-                    theCell.titleLabel.textColor = UIColor.c_textDarkGrayColor()
+                    theCell.titleLabel.font = UIFont.c_robotoBold( withSize: 14.0 )
+                    theCell.titleLabel.textAlignment = .left
+                    theCell.titleLabel.textColor = UIColor.c_textDarkGray()
                     
                     theCell.sponsoredLabel.text = "Sponsored"
-                    theCell.sponsoredLabel.textAlignment = .Left
-                    theCell.sponsoredLabel.font = UIFont.c_robotoLightWithSize( 12.0 )
-                    theCell.sponsoredLabel.textColor = UIColor.c_textLightGrayColor()
+                    theCell.sponsoredLabel.textAlignment = .left
+                    theCell.sponsoredLabel.font = UIFont.c_robotoLight( withSize: 12.0 )
+                    theCell.sponsoredLabel.textColor = UIColor.c_textLightGray()
                     
                     theCell.adSocialContextLabel.text = nonNilAd.socialContext
-                    theCell.adSocialContextLabel.textAlignment = .Left
-                    theCell.adSocialContextLabel.textColor = UIColor.c_textLightGrayColor()
-                    theCell.adSocialContextLabel.font = UIFont.c_robotoLightWithSize( 12.0 )
+                    theCell.adSocialContextLabel.textAlignment = .left
+                    theCell.adSocialContextLabel.textColor = UIColor.c_textLightGray()
+                    theCell.adSocialContextLabel.font = UIFont.c_robotoLight( withSize: 12.0 )
                     
                     theCell.adBodyLabel.text = nonNilAd.body
-                    theCell.adBodyLabel.textAlignment = .Left
-                    theCell.adBodyLabel.font = UIFont.c_robotoMediumWithSize( 12.0 )
-                    theCell.adBodyLabel.textColor = UIColor.c_textLightGrayColor()
+                    theCell.adBodyLabel.textAlignment = .left
+                    theCell.adBodyLabel.font = UIFont.c_robotoMedium( withSize: 12.0 )
+                    theCell.adBodyLabel.textColor = UIColor.c_textLightGray()
                     theCell.adBodyLabel.numberOfLines = 0
                     
-                    theCell.adChoiceLabel.corner = UIRectCorner.TopRight
+                    theCell.adChoiceLabel.corner = UIRectCorner.topRight
                     
-                    theCell.callToActionButton.setTitle(nonNilAd.callToAction, forState: UIControlState.Normal)
+                    theCell.callToActionButton.setTitle(nonNilAd.callToAction, for: UIControlState())
                     theCell.callToActionButton.layer.cornerRadius = 4.0
-                    theCell.callToActionButton.layer.backgroundColor = UIColor.c_blueColor().CGColor
-                    theCell.callToActionButton.titleLabel?.font = UIFont.c_robotoMediumWithSize( 12.0)
+                    theCell.callToActionButton.layer.backgroundColor = UIColor.c_blue().cgColor
+                    theCell.callToActionButton.titleLabel?.font = UIFont.c_robotoMedium( withSize: 12.0)
                     
                 }
                 
@@ -288,7 +288,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
             return
         }
         
-        theCell.type = MAXCellType.Image
+        theCell.type = MAXCellType.image
         
         if let image = self.imagesToDownload?[theIndexPath.row].image {
             
@@ -303,12 +303,12 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
             if let currentImage = self.imagesToDownload?[theIndexPath.row], let imagePath = self.imagesToDownload?[theIndexPath.row].imagePath {
                 currentImage.isDownloading = true
                 
-                GWImageManager.downloadImageIfNotExistsWithPath(imagePath, imageDataCompletion: {
+                GWImageManager.downloadImageIfNotExists(withPath: imagePath, imageDataCompletion: {
                     imageId, imageData, error -> Void in
                     
                     if let nonNilImageData = imageData {
                         currentImage.image = UIImage(data: nonNilImageData)
-                        self.indexPathClosure?(indexPath: theIndexPath)
+                        self.indexPathClosure?(theIndexPath)
                     }
                     
                 })
@@ -319,21 +319,21 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
             theCell.imageView.image = nil
         }
         
-        theCell.imageViewFrame = CGRectMake(0, 0, CGFloat(self.itemSize!), CGFloat(self.itemSize!))
-        theCell.titleLabelFrame = CGRectZero
+        theCell.imageViewFrame = CGRect(x: 0, y: 0, width: CGFloat(self.itemSize!), height: CGFloat(self.itemSize!))
+        theCell.titleLabelFrame = CGRect.zero
         
     }
     
-    func MAXSelectedItemInSection(theSection: Int, atIndex theIndex: Int) {
+    func maxSelectedItem(inSection theSection: Int, at theIndex: Int) {
         
         if let selectedImage = self.imagesToDownload?[theIndex].image, let imageName = self.imagesToDownload?[theIndex].imagePath {
-            self.selectedImageClosure?(imageName: imageName, image: selectedImage)
+            self.selectedImageClosure?(imageName, selectedImage)
         }
        
     }
     
     
-    func appendApiPathToImage(path: String) -> String {
+    func appendApiPathToImage(_ path: String) -> String {
         
         return "http://gw-static.azurewebsites.net" + path
         
@@ -345,7 +345,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
      
 
     */
-    func shouldAnswerWithSameIntention(intentionId: String) -> Bool {
+    func shouldAnswerWithSameIntention(_ intentionId: String) -> Bool {
         
         return false
     }
@@ -355,7 +355,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
      to thank you to answer the message: Happy birthday (A730B4), Have a nice trip (EEDAC3), I'm here for you (03B6E4),
      Come over for dinner (D19840), Celebrate the occasion (EB020F), Retirement congratulation (577D28), congratulations on the birth of your baby (63BF3A), Wedding congratulations (764A35), Condolences (B47AE0)
     */
-    func shouldAnswerWithThankYou(intentionId: String?) -> Bool {
+    func shouldAnswerWithThankYou(_ intentionId: String?) -> Bool {
         
         
         if intentionId == "A730B4" || intentionId == "EEDAC3" || intentionId == "03B6E4" || intentionId == "D19840" {
@@ -367,7 +367,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
         
     }
     
-    private func randomizeImagePaths(paths: [String]) -> [String] {
+    fileprivate func randomizeImagePaths(_ paths: [String]) -> [String] {
         var paths = paths
         
         var index = 0
@@ -384,7 +384,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
         return paths
     }
     
-    private func randomizeImages(images: [GWImage]) -> [GWImage] {
+    fileprivate func randomizeImages(_ images: [GWImage]) -> [GWImage] {
         
         var images = images
         

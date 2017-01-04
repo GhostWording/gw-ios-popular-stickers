@@ -7,6 +7,19 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class RecipientItem : NSObject {
     
@@ -34,9 +47,9 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
     var recipients: [GWRecipient]?
     var recipientItems: [RecipientItem]?
     
-    var downloadedRecipientImageClosure: ((indexPath: NSIndexPath) -> Void)?
-    var selectedRecipientClosure: ((recipient: GWRecipient) -> Void)?
-    var selectedIntentionClosure: ((intention: GWIntention) -> Void)?
+    var downloadedRecipientImageClosure: ((_ indexPath: IndexPath) -> Void)?
+    var selectedRecipientClosure: ((_ recipient: GWRecipient) -> Void)?
+    var selectedIntentionClosure: ((_ intention: GWIntention) -> Void)?
     
     init(area: String) {
         
@@ -45,12 +58,12 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         super.init()
     }
     
-    func downloadRecipients(completion: (error: NSError?) -> Void) {
+    func downloadRecipients(_ completion: @escaping (_ error: NSError?) -> Void) {
         
-        GWDataManager().downloadRecipientsWithArea(self.area, completion: {
+        GWDataManager().downloadRecipients(withArea: self.area, completion: {
             downloadedRecipients, error in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 if error == nil {
                     
@@ -58,7 +71,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
                     
                 }
                 
-                completion(error: error)
+                completion(error as NSError?)
                 
             })
             
@@ -68,12 +81,12 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
     
     func reloadRecipients() {
         
-        self.recipients = GWDataManager().fetchRecipientsWithIds(nil)
+        self.recipients = GWDataManager().fetchRecipients(withIds: nil)
         print("recipients are \(self.recipients)")
         self.recipients = self.filterRecipients(self.recipients)
-        self.recipients?.sortInPlace({ firstRecpient, secondRecipient -> Bool in
+        self.recipients?.sort(by: { firstRecpient, secondRecipient -> Bool in
             
-            return firstRecpient.importance?.intValue < secondRecipient.importance?.intValue
+            return firstRecpient.importance?.int32Value < secondRecipient.importance?.int32Value
             
         })
         
@@ -89,7 +102,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
     
     // MARK: Filtering
     
-    func filterRecipients(recipientsToFilter: [GWRecipient]?) -> [GWRecipient]? {
+    func filterRecipients(_ recipientsToFilter: [GWRecipient]?) -> [GWRecipient]? {
         
         if recipientsToFilter != nil {
          
@@ -132,7 +145,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         
     }
     
-    func oppositeGender(gender: String) -> String {
+    func oppositeGender(_ gender: String) -> String {
         
         if gender == "F" {
             return "H"
@@ -145,7 +158,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
     
     // MARK: Setting Up Recipients With Images After Filtering
     
-    private func createRecipientItems(recipients: [GWRecipient]) -> [RecipientItem] {
+    fileprivate func createRecipientItems(_ recipients: [GWRecipient]) -> [RecipientItem] {
         
         let recipientImages = self.fetchRecipientImages(recipients)
         
@@ -161,11 +174,11 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         return recipientItems
     }
     
-    private func matchImageWithRecipient(recipient: GWRecipient, images: [GWImage]) -> UIImage? {
+    fileprivate func matchImageWithRecipient(_ recipient: GWRecipient, images: [GWImage]) -> UIImage? {
         
         if let recipientImageUrl = recipient.imageUrl {
             
-            let recipientImageWithoutAPIPath = NSString.removeApiPathFromImagePath( recipientImageUrl )
+            let recipientImageWithoutAPIPath = NSString.removeApiPath( fromImagePath: recipientImageUrl )
             
             for currentImage in images {
                 
@@ -182,16 +195,16 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         return nil
     }
     
-    private func fetchRecipientImages(recipients: [GWRecipient]) -> [GWImage] {
+    fileprivate func fetchRecipientImages(_ recipients: [GWRecipient]) -> [GWImage] {
         
         let imagePaths = self.getImagePaths(recipients)
         
         
-        return GWImageManager.fetchImagesWithPaths(imagePaths)
+        return GWImageManager.fetchImages(withPaths: imagePaths)
         
     }
     
-    private func getImagePaths(recipients: [GWRecipient]) -> [String] {
+    fileprivate func getImagePaths(_ recipients: [GWRecipient]) -> [String] {
         
         var imageIds = [String]()
         
@@ -209,11 +222,11 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
     
     // MARK: Collection View Data source
     
-    func MAXCollectionViewImageAndTextNumSections() -> Int {
+    func maxCollectionViewImageAndTextNumSections() -> Int {
         return 1
     }
     
-    func MAXCollectionViewImageAndTextNumItemsInSection(theSection: Int) -> Int {
+    func maxCollectionViewImageAndTextNumItems(inSection theSection: Int) -> Int {
         
         if self.recipients == nil {
             return 0;
@@ -223,9 +236,9 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         
     }
     
-    func MAXCollectionViewCell(theCell: MAXCollectionViewCellImageAndText!, atIndex theIndexPath: NSIndexPath!) {
+    func maxCollectionViewCell(_ theCell: MAXCollectionViewCellImageAndText!, atIndex theIndexPath: IndexPath!) {
         
-        theCell.imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        theCell.imageView.contentMode = UIViewContentMode.scaleAspectFill
         theCell.imageView.layer.masksToBounds = true
         
         if let currentRecipientItem = self.getRecipientItemAtIndexPath(theIndexPath) {
@@ -235,17 +248,17 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
                 currentRecipientItem.isDownloadingImage = true
                 theCell.imageView.image = nil
                 
-                GWImageManager.downloadImageIfNotExistsWithPath(currentRecipientItem.recipient.imageUrl!, imageDataCompletion: {
+                GWImageManager.downloadImageIfNotExists(withPath: currentRecipientItem.recipient.imageUrl!, imageDataCompletion: {
                     imageId, imageData, error in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         
                         if let nonNilImageData = imageData {
                             
                             currentRecipientItem.recipientImage = UIImage(data: nonNilImageData)
                             theCell.imageView.image = currentRecipientItem.recipientImage
                             
-                            self.downloadedRecipientImageClosure?(indexPath: theIndexPath)
+                            self.downloadedRecipientImageClosure?(theIndexPath)
                         }
                         
                     })
@@ -264,17 +277,17 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         
     }
     
-    func MAXSelectedItemInSection(theSection: Int, atIndex theIndex: Int) {
+    func maxSelectedItem(inSection theSection: Int, at theIndex: Int) {
         
         if theIndex < self.recipientItems?.count {
-            self.selectedRecipientClosure?(recipient: self.recipientItems![theIndex].recipient)
+            self.selectedRecipientClosure?(self.recipientItems![theIndex].recipient)
         }
         
     }
     
     // MARK: Getters For collection view
     
-    private func getRecipientItemAtIndexPath(indexPath: NSIndexPath) -> RecipientItem? {
+    fileprivate func getRecipientItemAtIndexPath(_ indexPath: IndexPath) -> RecipientItem? {
         
         if indexPath.row < self.recipientItems?.count {
             
@@ -285,7 +298,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         return nil
     }
     
-    private func getRecipientName(recipient: GWRecipient) -> String? {
+    fileprivate func getRecipientName(_ recipient: GWRecipient) -> String? {
         
         let recipientNameArray = recipient.labels as! [NSDictionary]
         
@@ -293,12 +306,12 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         for currentDictionary in recipientNameArray {
             
             let cultureApiString = GWLocalizedBundle.currentLocaleAPIString()
-            if currentDictionary.objectForKey( "Culture" ) as! String == cultureApiString {
+            if currentDictionary.object( forKey: "Culture" ) as! String == cultureApiString {
                 recipientDict = currentDictionary
             }
             
         }
         
-        return recipientDict?.objectForKey("UserLabel") as? String
+        return recipientDict?.object(forKey: "UserLabel") as? String
     }
 }

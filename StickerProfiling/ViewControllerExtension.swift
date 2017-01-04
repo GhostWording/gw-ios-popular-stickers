@@ -12,9 +12,9 @@ extension UIViewController {
     
     func topMostController() -> UIViewController {
         
-        var topMostVC = UIApplication.sharedApplication().keyWindow!.rootViewController
+        var topMostVC = UIApplication.shared.keyWindow!.rootViewController
         
-        while topMostVC!.presentedViewController == true {
+        while topMostVC!.presentedViewController != nil {
             topMostVC = topMostVC!.presentedViewController
         }
         

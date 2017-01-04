@@ -10,9 +10,9 @@ import Foundation
 
 extension NSString {
     
-    func heightForStringWithFont(font: UIFont, width: CGFloat, maxHeight: CGFloat) -> CGFloat {
+    func heightForStringWithFont(_ font: UIFont, width: CGFloat, maxHeight: CGFloat) -> CGFloat {
         
-        let size = self.boundingRectWithSize(CGSizeMake(width, maxHeight), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes:  [NSFontAttributeName : font], context: nil)
+        let size = self.boundingRect(with: CGSize(width: width, height: maxHeight), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:  [NSFontAttributeName : font], context: nil)
         
         return size.height
     }
@@ -24,7 +24,7 @@ extension String {
     
     func imageName() -> String? {
         
-        let components = self.componentsSeparatedByString("/")
+        let components = self.components(separatedBy: "/")
         
         return components.last
     }

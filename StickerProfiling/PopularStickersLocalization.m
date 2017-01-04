@@ -16,3 +16,7 @@
 }
 
 @end
+
+FOUNDATION_EXPORT NSString * PopularStickersLocalizedString( NSString *key, NSString *comment) {
+    return [PopularStickersLocalization popularStickersLocalizedStringForKey:key];
+}

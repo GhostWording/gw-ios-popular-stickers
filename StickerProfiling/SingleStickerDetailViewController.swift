@@ -17,14 +17,14 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     var imageName: String?
     var imageToSend: UIImage?
     var prototypeId : String?
-    var indexPath : NSIndexPath?
+    var indexPath : IndexPath?
     
     var selectedStickerTitle: String?
     
     let viewModel = SingleStickerViewModel()
     
     // UI Components
-    let tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
+    let tableView = UITableView(frame: CGRect.zero, style: UITableViewStyle.plain)
     let imageView = UIImageView()
     let bottomButton = MAXFadeBlockButton()
     let infoLabel = UILabel()
@@ -39,41 +39,41 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
-        backToMessengerButton = MAXBlockButton(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40))
-        backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBannerColor()
+        backToMessengerButton = MAXBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBanner()
         backToMessengerButton?.titleEdgeInsets = UIEdgeInsetsMake(20, 0, 0, 0)
-        backToMessengerButton?.setTitle("Touch to return to messenger", forState: UIControlState.Normal)
-        backToMessengerButton?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        backToMessengerButton?.titleLabel?.font = UIFont.c_robotoWithSize(13.0)
+        backToMessengerButton?.setTitle("Touch to return to messenger", for: UIControlState())
+        backToMessengerButton?.setTitleColor(UIColor.white, for: UIControlState())
+        backToMessengerButton?.titleLabel?.font = UIFont.c_roboto(withSize: 13.0)
         
-        backToMessengerButton?.buttonTouchUpInsideWithCompletion({
+        backToMessengerButton?.buttonTouchUpInside(completion: {
             
             FBSDKMessengerSharer.openMessenger()
             
         })
         
         
-        imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.6)
-        imageView.contentMode = .ScaleAspectFill
+        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.6)
+        imageView.contentMode = .scaleAspectFill
         imageView.image = self.imageToShow
-        imageView.userInteractionEnabled = true
-        imageView.multipleTouchEnabled = true
+        imageView.isUserInteractionEnabled = true
+        imageView.isMultipleTouchEnabled = true
         imageView.layer.masksToBounds = true
         
         self.view.addSubview(imageView)
         
 
-        bottomButton.frame = CGRectMake(CGRectGetMidX(self.view.frame) - 90, CGRectGetHeight(imageView.frame) - 50 - CGRectGetHeight(imageView.frame) * 0.05, 180, 50)
-        bottomButton.setTitle(PopularStickersLocalizedString("<Send>", ""), forState: .Normal)
-        bottomButton.backgroundColor = UIColor.c_blueColor()
-        bottomButton.layer.shadowColor = UIColor.blackColor().CGColor
+        bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: imageView.frame.height - 50 - imageView.frame.height * 0.05, width: 180, height: 50)
+        bottomButton.setTitle(PopularStickersLocalizedString("<Send>", ""), for: UIControlState())
+        bottomButton.backgroundColor = UIColor.c_blue()
+        bottomButton.layer.shadowColor = UIColor.black.cgColor
         bottomButton.layer.shadowOpacity = 0.6
-        bottomButton.layer.shadowOffset = CGSizeMake(2, 2)
+        bottomButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         bottomButton.layer.cornerRadius = 5.0
 
-        bottomButton.buttonTouchUpInsideWithCompletion( {
+        bottomButton.buttonTouchUpInside( completion: {
          
             self.indexPath = nil
             self.imageToSend = self.imageToShow
@@ -84,49 +84,49 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         
         self.view.addSubview(bottomButton)
         
-        infoLabel.frame = CGRectMake(0, CGRectGetMaxY(imageView.frame), CGRectGetWidth(self.view.frame), 40)
-        infoLabel.textColor = UIColor.blackColor()
-        infoLabel.font = UIFont.c_robotoMediumWithSize(15.0)
+        infoLabel.frame = CGRect(x: 0, y: imageView.frame.maxY, width: self.view.frame.width, height: 40)
+        infoLabel.textColor = UIColor.black
+        infoLabel.font = UIFont.c_robotoMedium(withSize: 15.0)
         infoLabel.text = PopularStickersLocalizedString("<SendExplanation>", "")
-        infoLabel.textAlignment = .Center
-        infoLabel.backgroundColor = UIColor.c_bannerGrayColor()
+        infoLabel.textAlignment = .center
+        infoLabel.backgroundColor = UIColor.c_bannerGray()
         self.view.addSubview(infoLabel)
         
         
         
         var backButtonImage = UIImage(named: "BackArrow")
-        backButtonImage = backButtonImage?.imageWithRenderingMode(.AlwaysTemplate)
+        backButtonImage = backButtonImage?.withRenderingMode(.alwaysTemplate)
         
         
-        backButton.frame = CGRectMake(CGRectGetWidth(self.view.frame) * 0.05, 20 + CGRectGetWidth(self.view.frame) * 0.05, CGRectGetWidth(self.view.frame) * 0.12, CGRectGetWidth(self.view.frame) * 0.12)
-        backButton.setImage( backButtonImage, forState: UIControlState.Normal)
-        backButton.tintColor = UIColor.whiteColor()
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(CGRectGetHeight(backButton.frame) * 0.25, CGRectGetWidth(backButton.frame) * 0.25, CGRectGetHeight(backButton.frame) * 0.25, CGRectGetWidth(backButton.frame) * 0.25)
-        backButton.layer.cornerRadius = CGRectGetWidth(backButton.frame) / CGFloat(2.0)
-        backButton.layer.backgroundColor = UIColor.c_blueColor().CGColor
+        backButton.frame = CGRect(x: self.view.frame.width * 0.05, y: 20 + self.view.frame.width * 0.05, width: self.view.frame.width * 0.12, height: self.view.frame.width * 0.12)
+        backButton.setImage( backButtonImage, for: UIControlState())
+        backButton.tintColor = UIColor.white
+        backButton.imageEdgeInsets = UIEdgeInsetsMake(backButton.frame.height * 0.25, backButton.frame.width * 0.25, backButton.frame.height * 0.25, backButton.frame.width * 0.25)
+        backButton.layer.cornerRadius = backButton.frame.width / CGFloat(2.0)
+        backButton.layer.backgroundColor = UIColor.c_blue().cgColor
         backButton.alpha = CGFloat(backButton.fadeAlphaValue)
         
-        backButton.buttonTouchUpInsideWithCompletion({
+        backButton.buttonTouchUpInside(completion: {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGABackFromImage, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGABackFromImage, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         })
         
         self.view.addSubview(backButton)
         
         
-        let addTextButton = MAXFadeBlockButton(frame: CGRectMake(CGRectGetWidth(self.view.frame) - 65, CGRectGetHeight(self.view.frame) - 70, 50, 50))
+        let addTextButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 70, width: 50, height: 50))
         addTextButton.layer.cornerRadius = 25
-        addTextButton.layer.backgroundColor = UIColor.c_blueColor().CGColor
-        addTextButton.layer.shadowColor = UIColor.blackColor().CGColor
+        addTextButton.layer.backgroundColor = UIColor.c_blue().cgColor
+        addTextButton.layer.shadowColor = UIColor.black.cgColor
         addTextButton.layer.shadowOpacity = 0.6
-        addTextButton.layer.shadowOffset = CGSizeMake(2, 2)
-        addTextButton.setTitle("+", forState: UIControlState.Normal)
-        addTextButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        addTextButton.titleLabel?.font = UIFont.c_robotoMediumWithSize(31)
+        addTextButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        addTextButton.setTitle("+", for: UIControlState())
+        addTextButton.setTitleColor(UIColor.white, for: UIControlState())
+        addTextButton.titleLabel?.font = UIFont.c_robotoMedium(withSize: 31)
         
-        addTextButton.buttonTouchUpInsideWithCompletion({
+        addTextButton.buttonTouchUpInside(completion: {
             
             let recipientPicker = RecipientPickerViewController(area: "stickers")
             
@@ -141,15 +141,15 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                 
                 self.viewModel.textFilter = filter
                 self.viewModel.reloadTextsAsIntentions()
-                self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+                self.tableView.reloadSections(IndexSet.init(integer: 0), with: UITableViewRowAnimation.fade)
                 
-                UIView.animateWithDuration(0.3, animations: {
+                UIView.animate(withDuration: 0.3, animations: {
                     
                     }, completion: {
                         isComplete in
                         
                         if isComplete == true {
-                            self.tableView.setContentOffset( CGPointZero, animated: true)
+                            self.tableView.setContentOffset( CGPoint.zero, animated: true)
                         }
                         
                 })
@@ -165,7 +165,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                 
             }
             
-            self.presentViewController( recipientPicker, animated: true, completion: nil)
+            self.present( recipientPicker, animated: true, completion: nil)
             
         })
         
@@ -174,7 +174,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         viewModel.reloadTextsAsIntentions()
         
         // if the image has been viewed for an intention we do not want to show it again
-        if UserDefaults.hasViewedImageWithId(self.imageName) == false || self.viewModel.intentionId == nil {
+        if UserDefaults.hasViewedImage(withId: self.imageName) == false || self.viewModel.intentionId == nil {
             
             viewModel.downloadPopularTexts(imageName, completion: {
                 error -> Void in
@@ -192,12 +192,12 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
         }
         
-        self.tableView.frame = CGRectMake(0, CGRectGetMaxY(infoLabel.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMaxY(infoLabel.frame))
+        self.tableView.frame = CGRect(x: 0, y: infoLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - infoLabel.frame.maxY)
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.separatorColor = UIColor.lightGrayColor()
-        self.tableView.layoutMargins = UIEdgeInsetsZero
-        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.separatorColor = UIColor.lightGray
+        self.tableView.layoutMargins = UIEdgeInsets.zero
+        self.tableView.separatorInset = UIEdgeInsets.zero
         
         self.view.insertSubview(self.tableView, belowSubview : bottomButton)
         self.tableView.reloadData()
@@ -212,29 +212,29 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     func sendWithMessenger() {
         
-        AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
+        AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
         
         
         if let nonNilIndexPath = indexPath {
             // when index path is not nil we sent it with a text
-            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
         }
         else {
-            AnalyticsManager.sharedManager().postActionWithType( kGASendMessenger, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
         }
         
-        let progressHud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        progressHud.mode = MBProgressHUDMode.Indeterminate
+        let progressHud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHud.mode = MBProgressHUDMode.indeterminate
         
         if self.overlayView != nil {
             self.fadeOutOverlayView(nil)
         }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.2 ) * Int64( NSEC_PER_SEC )), dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.2 ) * Int64( NSEC_PER_SEC )) / Double(NSEC_PER_SEC), execute: {
             self.showMessengerExtension(self.imageToSend, imageId: self.imageName?.imageName(), prototypeId: nil)
             UserDefaults.setHasSentImageOrText( true )
         });
@@ -246,32 +246,32 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         let activityVC = UIActivityViewController(activityItems: [self.imageToSend!], applicationActivities: nil)
         
         if #available(iOS 9.0, *) {
-            let excludedActivities = [UIActivityTypeOpenInIBooks]
+            let excludedActivities = [UIActivityType.openInIBooks]
             activityVC.excludedActivityTypes = excludedActivities
         }
         
-        AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
+        AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
         
         if let nonNilIndexPath = indexPath {
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.sharedManager().postActionWithType( kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
             
         }
         else {
-            AnalyticsManager.sharedManager().postActionWithType( kGAShareViaIntent, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
         }
         
         
-        let progressHud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        progressHud.mode = MBProgressHUDMode.Indeterminate
+        let progressHud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHud.mode = MBProgressHUDMode.indeterminate
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64( 0.2 ) * Int64( NSEC_PER_SEC )), dispatch_get_main_queue(), {
-            self.presentViewController(activityVC, animated: true, completion: {
-                progressHud.hideAnimated( true )
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.2 ) * Int64( NSEC_PER_SEC )) / Double(NSEC_PER_SEC), execute: {
+            self.present(activityVC, animated: true, completion: {
+                progressHud.hide( animated: true )
                 UserDefaults.setHasSentImageOrText( true )
             })
         });
@@ -280,22 +280,22 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     func chooseSendMethod() {
         
-        if UserDefaults.sendMethodForMessage() == MessageSendMethod.NoMethod {
+        if UserDefaults.sendMethodForMessage() == MessageSendMethod.noMethod {
             
             if let nonNilIndexPath = indexPath {
-                AnalyticsManager.sharedManager().postActionWithType(kGASendMenuOpened, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
+                AnalyticsManager.shared().postAction(withType: kGASendMenuOpened, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
             }
             else {
-                AnalyticsManager.sharedManager().postActionWithType(kGASendMenuOpened, targetType: kGATargetTypeApp, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+                AnalyticsManager.shared().postAction(withType: kGASendMenuOpened, targetType: kGATargetTypeApp, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             }
             
-            overlayView = UIView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame) , CGRectGetHeight(self.view.frame)))
-            overlayView?.backgroundColor = UIColor.c_colorWithHexString(UIColor.c_hexValuesFromUIColor(UIColor.blackColor()), alpha:  0.3)
+            overlayView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width , height: self.view.frame.height))
+            overlayView?.backgroundColor = UIColor.c_color(withHexString: UIColor.c_hexValues(from: UIColor.black), alpha:  0.3)
             overlayView?.alpha = 0.0
             
-            let backgroundButton = MAXFadeBlockButton(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)))
-            backgroundButton.backgroundColor = UIColor.clearColor()
-            backgroundButton.buttonTouchUpInsideWithCompletion({
+            let backgroundButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            backgroundButton.backgroundColor = UIColor.clear
+            backgroundButton.buttonTouchUpInside(completion: {
                 self.fadeOutOverlayView(nil)
             })
             
@@ -303,9 +303,9 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             self.view.addSubview( overlayView! )
             
-            let chooseMethodView = UIView(frame: CGRectMake(CGRectGetWidth(self.view.frame) * 0.15, CGRectGetHeight(self.view.frame) * 0.3, CGRectGetWidth(self.view.frame) * 0.7, CGRectGetWidth(self.view.frame) * 0.7))
-            chooseMethodView.layer.backgroundColor = UIColor.whiteColor().CGColor
-            chooseMethodView.layer.borderColor = UIColor.c_blueColor().CGColor
+            let chooseMethodView = UIView(frame: CGRect(x: self.view.frame.width * 0.15, y: self.view.frame.height * 0.3, width: self.view.frame.width * 0.7, height: self.view.frame.width * 0.7))
+            chooseMethodView.layer.backgroundColor = UIColor.white.cgColor
+            chooseMethodView.layer.borderColor = UIColor.c_blue().cgColor
             chooseMethodView.layer.borderWidth = 2.0
             chooseMethodView.layer.cornerRadius = 5.0
             chooseMethodView.layer.masksToBounds = true
@@ -313,112 +313,112 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             overlayView!.addSubview( chooseMethodView )
             
             
-            let titleLabel = UILabel(frame:  CGRectMake(0, 0, CGRectGetWidth(chooseMethodView.frame), CGRectGetHeight(chooseMethodView.frame) * 0.15))
-            titleLabel.font = UIFont.c_robotoBoldWithSize( 16.0 )
-            titleLabel.textColor = UIColor.c_textDarkGrayColor()
-            titleLabel.textAlignment = .Center
+            let titleLabel = UILabel(frame:  CGRect(x: 0, y: 0, width: chooseMethodView.frame.width, height: chooseMethodView.frame.height * 0.15))
+            titleLabel.font = UIFont.c_robotoBold( withSize: 16.0 )
+            titleLabel.textColor = UIColor.c_textDarkGray()
+            titleLabel.textAlignment = .center
             titleLabel.text = PopularStickersLocalizedString("<ChooseSendMethod>", nil)
             
             chooseMethodView.addSubview( titleLabel )
             
             
-            let messengerButtonContainerRow = MAXFadeBlockButton(frame: CGRectMake(0, CGRectGetHeight(chooseMethodView.frame) * 0.16 - CGRectGetWidth(chooseMethodView.frame) * 0.035, CGRectGetWidth(chooseMethodView.frame) , CGRectGetWidth(chooseMethodView.frame) * 0.18 + CGRectGetWidth(chooseMethodView.frame) * 0.07))
+            let messengerButtonContainerRow = MAXFadeBlockButton(frame: CGRect(x: 0, y: chooseMethodView.frame.height * 0.16 - chooseMethodView.frame.width * 0.035, width: chooseMethodView.frame.width , height: chooseMethodView.frame.width * 0.18 + chooseMethodView.frame.width * 0.07))
             chooseMethodView.addSubview( messengerButtonContainerRow )
             
             
-            let messengerButton = FBSDKMessengerShareButton.circularButtonWithStyle( FBSDKMessengerShareButtonStyle.Blue )
-            messengerButton.frame = CGRectMake(CGRectGetWidth(chooseMethodView.frame) * 0.06, CGRectGetHeight(chooseMethodView.frame) * 0.035, CGRectGetWidth(chooseMethodView.frame) * 0.18, CGRectGetWidth(chooseMethodView.frame) * 0.18)
-            messengerButton.userInteractionEnabled = false
+            let messengerButton = FBSDKMessengerShareButton.circularButton( with: FBSDKMessengerShareButtonStyle.blue )
+            messengerButton?.frame = CGRect(x: chooseMethodView.frame.width * 0.06, y: chooseMethodView.frame.height * 0.035, width: chooseMethodView.frame.width * 0.18, height: chooseMethodView.frame.width * 0.18)
+            messengerButton?.isUserInteractionEnabled = false
             
-            messengerButtonContainerRow.addSubview( messengerButton )
+            messengerButtonContainerRow.addSubview( messengerButton! )
             
-            let messengerTitle = UILabel(frame: CGRectMake(CGRectGetMaxX(messengerButton.frame) + 10, CGRectGetMinY(messengerButton.frame), CGRectGetWidth(chooseMethodView.frame) * 0.6, CGRectGetHeight(messengerButton.frame)))
-            messengerTitle.textAlignment = .Left
-            messengerTitle.textColor = UIColor.c_textDarkGrayColor()
-            messengerTitle.font = UIFont.c_robotoMediumWithSize( 15.0 )
+            let messengerTitle = UILabel(frame: CGRect(x: (messengerButton?.frame.maxX)! + 10, y: (messengerButton?.frame.minY)!, width: chooseMethodView.frame.width * 0.6, height: (messengerButton?.frame.height)!))
+            messengerTitle.textAlignment = .left
+            messengerTitle.textColor = UIColor.c_textDarkGray()
+            messengerTitle.font = UIFont.c_robotoMedium( withSize: 15.0 )
             messengerTitle.text = PopularStickersLocalizedString("<MessengerMethod>", nil)
             
             messengerButtonContainerRow.addSubview( messengerTitle )
             
-            let otherButtonContainerRow = MAXFadeBlockButton(frame: CGRectMake(0, CGRectGetMaxY(messengerButtonContainerRow.frame) - CGRectGetWidth(chooseMethodView.frame) * 0.02, CGRectGetWidth(chooseMethodView.frame), CGRectGetWidth(chooseMethodView.frame) * 0.18 + CGRectGetWidth(chooseMethodView.frame) * 0.07))
+            let otherButtonContainerRow = MAXFadeBlockButton(frame: CGRect(x: 0, y: messengerButtonContainerRow.frame.maxY - chooseMethodView.frame.width * 0.02, width: chooseMethodView.frame.width, height: chooseMethodView.frame.width * 0.18 + chooseMethodView.frame.width * 0.07))
             chooseMethodView.addSubview( otherButtonContainerRow )
             
-            let otherButton = MAXFadeBlockButton(frame: CGRectMake(CGRectGetMinX(messengerButton.frame), CGRectGetWidth(chooseMethodView.frame) * 0.035, CGRectGetWidth(chooseMethodView.frame) * 0.18, CGRectGetWidth(chooseMethodView.frame) * 0.18))
-            otherButton.backgroundColor = UIColor.c_greenColor()
-            otherButton.layer.cornerRadius = CGRectGetWidth(otherButton.frame) / 2.0
-            otherButton.userInteractionEnabled = false
+            let otherButton = MAXFadeBlockButton(frame: CGRect(x: (messengerButton?.frame.minX)!, y: chooseMethodView.frame.width * 0.035, width: chooseMethodView.frame.width * 0.18, height: chooseMethodView.frame.width * 0.18))
+            otherButton.backgroundColor = UIColor.c_green()
+            otherButton.layer.cornerRadius = otherButton.frame.width / 2.0
+            otherButton.isUserInteractionEnabled = false
             
             
             
             var smsImage = UIImage(named: "SmsIcon")
-            smsImage = smsImage?.imageWithRenderingMode( UIImageRenderingMode.AlwaysTemplate )
+            smsImage = smsImage?.withRenderingMode( UIImageRenderingMode.alwaysTemplate )
             
-            let smsImageView = UIImageView(frame: CGRectMake(CGRectGetWidth(otherButton.frame) * 0.22, CGRectGetHeight(otherButton.frame) * 0.17, CGRectGetWidth(otherButton.frame) * 0.26, CGRectGetWidth(otherButton.frame) * 0.26))
+            let smsImageView = UIImageView(frame: CGRect(x: otherButton.frame.width * 0.22, y: otherButton.frame.height * 0.17, width: otherButton.frame.width * 0.26, height: otherButton.frame.width * 0.26))
             smsImageView.image = smsImage
-            smsImageView.tintColor = UIColor.whiteColor()
+            smsImageView.tintColor = UIColor.white
             otherButton.addSubview( smsImageView )
             
             var whatsAppImage = UIImage(named: "WhatsAppIcon")
-            whatsAppImage = whatsAppImage?.imageWithRenderingMode( UIImageRenderingMode.AlwaysTemplate )
+            whatsAppImage = whatsAppImage?.withRenderingMode( UIImageRenderingMode.alwaysTemplate )
             
-            let whatsAppImageView = UIImageView(frame: CGRectMake(CGRectGetWidth(otherButton.frame) * 0.58, CGRectGetHeight(otherButton.frame) * 0.32, CGRectGetWidth(otherButton.frame) * 0.3, CGRectGetWidth(otherButton.frame) * 0.3))
+            let whatsAppImageView = UIImageView(frame: CGRect(x: otherButton.frame.width * 0.58, y: otherButton.frame.height * 0.32, width: otherButton.frame.width * 0.3, height: otherButton.frame.width * 0.3))
             whatsAppImageView.image = whatsAppImage
-            whatsAppImageView.tintColor = UIColor.whiteColor()
+            whatsAppImageView.tintColor = UIColor.white
             otherButton.addSubview( whatsAppImageView )
             
             var emailImage = UIImage(named:  "EmailIcon")
-            emailImage = emailImage?.imageWithRenderingMode( UIImageRenderingMode.AlwaysTemplate )
+            emailImage = emailImage?.withRenderingMode( UIImageRenderingMode.alwaysTemplate )
             
-            let emailImageView = UIImageView(frame: CGRectMake(CGRectGetWidth(otherButton.frame) * 0.2, CGRectGetHeight(otherButton.frame) * 0.55, CGRectGetWidth(otherButton.frame) * 0.33, CGRectGetWidth(otherButton.frame) * 0.33))
+            let emailImageView = UIImageView(frame: CGRect(x: otherButton.frame.width * 0.2, y: otherButton.frame.height * 0.55, width: otherButton.frame.width * 0.33, height: otherButton.frame.width * 0.33))
             emailImageView.image = emailImage
-            emailImageView.tintColor = UIColor.whiteColor()
+            emailImageView.tintColor = UIColor.white
             otherButton.addSubview( emailImageView )
             
             
             otherButtonContainerRow.addSubview( otherButton )
             
-            let otherSendMethodTitleLabel = UILabel(frame: CGRectMake(CGRectGetMaxX(otherButton.frame) + 10, CGRectGetMinY(otherButton.frame), CGRectGetWidth(chooseMethodView.frame) * 0.6, CGRectGetHeight(otherButton.frame)))
-            otherSendMethodTitleLabel.textAlignment = .Left
-            otherSendMethodTitleLabel.textColor = UIColor.c_textDarkGrayColor()
-            otherSendMethodTitleLabel.font = UIFont.c_robotoMediumWithSize( 15.0 )
+            let otherSendMethodTitleLabel = UILabel(frame: CGRect(x: otherButton.frame.maxX + 10, y: otherButton.frame.minY, width: chooseMethodView.frame.width * 0.6, height: otherButton.frame.height))
+            otherSendMethodTitleLabel.textAlignment = .left
+            otherSendMethodTitleLabel.textColor = UIColor.c_textDarkGray()
+            otherSendMethodTitleLabel.font = UIFont.c_robotoMedium( withSize: 15.0 )
             otherSendMethodTitleLabel.text = PopularStickersLocalizedString("<OtherMethod>", nil)
             
             otherButtonContainerRow.addSubview( otherSendMethodTitleLabel )
             
-            let bottomBlueFooter = UIView(frame: CGRectMake(0, CGRectGetHeight(chooseMethodView.frame) * 0.84, CGRectGetWidth(chooseMethodView.frame) , CGRectGetHeight(chooseMethodView.frame) * 0.16 ))
-            bottomBlueFooter.backgroundColor = UIColor.c_blueColor()
+            let bottomBlueFooter = UIView(frame: CGRect(x: 0, y: chooseMethodView.frame.height * 0.84, width: chooseMethodView.frame.width , height: chooseMethodView.frame.height * 0.16 ))
+            bottomBlueFooter.backgroundColor = UIColor.c_blue()
             
             chooseMethodView.addSubview( bottomBlueFooter )
             
             if  UserDefaults.hasSentImageOrText() == true {
                 
-                self.rememberMethodSwitch = MBSwitch(frame: CGRectMake(CGRectGetWidth(chooseMethodView.frame) * 0.08, CGRectGetMaxY(otherButtonContainerRow.frame) + CGRectGetWidth(chooseMethodView.frame) * 0.035, CGRectGetWidth(chooseMethodView.frame) * 0.15, CGRectGetWidth(chooseMethodView.frame) * 0.1))
-                self.rememberMethodSwitch!.onTintColor = UIColor.c_blueColor()
+                self.rememberMethodSwitch = MBSwitch(frame: CGRect(x: chooseMethodView.frame.width * 0.08, y: otherButtonContainerRow.frame.maxY + chooseMethodView.frame.width * 0.035, width: chooseMethodView.frame.width * 0.15, height: chooseMethodView.frame.width * 0.1))
+                self.rememberMethodSwitch!.onTintColor = UIColor.c_blue()
                 chooseMethodView.addSubview( rememberMethodSwitch! )
                 
-                let rememberTitleLabel = UILabel(frame: CGRectMake(CGRectGetMaxX(self.rememberMethodSwitch!.frame) + 10, CGRectGetMinY(self.rememberMethodSwitch!.frame), CGRectGetWidth(chooseMethodView.frame) * 0.7, CGRectGetWidth(chooseMethodView.frame) * 0.1))
-                rememberTitleLabel.textAlignment = .Left
-                rememberTitleLabel.textColor = UIColor.c_textDarkGrayColor()
-                rememberTitleLabel.font = UIFont.c_robotoMediumWithSize( 15.0 )
+                let rememberTitleLabel = UILabel(frame: CGRect(x: self.rememberMethodSwitch!.frame.maxX + 10, y: self.rememberMethodSwitch!.frame.minY, width: chooseMethodView.frame.width * 0.7, height: chooseMethodView.frame.width * 0.1))
+                rememberTitleLabel.textAlignment = .left
+                rememberTitleLabel.textColor = UIColor.c_textDarkGray()
+                rememberTitleLabel.font = UIFont.c_robotoMedium( withSize: 15.0 )
                 rememberTitleLabel.text = PopularStickersLocalizedString("<RememberSendMethod>", nil)
                 chooseMethodView.addSubview( rememberTitleLabel )
                 
             }
             else {
                 
-                messengerButtonContainerRow.frame = CGRectMake(0, CGRectGetHeight(chooseMethodView.frame) * 0.2, CGRectGetWidth(chooseMethodView.frame) , CGRectGetWidth(chooseMethodView.frame) * 0.18 + CGRectGetWidth(chooseMethodView.frame) * 0.07)
-                otherButtonContainerRow.frame = CGRectMake(0, CGRectGetMaxY(messengerButtonContainerRow.frame) + CGRectGetWidth(chooseMethodView.frame) * 0.05, CGRectGetWidth(chooseMethodView.frame), CGRectGetWidth(chooseMethodView.frame) * 0.18 + CGRectGetWidth(chooseMethodView.frame) * 0.07)
+                messengerButtonContainerRow.frame = CGRect(x: 0, y: chooseMethodView.frame.height * 0.2, width: chooseMethodView.frame.width , height: chooseMethodView.frame.width * 0.18 + chooseMethodView.frame.width * 0.07)
+                otherButtonContainerRow.frame = CGRect(x: 0, y: messengerButtonContainerRow.frame.maxY + chooseMethodView.frame.width * 0.05, width: chooseMethodView.frame.width, height: chooseMethodView.frame.width * 0.18 + chooseMethodView.frame.width * 0.07)
                 
                 
             }
             
-            let cancelButton = MAXFadeBlockButton(frame: CGRectMake(0, 0, CGRectGetWidth(bottomBlueFooter.frame), CGRectGetHeight(bottomBlueFooter.frame)))
-            cancelButton.setTitle(PopularStickersLocalizedString("<NotificationAlertCancelTitle>", nil), forState: UIControlState.Normal)
-            cancelButton.titleLabel!.font = UIFont.c_robotoMediumWithSize( 15.0 )
-            cancelButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            let cancelButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 0, width: bottomBlueFooter.frame.width, height: bottomBlueFooter.frame.height))
+            cancelButton.setTitle(PopularStickersLocalizedString("<NotificationAlertCancelTitle>", nil), for: UIControlState())
+            cancelButton.titleLabel!.font = UIFont.c_robotoMedium( withSize: 15.0 )
+            cancelButton.setTitleColor(UIColor.white, for: UIControlState())
             
             
-            cancelButton.buttonTouchUpInsideWithCompletion({
+            cancelButton.buttonTouchUpInside(completion: {
                 
                 self.fadeOutOverlayView(nil)
                 
@@ -427,11 +427,11 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             bottomBlueFooter.addSubview( cancelButton )
             
             
-            messengerButtonContainerRow.buttonTouchUpInsideWithCompletion({
+            messengerButtonContainerRow.buttonTouchUpInside(completion: {
                 
                 if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch != nil {
-                    if self.rememberMethodSwitch!.on == true {
-                        UserDefaults.setSendMethodForMessage( MessageSendMethod.Messenger )
+                    if self.rememberMethodSwitch!.isOn == true {
+                        UserDefaults.setSendMethodForMessage( MessageSendMethod.messenger )
                     }
                 }
                 
@@ -441,10 +441,10 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                 
             })
             
-            otherButtonContainerRow.buttonTouchUpInsideWithCompletion({
+            otherButtonContainerRow.buttonTouchUpInside(completion: {
                 
                 if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch != nil {
-                    if self.rememberMethodSwitch!.on == true {
+                    if self.rememberMethodSwitch!.isOn == true {
                         UserDefaults.setSendMethodForMessage(  MessageSendMethod.OS )
                     }
                 }
@@ -455,11 +455,11 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                 
             })
             
-            UIView.animateWithDuration(0.1, animations: {
+            UIView.animate(withDuration: 0.1, animations: {
                 self.overlayView!.alpha = 1.0
             })
         }
-        else if UserDefaults.sendMethodForMessage() == MessageSendMethod.Messenger {
+        else if UserDefaults.sendMethodForMessage() == MessageSendMethod.messenger {
             
             self.sendWithMessenger()
         }
@@ -471,8 +471,8 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     }
     
     
-    func fadeOutOverlayView(completion: (() -> Void)?) {
-        UIView.animateWithDuration(0.1, animations: {
+    func fadeOutOverlayView(_ completion: (() -> Void)?) {
+        UIView.animate(withDuration: 0.1, animations: {
             self.overlayView!.alpha = 0.0
             }, completion: {
                 finished -> Void in
@@ -486,57 +486,57 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     func animateButtonDownAndInfoOut() {
         
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             
             self.infoLabel.alpha = 0.0
-            self.bottomButton.c_setOriginY( Float(CGRectGetHeight(self.view.frame) - self.backButton.frame.size.height - 20))
-            self.tableView.separatorColor = UIColor.clearColor()
+            self.bottomButton.c_setOriginY( Float(self.view.frame.height - self.backButton.frame.size.height - 20))
+            self.tableView.separatorColor = UIColor.clear
             
         })
         
-        self.bottomButton.setTitle(PopularStickersLocalizedString("<Send>", ""), forState: .Normal)
+        self.bottomButton.setTitle(PopularStickersLocalizedString("<Send>", ""), for: UIControlState())
         
     }
     
     func animateButtonUpAndInfoIn() {
         
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             
             if self.backToMessengerButton?.superview == nil {
                 
-                self.bottomButton.frame = CGRectMake(CGRectGetMidX(self.view.frame) - 90, CGRectGetHeight(self.imageView.frame) - 50 - CGRectGetHeight(self.imageView.frame) * 0.05, 180, 50)
+                self.bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: self.imageView.frame.height - 50 - self.imageView.frame.height * 0.05, width: 180, height: 50)
             }
             else {
                 
-                self.bottomButton.frame = CGRectMake(CGRectGetMidX(self.view.frame) - 90, CGRectGetHeight(self.imageView.frame) - 10 - CGRectGetHeight(self.imageView.frame) * 0.05, 180, 50)
+                self.bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: self.imageView.frame.height - 10 - self.imageView.frame.height * 0.05, width: 180, height: 50)
             }
             
             self.infoLabel.alpha = 1.0
-            self.tableView.separatorColor = UIColor.lightGrayColor()
+            self.tableView.separatorColor = UIColor.lightGray
         
         })
         
-        bottomButton.setTitle(PopularStickersLocalizedString("<Send>", ""), forState: .Normal)
+        bottomButton.setTitle(PopularStickersLocalizedString("<Send>", ""), for: UIControlState())
         
     }
 
     // MARK: Table View
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.viewModel.numberOfTexts()
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("cellIdentifier") as? PopularTextsTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier") as? PopularTextsTableViewCell
         
         if cell == nil {
-            cell = PopularTextsTableViewCell(style: .Default, reuseIdentifier: "cellIdentifier")
-            cell?.popularTextLabel.font = UIFont.c_robotoLightWithSize(17.0)
+            cell = PopularTextsTableViewCell(style: .default, reuseIdentifier: "cellIdentifier")
+            cell?.popularTextLabel.font = UIFont.c_robotoLight(withSize: 17.0)
             
             let selectionView = UIView()
-            selectionView.backgroundColor = UIColor.c_lightBlueCellHighlightColor()
+            selectionView.backgroundColor = UIColor.c_lightBlueCellHighlight()
             
             cell?.selectedBackgroundView = selectionView
             
@@ -545,30 +545,30 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         cell?.popularTextLabel.text = self.viewModel.textContent(indexPath.row)
         
         cell?.nbSharesLabel.text = self.viewModel.textNumberOfShares(indexPath.row)
-        cell?.nbSharesLabel.textAlignment = .Right
-        cell?.nbSharesLabel.font = UIFont.c_robotoWithSize(15.0)
+        cell?.nbSharesLabel.textAlignment = .right
+        cell?.nbSharesLabel.font = UIFont.c_roboto(withSize: 15.0)
         
         cell?.nbSharesImageView.image = UIImage(named: "NbSharesIcon")
-        cell?.nbSharesImageView.contentMode = UIViewContentMode.ScaleAspectFit
-        cell?.nbSharesImageView.hidden = self.viewModel.textIsDisplayedAndShared(indexPath.row) == false
+        cell?.nbSharesImageView.contentMode = UIViewContentMode.scaleAspectFit
+        cell?.nbSharesImageView.isHidden = self.viewModel.textIsDisplayedAndShared(indexPath.row) == false
         
         
         return cell!
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if self.viewModel.textIsDisplayedAndShared( indexPath.row ) == true {
-            return self.viewModel.textHeight(indexPath.row, width: CGRectGetWidth(self.view.frame) * 0.8, font: UIFont.c_robotoLightWithSize(17.0)) + 60
+            return self.viewModel.textHeight(indexPath.row, width: self.view.frame.width * 0.8, font: UIFont.c_robotoLight(withSize: 17.0)) + 60
         }
         
-        return self.viewModel.textHeight(indexPath.row, width: CGRectGetWidth(self.view.frame) * 0.8, font: UIFont.c_robotoLightWithSize(17.0)) + 30
+        return self.viewModel.textHeight(indexPath.row, width: self.view.frame.width * 0.8, font: UIFont.c_robotoLight(withSize: 17.0)) + 30
         
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let text = self.viewModel.textContent(indexPath.row) {
             
@@ -581,46 +581,46 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     }
 
     
-    func createMetadataJsonString(imageId: String?, prototypeId: String?) -> String? {
+    func createMetadataJsonString(_ imageId: String?, prototypeId: String?) -> String? {
         
         let mutableDict = NSMutableDictionary()
         
-        mutableDict.setObject(1, forKey: "version")
+        mutableDict.setObject(1, forKey: "version" as NSCopying)
         
         if let intentionId = self.viewModel.intentionId {
-            mutableDict.setObject(intentionId, forKey: "intentionId")
+            mutableDict.setObject(intentionId, forKey: "intentionId" as NSCopying)
         }
         else {
-            mutableDict.setObject(NSNull(), forKey: "intentionId")
+            mutableDict.setObject(NSNull(), forKey: "intentionId" as NSCopying)
         }
         
         if let imagePath = self.viewModel.imagePath {
-            mutableDict.setObject(imagePath, forKey: "imagePath")
+            mutableDict.setObject(imagePath, forKey: "imagePath" as NSCopying)
         }
         
         // not supported yet
         if let nonNilPrototypeId = prototypeId {
-            mutableDict.setObject(nonNilPrototypeId, forKey: "prototypeId")
+            mutableDict.setObject(nonNilPrototypeId, forKey: "prototypeId" as NSCopying)
         }
         else {
-            mutableDict.setObject(NSNull(), forKey: "prototypeId")
+            mutableDict.setObject(NSNull(), forKey: "prototypeId" as NSCopying)
         }
-        mutableDict.setObject(NSNull(), forKey: "recipientType")
+        mutableDict.setObject(NSNull(), forKey: "recipientType" as NSCopying)
         
         
         if let imageName = imageId {
             
-            if let lastComponent = imageName.componentsSeparatedByString("/").last {
-                mutableDict.setObject(lastComponent, forKey: "imageName")
+            if let lastComponent = imageName.components(separatedBy: "/").last {
+                mutableDict.setObject(lastComponent, forKey: "imageName" as NSCopying)
             }
         }
         
         
         
         do {
-            let data = try NSJSONSerialization.dataWithJSONObject(mutableDict, options: NSJSONWritingOptions.PrettyPrinted)
+            let data = try JSONSerialization.data(withJSONObject: mutableDict, options: JSONSerialization.WritingOptions.prettyPrinted)
             
-            let jsonString = String(data: data, encoding: NSUTF8StringEncoding)
+            let jsonString = String(data: data, encoding: String.Encoding.utf8)
             
             return jsonString
             
@@ -634,44 +634,44 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     // MARK: Image Creation and Extensions
     
-    func showMessengerExtension(image: UIImage?, imageId: String?, prototypeId: String?) {
+    func showMessengerExtension(_ image: UIImage?, imageId: String?, prototypeId: String?) {
         
         if let nonNilImage = image, let _ = imageId {
             
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             let options = FBSDKMessengerShareOptions()
             
             options.contextOverride = AppFlow.currentContext()
             options.metadata = self.createMetadataJsonString(imageId, prototypeId: prototypeId)
-            FBSDKMessengerSharer.shareImage(nonNilImage, withOptions: options)
+            FBSDKMessengerSharer.share(nonNilImage, with: options)
             
         }
     }
     
     // MARK: Create Image With Text
     
-    func createImage(text: String) -> UIImage {
+    func createImage(_ text: String) -> UIImage {
         
         let imageView = UIImageView(image: self.imageToShow)
         
         let biggerSide = imageView.frame.size.width
         
         let fontSize  = biggerSide / 16.0
-        let font = UIFont.c_robotoLightWithSize(Float(fontSize))
+        let font = UIFont.c_robotoLight(withSize: Float(fontSize))
         
-        let fontHeight = NSString.c_findHeightForText(text, havingWidth: imageView.frame.size.width * 0.8, andFont: font)
+        let fontHeight = NSString.c_findHeight(forText: text, havingWidth: imageView.frame.size.width * 0.8, andFont: font)
         
-        let label = UILabel(frame: CGRectMake(CGRectGetWidth(imageView.frame) * 0.1, CGRectGetMaxY(imageView.frame) + 40, CGRectGetWidth(imageView.frame) * 0.8, fontHeight + 6))
-        label.textAlignment = .Center
+        let label = UILabel(frame: CGRect(x: imageView.frame.width * 0.1, y: imageView.frame.maxY + 40, width: imageView.frame.width * 0.8, height: fontHeight + 6))
+        label.textAlignment = .center
         label.numberOfLines = 0
         label.font = font
         label.text = text
-        label.textColor = UIColor.blackColor()
+        label.textColor = UIColor.black
 
         
-        let snapshotView = UIView(frame: CGRectMake(0, 0, imageView.frame.size.width, CGRectGetMaxY(label.frame) + 40))
-        snapshotView.backgroundColor = UIColor.whiteColor()
+        let snapshotView = UIView(frame: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: label.frame.maxY + 40))
+        snapshotView.backgroundColor = UIColor.white
         snapshotView.addSubview(imageView)
         snapshotView.addSubview(label)
         
@@ -685,10 +685,10 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     func addOrRemoveBackToMessengerButton() {
         
-        if AppFlow.currentMessengerFlow == MessengerFlow.Send {
+        if AppFlow.currentMessengerFlow == MessengerFlow.send {
             self.backToMessengerButton?.removeFromSuperview()
-            self.imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.6)
-            self.backButton.frame = CGRectMake(CGRectGetWidth(self.view.frame) * 0.05, 20 + CGRectGetWidth(self.view.frame) * 0.05, CGRectGetWidth(self.view.frame) * 0.12, CGRectGetWidth(self.view.frame) * 0.12)
+            self.imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.6)
+            self.backButton.frame = CGRect(x: self.view.frame.width * 0.05, y: 20 + self.view.frame.width * 0.05, width: self.view.frame.width * 0.12, height: self.view.frame.width * 0.12)
         }
         else {
             
@@ -696,8 +696,8 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                 self.view.addSubview(self.backToMessengerButton!)
             }
             
-            self.imageView.frame = CGRectMake(0, 40, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.6 - 40)
-            self.backButton.frame = CGRectMake(CGRectGetWidth(self.view.frame) * 0.05, 20 + 40 + CGRectGetWidth(self.view.frame) * 0.05, CGRectGetWidth(self.view.frame) * 0.12, CGRectGetWidth(self.view.frame) * 0.12)
+            self.imageView.frame = CGRect(x: 0, y: 40, width: self.view.frame.width, height: self.view.frame.height * 0.6 - 40)
+            self.backButton.frame = CGRect(x: self.view.frame.width * 0.05, y: 20 + 40 + self.view.frame.width * 0.05, width: self.view.frame.width * 0.12, height: self.view.frame.width * 0.12)
             
         }
         

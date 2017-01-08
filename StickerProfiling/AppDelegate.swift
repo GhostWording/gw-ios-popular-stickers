@@ -188,7 +188,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             
             let timeInterval = nonNilDate.timeIntervalSinceNow
             
-            if timeInterval < -240 {
+            if timeInterval < -120 {
                 self.sessionResumesInterstitialAd = self.loadInterstitialAd()
             }
             

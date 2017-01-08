@@ -10,8 +10,8 @@
 
 @interface PopularStickersLocalization : NSObject
 
-+(NSString *)popularStickersLocalizedStringForKey:(NSString *)theKey;
++(nonnull NSString *)popularStickersLocalizedStringForKey:(NSString * _Nonnull)theKey;
 
 @end
 
-FOUNDATION_EXPORT NSString * PopularStickersLocalizedString( NSString *key, NSString *comment);
+FOUNDATION_EXPORT NSString * _Nonnull PopularStickersLocalizedString( NSString * _Nonnull key, NSString * _Nullable comment);

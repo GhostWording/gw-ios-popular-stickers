@@ -345,7 +345,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             UserDefaults.setUserNotificationFrequency( NSNumber(value: Int32( UserNotifications.OneMessageADay.rawValue ) as Int32))
             
             AnalyticsManager.shared().postAction( withType: kGANotificationFrequency, targetType: kGATargetTypeApp, targetId: "OnceADay", targetParameter: nil, actionLocation: kGAUserProfileScreen)
-            
+        
             self.updateSelectedStateOfButtons()
         })
         

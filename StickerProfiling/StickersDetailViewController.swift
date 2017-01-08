@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKMessengerShareKit
 
-class StickersDetailViewController: UIViewController {
+class StickersDetailViewController: RootViewController {
 
     var selectedStickerTitle: String?
     var selectedImagePath: String?
@@ -23,7 +23,7 @@ class StickersDetailViewController: UIViewController {
     
     init(messengerMetadata: NSDictionary?) {
         
-        super.init(nibName: nil, bundle: nil)
+        super.init()
         
         //self.selectedStickerTitle = messengerMetadata?.objectForKey("stickerTitle") as? String
         self.selectedImagePath = messengerMetadata?.object(forKey: "imagePath") as? String
@@ -41,7 +41,7 @@ class StickersDetailViewController: UIViewController {
             }
             
             if let nonNilImageId = messengerMetadata?.object(forKey: "imageName") as? String {
-                AnalyticsManager.shared().postAction(withType: kGAReplyingImageName, targetType: kGATargetTypeImage, targetId: nonNilImageId, targetParameter: nil, actionLocation: kGACategoryListScreen)
+                AnalyticsManager.shared().postAction(withType: kGAReplyingImageName, targetType: kGATargetTypeImage, targetId: nonNilImageId.imageName(), targetParameter: nil, actionLocation: kGACategoryListScreen)
             }
             
         }
@@ -104,6 +104,15 @@ class StickersDetailViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear( animated )
+        
+        if UserDefaults.isMainScreenReached() == false {
+            AnalyticsManager().postAction(withType: kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -219,7 +228,7 @@ class StickersDetailViewController: UIViewController {
         viewModel.selectedImage({
             imageName, selectedImage -> Void in
             
-            AnalyticsManager.shared().postAction( withType: kGAImageSelected, targetType: kGATargetTypeImage, targetId: imageName, targetParameter: nil, actionLocation: kGACategoryListScreen)
+            AnalyticsManager.shared().postAction( withType: kGAImageSelected, targetType: kGATargetTypeImage, targetId: imageName?.imageName(), targetParameter: nil, actionLocation: kGACategoryListScreen)
             
             self.showSingleStickerDetail(imageName, image: selectedImage)
             

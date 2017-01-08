@@ -306,7 +306,7 @@ class RecipientPickerViewModel: NSObject, MAXCollectionViewImageAndTextDataSourc
         for currentDictionary in recipientNameArray {
             
             let cultureApiString = GWLocalizedBundle.currentLocaleAPIString()
-            if currentDictionary.object( forKey: "Culture" ) as! String == cultureApiString {
+            if currentDictionary.object( forKey: "Culture" ) as? String == cultureApiString {
                 recipientDict = currentDictionary
             }
             

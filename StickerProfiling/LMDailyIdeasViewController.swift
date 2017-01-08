@@ -425,7 +425,7 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
             // when index path is not nil we sent it with a text
             AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textIdAtIndexPath( nonNilIndexPath ), targetParameter: nil, actionLocation: kGADailyIdeasScreen)
             
-            AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textIdAtIndexPath( nonNilIndexPath ), targetParameter: nil, actionLocation: kGADailyIdeasScreen)
+            AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeImage, targetId: self.viewModel.getImageName( self.indexPath! ), targetParameter: nil, actionLocation: kGADailyIdeasScreen)
             
             AnalyticsManager.shared().postAction( withType: kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textIdAtIndexPath( nonNilIndexPath ), targetParameter: self.viewModel.getImageName( self.indexPath! ), actionLocation: kGADailyIdeasScreen)
         }
@@ -465,7 +465,7 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
             
             AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textIdAtIndexPath( nonNilIndexPath ), targetParameter: nil, actionLocation: kGADailyIdeasScreen)
             
-            AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textIdAtIndexPath( nonNilIndexPath ), targetParameter: nil, actionLocation: kGADailyIdeasScreen)
+            AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeImage, targetId: self.viewModel.getImageName( self.indexPath! ), targetParameter: nil, actionLocation: kGADailyIdeasScreen)
             
             AnalyticsManager.shared().postAction( withType: kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textIdAtIndexPath( nonNilIndexPath ), targetParameter: self.viewModel.getImageName( self.indexPath! ), actionLocation: kGADailyIdeasScreen)
             
@@ -498,7 +498,7 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.2 ) * Int64( NSEC_PER_SEC )) / Double(NSEC_PER_SEC), execute: {
             self.present(activityVC, animated: true, completion: {
-                progressHud.hide( true )
+                progressHud.hide(animated: true)
                 UserDefaults.setHasSentImageOrText( true )
             })
         });

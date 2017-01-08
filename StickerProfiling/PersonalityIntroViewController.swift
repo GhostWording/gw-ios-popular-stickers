@@ -141,6 +141,8 @@ class PersonalityIntroViewController: UIViewController {
             
             skipButton.buttonTouchUpInside(completion: {
                 
+                AnalyticsManager.shared().postAction(withType: kGASkipPersonalityIntro, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAPersonalityScreen)
+                
                 self.moveToOverviewVC()
                 
             })

@@ -46,7 +46,7 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         }
         
         if UserDefaults.isMainScreenReached() == false {
-            AnalyticsManager().postAction(withType: kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+            AnalyticsManager().postAction(withType: kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
         }
         
     }

@@ -219,7 +219,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             // when index path is not nil we sent it with a text
             AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGASendMessenger, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
             AnalyticsManager.shared().postAction( withType: kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
         }
@@ -256,7 +256,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeText, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: nil, actionLocation: kGAItemDetailScreen)
+            AnalyticsManager.shared().postAction( withType: kGAShareViaIntent, targetType: kGATargetTypeImage, targetId: self.imageName?.imageName(), targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
             AnalyticsManager.shared().postAction( withType: kGALinkEvents, targetType: kGATargetTypeApp, targetId: self.viewModel.textId(nonNilIndexPath.row), targetParameter: self.imageName?.imageName(), actionLocation: kGAItemDetailScreen)
             

@@ -49,7 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             GWExperiment.fetch(withArea: "stickers", withCompletion: {
                 experimentId, variationId, error in
                 
-                AnalyticsManager.shared().postAction(withType: kGAReadVariation, targetType: kGATargetTypeApp, targetId:  String(describing: variationId), targetParameter: nil, actionLocation: nil)
+                if let nonNilVariationId = variationId {
+                    
+                    AnalyticsManager.shared().postAction(withType: kGAReadVariation, targetType: kGATargetTypeApp, targetId:  "\(nonNilVariationId)", targetParameter: nil, actionLocation: nil)
+                    
+                }
                 
             })
         }
@@ -240,7 +244,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
             AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
         }
         
-        interstitialAd.show( fromRootViewController: self.window!.rootViewController )
+        if let tabBarController = self.window?.rootViewController as? UITabBarController {
+            
+            interstitialAd.show(fromRootViewController: tabBarController.findActiveViewController())
+        }
+        else if let viewController = self.window?.rootViewController {
+            
+            interstitialAd.show( fromRootViewController: viewController.topMostController() )
+            
+        }
         
     }
     
@@ -372,6 +384,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         self.updateViewControllerForMessenger(self.window?.rootViewController)
     }
     
+    // MARK: Tab Bar Selection
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        if tabBarController.selectedIndex == 0 {
+            AnalyticsManager.shared().postAction(withType: kGASelectTab, targetType: kGATargetTypeApp, targetId: kGACategories, targetParameter: nil, actionLocation: nil)
+        }
+        else if tabBarController.selectedIndex == 1 {
+            AnalyticsManager.shared().postAction(withType: kGASelectTab, targetType: kGATargetTypeApp, targetId: kGADailyIdeas, targetParameter: nil, actionLocation: nil)
+        }
+        
+    }
     
     // MARK: Core Data Launch
     

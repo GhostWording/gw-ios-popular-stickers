@@ -333,7 +333,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
                                 if AppFlow.shouldAnswerWithSameIntention(intentionId) == true {
                                     
                                     let stickersDetail = StickersDetailViewController(messengerMetadata: dict)
-                                    self.window?.rootViewController = StickersOverviewController(pushedVC: stickersDetail)
+                                    self.window?.rootViewController = StickersOverviewController(vc: stickersDetail)
                                     
                                     
                                 }
@@ -344,7 +344,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
                                     mutableDict.setObject(PopularStickersLocalizedString("<ThankYouIntentionLabel>", ""), forKey: "stickerTitle" as NSCopying)
                                     
                                     let stickersDetail = StickersDetailViewController(messengerMetadata: mutableDict)
-                                    self.window?.rootViewController = StickersOverviewController(pushedVC: stickersDetail)
+                                    self.window?.rootViewController = StickersOverviewController(vc: stickersDetail)
                                     //self.window?.rootViewController?.presentViewController(stickersDetail, animated: false, completion: nil)
                                     
                                 }
@@ -359,7 +359,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
                             else if let _ = dict.object(forKey: "imagePath") as? String {
                                 
                                 let stickersDetail = StickersDetailViewController(messengerMetadata: dict)
-                                self.window?.rootViewController = StickersOverviewController(pushedVC: stickersDetail)
+                                self.window?.rootViewController = StickersOverviewController(vc: stickersDetail)
                                 //self.window?.rootViewController?.presentViewController(stickersDetail, animated: false, completion: nil)
                                 
                             }

@@ -11,42 +11,67 @@ import MBProgressHUD
 import FBSDKMessengerShareKit
 import FBAudienceNetwork
 
-class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
+class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
     
     let viewModel = StickersOverviewViewModel()
     var collectionView: MAXCollectionViewImageAndText!
     var backToMessengerButton: MAXBlockButton?
-    
-    var viewControllerToShow: UIViewController?
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        
-        viewControllerToShow = nil
-    }
-    
-    init(pushedVC: UIViewController?) {
-        
-        super.init(nibName: nil, bundle: nil)
-        
-        viewControllerToShow = pushedVC
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    let showTabBarButton = MAXFadeBlockButton()
     
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        if let nonNilViewControllerToShow = self.viewControllerToShow {
-            self.present(nonNilViewControllerToShow, animated: false, completion: nil)
-            self.viewControllerToShow = nil
-        }
+        super.viewDidAppear( animated )
         
         if UserDefaults.isMainScreenReached() == false {
             AnalyticsManager().postAction(withType: kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
+            UserDefaults.setIsMainScreenReached( true )
+        }
+        
+        self.developerModeUpdate()
+    }
+    
+    func developerModeUpdate() {
+        
+        if UserDefaults.developerModeEnabled() == true {
+            showTabBarButton.frame = CGRect(x: self.view.frame.width - 64 * 1.5 * 2, y: 20, width: 64, height: 44)
+            self.updateTabBarShowButtonTitle()
+            
+            showTabBarButton.buttonTouchUpCompletionBlock = {
+                self.tabBarController?.tabBar.isHidden = !(self.tabBarController?.tabBar.isHidden == true)
+                self.updateTabBarShowButtonTitle()
+            }
+            if showTabBarButton.superview != self.collectionView?.headerView {
+                self.collectionView?.headerView.addSubview( showTabBarButton )
+            }
+            
+            self.collectionView?.headerView.removeFromSuperview()
+            
+        }
+        else {
+            
+            self.showTabBarButton.removeFromSuperview()
+            self.tabBarController?.tabBar.isHidden = false
+            
+        }
+        
+        if UserDefaults.developerModeEnabled() == true && self.collectionView != nil {
+            self.collectionView?.isHeaderPartOfCollectionView = true
+        }
+        else if self.collectionView != nil {
+            self.collectionView?.isHeaderPartOfCollectionView = false
+        }
+        
+        self.setNeedsStatusBarAppearanceUpdate()
+        
+    }
+    
+    func updateTabBarShowButtonTitle() {
+        
+        if self.tabBarController?.tabBar.isHidden == true {
+            showTabBarButton.setTitle("Hide", for: UIControlState())
+        }
+        else {
+            showTabBarButton.setTitle("Show", for: UIControlState())
         }
         
     }
@@ -155,6 +180,30 @@ class StickersOverviewController: UIViewController, FBInterstitialAdDelegate {
         
     }
     
+    override func forceReload() {
+        
+        viewModel.downloadIntentions({
+            error -> Void in
+            
+            self.viewModel.downloadThemes({
+                error -> Void in
+                
+                self.collectionView?.collectionView.reloadData()
+                
+            })
+            
+        })
+        
+    }
+    
+    override var prefersStatusBarHidden : Bool {
+        
+        if UserDefaults.developerModeEnabled() == true {
+            return true
+        }
+        
+        return false
+    }
     
     // MARK: Messenger Integration
     

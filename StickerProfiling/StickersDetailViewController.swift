@@ -111,6 +111,7 @@ class StickersDetailViewController: RootViewController {
         
         if UserDefaults.isMainScreenReached() == false {
             AnalyticsManager().postAction(withType: kGAMainScreenReached, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
+            UserDefaults.setIsMainScreenReached( true )
         }
         
     }

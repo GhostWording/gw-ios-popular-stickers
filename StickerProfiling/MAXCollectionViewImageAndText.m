@@ -8,6 +8,7 @@
 
 #import "MAXCollectionViewImageAndText.h"
 #import "MAXCollectionViewCellImageAndText.h"
+#import "MAXImageAndTextHeaderViewCell.h"
 
 @interface MAXCollectionViewImageAndText() <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate> {
     
@@ -54,7 +55,34 @@
         collectionViewFrame = CGRectMake(0, CGRectGetHeight(_headerView.frame), CGRectGetWidth(frame), CGRectGetHeight(frame) - 64);
     }
     
-    _collectionView.frame = CGRectMake(0, CGRectGetHeight(_headerView.frame), CGRectGetWidth(frame), CGRectGetHeight(frame) - CGRectGetHeight(_headerView.frame));
+    if (_isHeaderPartOfCollectionView == true) {
+        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    }
+    else if (_isHeaderPartOfCollectionView == false) {
+        self.collectionView.frame = CGRectMake(CGRectGetMinX(self.collectionView.frame), CGRectGetMinY(self.collectionView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - self.headerView.frame.size.height);
+    }
+    
+    
+    [self.collectionView reloadData];
+}
+
+-(void)setIsHeaderPartOfCollectionView:(BOOL)isHeaderPartOfCollectionView {
+    
+    
+    if (isHeaderPartOfCollectionView == true) {
+        self.collectionView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    }
+    else if (isHeaderPartOfCollectionView == false) {
+        self.collectionView.frame = CGRectMake(CGRectGetMinX(self.collectionView.frame), self.headerView.frame.size.height, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - self.headerView.frame.size.height);
+        if (self.headerView.superview != self && self.headerView != nil) {
+            [self.headerView removeFromSuperview];
+            [self addSubview: self.headerView];
+        }
+    }
+    
+    _isHeaderPartOfCollectionView = isHeaderPartOfCollectionView;
+    
+    [self.collectionView reloadData];
     
 }
 
@@ -79,13 +107,14 @@
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = [UIColor whiteColor];
     [_collectionView registerClass:[MAXCollectionViewCellImageAndText class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [_collectionView registerClass:[MAXImageAndTextHeaderViewCell class] forSupplementaryViewOfKind: UICollectionElementKindSectionHeader withReuseIdentifier:@"headerIdentifier"];
     
     [self addSubview:_collectionView];
     
 }
 
-#pragma mark - Collection View Delegate 
-    
+#pragma mark - Collection View Delegate
+
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -106,6 +135,16 @@
 }
 
 
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    
+    if (self.isHeaderPartOfCollectionView == false) {
+        
+        return CGRectZero.size;
+    }
+    
+    return self.headerView.frame.size;
+}
+
 #pragma mark - Collection view data source
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -120,7 +159,8 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     if ([self.datasource respondsToSelector:@selector(MAXCollectionViewImageAndTextNumItemsInSection:)] == YES) {
-        return [self.datasource MAXCollectionViewImageAndTextNumItemsInSection:section];
+        
+        return [self.datasource MAXCollectionViewImageAndTextNumItemsInSection: section];
     }
     
     return 0;
@@ -165,9 +205,23 @@
     return cell;
 }
 
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([kind isEqualToString: UICollectionElementKindSectionHeader] == YES) {
+        
+        MAXImageAndTextHeaderViewCell *header = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier: @"headerIdentifier" forIndexPath: indexPath];
+        if (self.headerView != nil) {
+            header.headerView = self.headerView;
+        }
+        
+        return header;
+    }
+    
+    return nil;
+}
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"item in section: %d at index: %d", (int)indexPath.section, (int)indexPath.row);
     
     if ([self.datasource respondsToSelector:@selector(MAXSelectedItemInSection:atIndex:)] == YES) {
         

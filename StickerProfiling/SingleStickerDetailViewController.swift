@@ -39,6 +39,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.view.backgroundColor = UIColor.white
         
         backToMessengerButton = MAXBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
@@ -73,11 +74,11 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         bottomButton.layer.shadowOffset = CGSize(width: 2, height: 2)
         bottomButton.layer.cornerRadius = 5.0
 
-        bottomButton.buttonTouchUpInside( completion: {
+        bottomButton.buttonTouchUpInside( completion: { [weak self] in
          
-            self.indexPath = nil
-            self.imageToSend = self.imageToShow
-            self.chooseSendMethod()
+            self?.indexPath = nil
+            self?.imageToSend = self?.imageToShow
+            self?.chooseSendMethod()
             
         })
         
@@ -106,11 +107,11 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         backButton.layer.backgroundColor = UIColor.c_blue().cgColor
         backButton.alpha = CGFloat(backButton.fadeAlphaValue)
         
-        backButton.buttonTouchUpInside(completion: {
+        backButton.buttonTouchUpInside(completion: { [weak self] in
             
             AnalyticsManager.shared().postAction( withType: kGABackFromImage, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            self.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: nil)
         })
         
         self.view.addSubview(backButton)
@@ -126,7 +127,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         addTextButton.setTitleColor(UIColor.white, for: UIControlState())
         addTextButton.titleLabel?.font = UIFont.c_robotoMedium(withSize: 31)
         
-        addTextButton.buttonTouchUpInside(completion: {
+        addTextButton.buttonTouchUpInside(completion: { [weak self] in
             
             let recipientPicker = RecipientPickerViewController(area: "stickers")
             
@@ -139,9 +140,9 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                 filter.senderGender = UserDefaults.userGender()
                 filter.intentionId = intention.intentionId
                 
-                self.viewModel.textFilter = filter
-                self.viewModel.reloadTextsAsIntentions()
-                self.tableView.reloadSections(IndexSet.init(integer: 0), with: UITableViewRowAnimation.fade)
+                self?.viewModel.textFilter = filter
+                self?.viewModel.reloadTextsAsIntentions()
+                self?.tableView.reloadSections(IndexSet.init(integer: 0), with: UITableViewRowAnimation.fade)
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     
@@ -149,23 +150,23 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                         isComplete in
                         
                         if isComplete == true {
-                            self.tableView.setContentOffset( CGPoint.zero, animated: true)
+                            self?.tableView.setContentOffset( CGPoint.zero, animated: true)
                         }
                         
                 })
                 
-                if self.viewModel.numberOfTexts() == 0 {
-                    self.animateButtonDownAndInfoOut()
+                if self?.viewModel.numberOfTexts() == 0 {
+                    self?.animateButtonDownAndInfoOut()
                 }
                 else {
-                    self.animateButtonUpAndInfoIn()
+                    self?.animateButtonUpAndInfoIn()
                 }
                 
                 
                 
             }
             
-            self.present( recipientPicker, animated: true, completion: nil)
+            self?.present( recipientPicker, animated: true, completion: nil)
             
         })
         
@@ -173,22 +174,24 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         
         viewModel.reloadTextsAsIntentions()
         
+        weak var wSelf = self
+        
         // if the image has been viewed for an intention we do not want to show it again
         if UserDefaults.hasViewedImage(withId: self.imageName) == false || self.viewModel.intentionId == nil {
             
             viewModel.downloadPopularTexts(imageName, completion: {
                 error -> Void in
                 
-                self.tableView.reloadData()
-                if self.viewModel.textsAndRanking?.count == 0 {
+                wSelf?.tableView.reloadData()
+                if wSelf?.viewModel.textsAndRanking?.count == 0 {
                     
-                    self.animateButtonDownAndInfoOut()
+                    wSelf?.animateButtonDownAndInfoOut()
                     
                 }
                 
             })
             
-            UserDefaults.setHasViewedImageWithId(self.imageName)
+            UserDefaults.setHasViewedImageWithId(wSelf?.imageName)
             
         }
         
@@ -203,6 +206,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         self.tableView.reloadData()
         
         self.addOrRemoveBackToMessengerButton()
+ 
     }
 
     override func didReceiveMemoryWarning() {
@@ -269,8 +273,8 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         let progressHud = MBProgressHUD.showAdded(to: self.view, animated: true)
         progressHud.mode = MBProgressHUDMode.indeterminate
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.2 ) * Int64( NSEC_PER_SEC )) / Double(NSEC_PER_SEC), execute: {
-            self.present(activityVC, animated: true, completion: {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64( 0.2 ) * Int64( NSEC_PER_SEC )) / Double(NSEC_PER_SEC), execute: { [weak self] in
+            self?.present(activityVC, animated: true, completion: {
                 progressHud.hide( animated: true )
                 UserDefaults.setHasSentImageOrText( true )
             })
@@ -295,8 +299,8 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             let backgroundButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
             backgroundButton.backgroundColor = UIColor.clear
-            backgroundButton.buttonTouchUpInside(completion: {
-                self.fadeOutOverlayView(nil)
+            backgroundButton.buttonTouchUpInside(completion: { [weak self] in
+                self?.fadeOutOverlayView(nil)
             })
             
             overlayView?.addSubview( backgroundButton )
@@ -418,40 +422,40 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             cancelButton.setTitleColor(UIColor.white, for: UIControlState())
             
             
-            cancelButton.buttonTouchUpInside(completion: {
+            cancelButton.buttonTouchUpInside(completion: { [weak self] in
                 
-                self.fadeOutOverlayView(nil)
+                self?.fadeOutOverlayView(nil)
                 
             })
             
             bottomBlueFooter.addSubview( cancelButton )
             
             
-            messengerButtonContainerRow.buttonTouchUpInside(completion: {
+            messengerButtonContainerRow.buttonTouchUpInside(completion: { [weak self] in
                 
-                if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch != nil {
-                    if self.rememberMethodSwitch!.isOn == true {
+                if UserDefaults.hasSentImageOrText() == true && self?.rememberMethodSwitch != nil {
+                    if self?.rememberMethodSwitch!.isOn == true {
                         UserDefaults.setSendMethodForMessage( MessageSendMethod.messenger )
                     }
                 }
                 
-                self.fadeOutOverlayView(nil)
+                self?.fadeOutOverlayView(nil)
                 
-                self.sendWithMessenger()
+                self?.sendWithMessenger()
                 
             })
             
-            otherButtonContainerRow.buttonTouchUpInside(completion: {
+            otherButtonContainerRow.buttonTouchUpInside(completion: { [weak self] in
                 
-                if UserDefaults.hasSentImageOrText() == true && self.rememberMethodSwitch != nil {
-                    if self.rememberMethodSwitch!.isOn == true {
+                if UserDefaults.hasSentImageOrText() == true && self?.rememberMethodSwitch != nil {
+                    if self?.rememberMethodSwitch!.isOn == true {
                         UserDefaults.setSendMethodForMessage(  MessageSendMethod.OS )
                     }
                 }
                 
-                self.fadeOutOverlayView(nil)
+                self?.fadeOutOverlayView(nil)
                 
-                self.sendWithOS()
+                self?.sendWithOS()
                 
             })
             
@@ -472,12 +476,13 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     
     
     func fadeOutOverlayView(_ completion: (() -> Void)?) {
+        weak var wSelf = self
         UIView.animate(withDuration: 0.1, animations: {
-            self.overlayView!.alpha = 0.0
+            wSelf?.overlayView!.alpha = 0.0
             }, completion: {
                 finished -> Void in
                 
-                self.overlayView!.removeFromSuperview()
+                wSelf?.overlayView!.removeFromSuperview()
                 
         })
     }
@@ -485,12 +490,12 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     // MARK: Animate button and info view
     
     func animateButtonDownAndInfoOut() {
-        
+        weak var wSelf = self
         UIView.animate(withDuration: 0.3, animations: {
             
-            self.infoLabel.alpha = 0.0
-            self.bottomButton.c_setOriginY( Float(self.view.frame.height - self.backButton.frame.size.height - 20))
-            self.tableView.separatorColor = UIColor.clear
+            wSelf?.infoLabel.alpha = 0.0
+            wSelf?.bottomButton.c_setOriginY( Float(self.view.frame.height - self.backButton.frame.size.height - 20))
+            wSelf?.tableView.separatorColor = UIColor.clear
             
         })
         
@@ -499,20 +504,20 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     }
     
     func animateButtonUpAndInfoIn() {
-        
+        weak var wSelf = self
         UIView.animate(withDuration: 0.3, animations: {
             
             if self.backToMessengerButton?.superview == nil {
                 
-                self.bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: self.imageView.frame.height - 50 - self.imageView.frame.height * 0.05, width: 180, height: 50)
+                wSelf?.bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: self.imageView.frame.height - 50 - self.imageView.frame.height * 0.05, width: 180, height: 50)
             }
             else {
                 
-                self.bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: self.imageView.frame.height - 10 - self.imageView.frame.height * 0.05, width: 180, height: 50)
+                wSelf?.bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: self.imageView.frame.height - 10 - self.imageView.frame.height * 0.05, width: 180, height: 50)
             }
             
-            self.infoLabel.alpha = 1.0
-            self.tableView.separatorColor = UIColor.lightGray
+            wSelf?.infoLabel.alpha = 1.0
+            wSelf?.tableView.separatorColor = UIColor.lightGray
         
         })
         
@@ -701,6 +706,10 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
         }
         
+    }
+    
+    deinit {
+        print("deinit sticker detail")
     }
 
 }

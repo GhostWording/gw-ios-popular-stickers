@@ -32,16 +32,18 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
     
     func developerModeUpdate() {
         
+        weak var wSelf = self
+        
         if UserDefaults.developerModeEnabled() == true {
             showTabBarButton.frame = CGRect(x: self.view.frame.width - 64 * 1.5 * 2, y: 20, width: 64, height: 44)
             self.updateTabBarShowButtonTitle()
             
             showTabBarButton.buttonTouchUpCompletionBlock = {
-                self.tabBarController?.tabBar.isHidden = !(self.tabBarController?.tabBar.isHidden == true)
-                self.updateTabBarShowButtonTitle()
+                wSelf?.tabBarController?.tabBar.isHidden = !(self.tabBarController?.tabBar.isHidden == true)
+                wSelf?.updateTabBarShowButtonTitle()
             }
             if showTabBarButton.superview != self.collectionView?.headerView {
-                self.collectionView?.headerView.addSubview( showTabBarButton )
+                wSelf?.collectionView?.headerView.addSubview( showTabBarButton )
             }
             
             self.collectionView?.headerView.removeFromSuperview()
@@ -78,6 +80,8 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        weak var wSelf = self
         
         backToMessengerButton = MAXBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBanner()
@@ -117,7 +121,7 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
             
             AnalyticsManager.shared().postAction( withType: kGAOptionMenu, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
             
-            self.showSettingsView()
+            wSelf?.showSettingsView()
         })
         
         collectionView.headerView.addSubview(settingsButton)
@@ -136,10 +140,10 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         viewModel.downloadIntentions({
             error -> Void in
             
-            self.viewModel.downloadThemes({
+            wSelf?.viewModel.downloadThemes({
                 error -> Void in
                 
-                self.collectionView.collectionView.reloadData()
+                wSelf?.collectionView.collectionView.reloadData()
                 progressHud.hide( animated: true )
                 
             })
@@ -149,14 +153,14 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         viewModel.reloadCellAtIndexPath({
             indexPath -> Void in
             
-            self.collectionView.collectionView.reloadItems(at: [indexPath])
+            wSelf?.collectionView.collectionView.reloadItems(at: [indexPath])
             
         })
         
         viewModel.selectedSticker({
             label, imagePath, intentionId -> Void in
             
-            self.showStickerDetailView(label, imagePath: imagePath, intentionId: intentionId)
+            wSelf?.showStickerDetailView(label, imagePath: imagePath, intentionId: intentionId)
             
         })
         
@@ -170,10 +174,12 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         viewModel.reloadData()
         collectionView.collectionView.reloadData()
         
+        weak var wSelf = self
+        
         viewModel.downloadIntentions({
             error -> Void in
             
-            self.collectionView.collectionView.reloadData()
+            wSelf?.collectionView.collectionView.reloadData()
             
             
         })
@@ -182,13 +188,15 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
     
     override func forceReload() {
         
+        weak var wSelf = self
+        
         viewModel.downloadIntentions({
             error -> Void in
             
             self.viewModel.downloadThemes({
                 error -> Void in
                 
-                self.collectionView?.collectionView.reloadData()
+                wSelf?.collectionView?.collectionView.reloadData()
                 
             })
             
@@ -245,6 +253,8 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         stickerDetailVC.selectedStickerTitle = label
         stickerDetailVC.selectedImagePath = imagePath
         stickerDetailVC.selectedIntentionId = intentionId
+        
+        let viewController = ViewController()
         
         self.present(stickerDetailVC, animated: true, completion: nil)
         

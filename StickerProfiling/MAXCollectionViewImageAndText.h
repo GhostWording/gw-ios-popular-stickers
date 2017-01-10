@@ -51,7 +51,7 @@
 /**
  @bastract used as the simplified datasource of the collection view instead of exposing the complex datasource of the collection view
  */
-@property (nonatomic, strong) id <MAXCollectionViewImageAndTextDataSource> datasource;
+@property (nonatomic, weak) id <MAXCollectionViewImageAndTextDataSource> datasource;
 
 /**
  @abstract If you want the header to be part of the collection view or always be at the top.

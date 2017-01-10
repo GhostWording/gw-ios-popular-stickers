@@ -64,8 +64,8 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         backButton.tintColor = UIColor.white
         backButton.imageEdgeInsets = UIEdgeInsetsMake(44 * 0.3, 44 * 0.3, 44 * 0.3, 44 * 0.8)
         
-        backButton.buttonTouchUpInside(completion: {
-            self.dismiss(animated: true, completion: nil)
+        backButton.buttonTouchUpInside(completion: { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         })
         
         headerView.addSubview(backButton)
@@ -114,7 +114,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         var switchTapCounter = 0
         
-        notificationSwitch.switchValueChanged(completion: {
+        notificationSwitch.switchValueChanged(completion: { [weak self] in
             
             switchTapCounter += 1
             
@@ -142,7 +142,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                     developerModeString = "Developer Mode Disabled"
                 }
                 
-                let developerModeLabel = UILabel(frame: CGRect(x: self.view.frame.width * 0.1, y: self.view.frame.height - self.view.frame.width * 0.4, width: self.view.frame.width * 0.8, height: self.view.frame.height * 0.2))
+                let developerModeLabel = UILabel(frame: CGRect(x: self!.view.frame.width * 0.1, y: self!.view.frame.height - self!.view.frame.width * 0.4, width: self!.view.frame.width * 0.8, height: self!.view.frame.height * 0.2))
                 developerModeLabel.textAlignment = .center
                 developerModeLabel.layer.cornerRadius = 5
                 developerModeLabel.layer.backgroundColor = UIColor.darkGray.cgColor
@@ -150,8 +150,8 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                 developerModeLabel.font = UIFont.c_robotoMedium( withSize: 14.0 )
                 developerModeLabel.text = developerModeString
                 developerModeLabel.sizeToFit()
-                developerModeLabel.frame = CGRect(x: self.view.frame.midX - developerModeLabel.frame.width * 0.7, y: self.view.frame.height * 0.6 , width: developerModeLabel.frame.width * 1.4, height: developerModeLabel.frame.height * 1.7)
-                self.view.addSubview( developerModeLabel )
+                developerModeLabel.frame = CGRect(x: self!.view.frame.midX - developerModeLabel.frame.width * 0.7, y: self!.view.frame.height * 0.6 , width: developerModeLabel.frame.width * 1.4, height: developerModeLabel.frame.height * 1.7)
+                self?.view.addSubview( developerModeLabel )
                 
                 UIView.animate(withDuration: 2.5, animations: {
                     
@@ -199,10 +199,10 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         arrowImageView.transform = CGAffineTransform( rotationAngle: CGFloat(M_PI) )
         personalityTypeButton.addSubview( arrowImageView )
         
-        personalityTypeButton.buttonTouchUpInside(completion: {
+        personalityTypeButton.buttonTouchUpInside(completion: { [weak self] in
             
             let personalityPicker = PersonalityIntroViewController(type: PersonalityViewControllerType.settings)
-            self.present( personalityPicker, animated: true, completion: nil)
+            self?.present( personalityPicker, animated: true, completion: nil)
             
         })
         
@@ -261,7 +261,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         // MARK: Button touches and User Defaults Update
         
-        englishButton.buttonTouchUpInside(completion: {
+        englishButton.buttonTouchUpInside(completion: { [weak self] in
             
             if GWLocalizedBundle.currentLocaleAPIString() != englishCultureString {
                 
@@ -276,18 +276,18 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                     
                 })
                 
-                if let presentedVC = self.presentingViewController as? StickersOverviewController {
+                if let presentedVC = self?.presentingViewController as? StickersOverviewController {
                     
                     presentedVC.reloadData()
                     
                 }
             }
             
-            self.updateSelectedStateOfButtons()
-            self.updateUIWithNewLanguage()
+            self?.updateSelectedStateOfButtons()
+            self?.updateUIWithNewLanguage()
         })
         
-        frenchButton.buttonTouchUpInside(completion: {
+        frenchButton.buttonTouchUpInside(completion: { [weak self] in
             
             if GWLocalizedBundle.currentLocaleAPIString() != frenchCultureString {
                 
@@ -302,18 +302,18 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                     
                 })
                 
-                if let presentedVC = self.presentingViewController as? StickersOverviewController {
+                if let presentedVC = self?.presentingViewController as? StickersOverviewController {
                     
                     presentedVC.reloadData()
                     
                 }
             }
             
-            self.updateSelectedStateOfButtons()
-            self.updateUIWithNewLanguage()
+            self?.updateSelectedStateOfButtons()
+            self?.updateUIWithNewLanguage()
         })
         
-        spanishButton.buttonTouchUpInside(completion: {
+        spanishButton.buttonTouchUpInside(completion: { [weak self] in
             
             if GWLocalizedBundle.currentLocaleAPIString() != spanishCultureString {
                 
@@ -328,114 +328,114 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
                     
                 })
                 
-                if let presentedVC = self.presentingViewController as? StickersOverviewController {
+                if let presentedVC = self?.presentingViewController as? StickersOverviewController {
                     
                     presentedVC.reloadData()
                     
                 }
             }
             
-            self.updateSelectedStateOfButtons()
-            self.updateUIWithNewLanguage()
+            self?.updateSelectedStateOfButtons()
+            self?.updateUIWithNewLanguage()
         })
         
         
-        notifOnceADayButton.buttonTouchUpInside(completion: {
+        notifOnceADayButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setUserNotificationFrequency( NSNumber(value: Int32( UserNotifications.OneMessageADay.rawValue ) as Int32))
             
             AnalyticsManager.shared().postAction( withType: kGANotificationFrequency, targetType: kGATargetTypeApp, targetId: "OnceADay", targetParameter: nil, actionLocation: kGAUserProfileScreen)
         
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
-        notifEveryOtherDayButton.buttonTouchUpInside(completion: {
+        notifEveryOtherDayButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setUserNotificationFrequency( NSNumber(value: Int32( UserNotifications.OneMessageEveryOtherDay.rawValue ) as Int32))
             
             AnalyticsManager.shared().postAction( withType: kGANotificationFrequency, targetType: kGATargetTypeApp, targetId: "EveryOtherDay", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
-        notifOnceAWeekButton.buttonTouchUpInside(completion: {
+        notifOnceAWeekButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setUserNotificationFrequency( NSNumber(value: Int32( UserNotifications.OneMessageAWeek.rawValue ) as Int32))
             
             AnalyticsManager.shared().postAction( withType: kGANotificationFrequency, targetType: kGATargetTypeApp, targetId: "OnceAWeek", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
         
-        messengerSendMethodButton.buttonTouchUpInside(completion: {
+        messengerSendMethodButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setSendMethodForMessage( MessageSendMethod.messenger )
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
             
         })
         
-        otherSendMethodButton.buttonTouchUpInside(completion: {
+        otherSendMethodButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setSendMethodForMessage( MessageSendMethod.OS )
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
             
         })
         
         
-        maleButton.buttonTouchUpInside(completion: {
+        maleButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setUserGender( maleGender )
             
             AnalyticsManager.shared().postAction( withType: kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
-        femaleButton.buttonTouchUpInside(completion: {
+        femaleButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setUserGender( femaleGender )
             
             AnalyticsManager.shared().postAction( withType: kGAGender, targetType: kGATargetTypeApp, targetId: UserDefaults.userGender(), targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
         
-        liveAloneButton.buttonTouchUpInside(completion: {
+        liveAloneButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setUserLivingSituation( NSNumber(value: Int32( UserLivingSituation.LiveAlone.rawValue ) as Int32))
             
             AnalyticsManager.shared().postAction( withType: kGAConjugalSituation, targetType: kGATargetTypeApp, targetId: "Single", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
-        liveWithSomeoneButton.buttonTouchUpInside(completion: {
+        liveWithSomeoneButton.buttonTouchUpInside(completion: { [weak self] in
             
             UserDefaults.setUserLivingSituation( NSNumber(value: Int32( UserLivingSituation.LiveWithSomeone.rawValue ) as Int32))
             
             AnalyticsManager.shared().postAction( withType: kGAConjugalSituation, targetType: kGATargetTypeApp, targetId: "InACouple", targetParameter: nil, actionLocation: kGAUserProfileScreen)
             
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
         
-        under17Button.buttonTouchUpInside(completion: {
+        under17Button.buttonTouchUpInside(completion: { [weak self] in
             UserDefaults.setUserAge( NSNumber(value: Int32( UserAge.LessThan17.rawValue ) as Int32))
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
-        between18And35Button.buttonTouchUpInside(completion: {
+        between18And35Button.buttonTouchUpInside(completion: { [weak self] in
             UserDefaults.setUserAge( NSNumber(value: Int32( UserAge.Between18And39.rawValue ) as Int32))
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
-        between35And65Button.buttonTouchUpInside(completion: {
+        between35And65Button.buttonTouchUpInside(completion: { [weak self] in
             UserDefaults.setUserAge( NSNumber(value: Int32( UserAge.Between40And64.rawValue ) as Int32))
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
-        over65Button.buttonTouchUpInside(completion: {
+        over65Button.buttonTouchUpInside(completion: { [weak self] in
             UserDefaults.setUserAge( NSNumber(value: Int32( UserAge.Over65.rawValue ) as Int32))
-            self.updateSelectedStateOfButtons()
+            self?.updateSelectedStateOfButtons()
         })
         
     }
@@ -618,5 +618,8 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         return button
     }
     
+    deinit {
+        print("deinit Settings View Controller")
+    }
     
 }

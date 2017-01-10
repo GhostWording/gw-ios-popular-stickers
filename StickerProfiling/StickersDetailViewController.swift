@@ -17,7 +17,7 @@ class StickersDetailViewController: RootViewController {
     var collectionView: MAXCollectionViewImageAndText!
     var backToMessengerButton: MAXBlockButton?
     var stickersTitleLabel = UILabel()
-
+    weak var wSelf : StickersDetailViewController?
     
     let viewModel = StickersDetailViewModel()
     
@@ -62,15 +62,15 @@ class StickersDetailViewController: RootViewController {
                 GWDataManager().downloadIntentions(withArea: "stickers", withCulture: GWLocalizedBundle.currentLocaleAPIString(), withCompletion: {
                     intentions, error in
                     
-                    DispatchQueue.main.async(execute: {
+                    DispatchQueue.main.async(execute: { [weak self] in
                         
                         if error == nil {
                             let fetchedIntentions = GWDataManager().fetchIntentionsOnMainThread(withAreaName: "stickers", culture: GWLocalizedBundle.currentLocaleAPIString(), withIntentionIds: [ nonNilIntentionId ] )
-                            self.stickersTitleLabel.text = fetchedIntentions.first?.label
-                            self.selectedStickerTitle = fetchedIntentions.first?.label
-                            self.selectedImagePath = fetchedIntentions.first?.imagePath
-                            self.viewModel.imagePath = fetchedIntentions.first?.imagePath
-                            self.collectionView.collectionView.reloadData()
+                            self?.stickersTitleLabel.text = fetchedIntentions.first?.label
+                            self?.selectedStickerTitle = fetchedIntentions.first?.label
+                            self?.selectedImagePath = fetchedIntentions.first?.imagePath
+                            self?.viewModel.imagePath = fetchedIntentions.first?.imagePath
+                            self?.collectionView.collectionView.reloadData()
                         }
                         
                     })
@@ -85,12 +85,12 @@ class StickersDetailViewController: RootViewController {
             GWDataManager().downloadImageThemes(withPath: "http://gw-static-apis.azurewebsites.net/data/stickers/moodthemes.json", withCompletion: {
                 themeDict, error in
                 
-                DispatchQueue.main.async(execute: {
+                DispatchQueue.main.async(execute: { [weak self] in
                     
                     if let nonNilThemes = themeDict?["Themes"] as? [NSDictionary] {
                         print("non nil themes \(nonNilThemes) and image path \(nonNilImagePath)")
-                        self.stickersTitleLabel.text = self.viewModel.nameForTheme(nonNilThemes, themePath: nonNilImagePath)
-                        self.selectedStickerTitle = self.viewModel.nameForTheme(nonNilThemes, themePath: nonNilImagePath)
+                        self?.stickersTitleLabel.text = self?.viewModel.nameForTheme(nonNilThemes, themePath: nonNilImagePath)
+                        self?.selectedStickerTitle = self?.viewModel.nameForTheme(nonNilThemes, themePath: nonNilImagePath)
                         
                     }
                     
@@ -161,13 +161,13 @@ class StickersDetailViewController: RootViewController {
         backButton.tintColor = UIColor.white
         backButton.imageEdgeInsets = UIEdgeInsetsMake(44 * 0.3, 44 * 0.3, 44 * 0.3, 44 * 0.8)
         
-        backButton.buttonTouchUpInside(completion: {
+        backButton.buttonTouchUpInside(completion: { [weak self] in
             
             AnalyticsManager.shared().postAction( withType: kGABackFromThemes, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGACategoryListScreen)
             
             UserDefaults.incrementNumBackToMainMenu()
             
-            self.dismiss(animated: true, completion: {
+            self?.dismiss(animated: true, completion: {
                 
                 if (UserDefaults.numBackToMainMenu() == 4 || UserDefaults.numBackToMainMenu() == 10 || UserDefaults.numBackToMainMenu() == 20) && UserDefaults.wantsNotification() == false {
                     
@@ -210,19 +210,20 @@ class StickersDetailViewController: RootViewController {
         
         self.view.addSubview(collectionView)
         
+        weak var wSelf = self
         
         viewModel.downloadImageIds({
             error -> Void in
             
 
-            self.collectionView.collectionView.reloadData()
+            wSelf?.collectionView.collectionView.reloadData()
             
         })
         
         viewModel.reloadIndexPath({
             indexPath -> Void in
 
-            self.collectionView.collectionView.reloadItems(at: [indexPath])
+            wSelf?.collectionView.collectionView.reloadItems(at: [indexPath])
             
         })
         
@@ -231,7 +232,7 @@ class StickersDetailViewController: RootViewController {
             
             AnalyticsManager.shared().postAction( withType: kGAImageSelected, targetType: kGATargetTypeImage, targetId: imageName?.imageName(), targetParameter: nil, actionLocation: kGACategoryListScreen)
             
-            self.showSingleStickerDetail(imageName, image: selectedImage)
+            wSelf?.showSingleStickerDetail(imageName, image: selectedImage)
             
         })
         
@@ -277,6 +278,10 @@ class StickersDetailViewController: RootViewController {
         
         self.present(singleStickerVC, animated: true, completion: nil)
         
+    }
+    
+    deinit {
+        print("deinit sticker category list")
     }
     
 }

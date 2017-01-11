@@ -58,4 +58,6 @@
  */
 @property (nonatomic) BOOL isHeaderPartOfCollectionView;
 
+@property (nonatomic, copy) void (^reachedBottomBlock)(void);
+
 @end

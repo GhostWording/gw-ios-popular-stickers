@@ -10,7 +10,7 @@
 #import "MAXCollectionViewCellImageAndText.h"
 #import "MAXImageAndTextHeaderViewCell.h"
 
-@interface MAXCollectionViewImageAndText() <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate> {
+@interface MAXCollectionViewImageAndText() <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate> {
     
     
     
@@ -230,6 +230,15 @@
     
 }
 
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
+    if (bottomEdge >= scrollView.contentSize.height) {
+        if (self.reachedBottomBlock != nil) {
+            self.reachedBottomBlock();
+        }
+    }
+    
+}
 
 @end

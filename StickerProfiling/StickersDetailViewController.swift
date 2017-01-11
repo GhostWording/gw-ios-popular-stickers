@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKMessengerShareKit
 
-class StickersDetailViewController: RootViewController {
+class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
 
     var selectedStickerTitle: String?
     var selectedImagePath: String?
@@ -18,12 +18,17 @@ class StickersDetailViewController: RootViewController {
     var backToMessengerButton: MAXBlockButton?
     var stickersTitleLabel = UILabel()
     weak var wSelf : StickersDetailViewController?
+    let adLoader = AdLoader()
     
     let viewModel = StickersDetailViewModel()
     
     init(messengerMetadata: NSDictionary?) {
         
         super.init()
+        
+        _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: { error in
+            print("ad loaded")
+        })
         
         //self.selectedStickerTitle = messengerMetadata?.objectForKey("stickerTitle") as? String
         self.selectedImagePath = messengerMetadata?.object(forKey: "imagePath") as? String
@@ -222,6 +227,32 @@ class StickersDetailViewController: RootViewController {
         
         viewModel.reloadData()
         collectionView.collectionView.reloadData()
+        
+        collectionView.reachedBottomBlock = {
+            
+            if let nonNilAd = wSelf?.adLoader.interstitialAd {
+                if nonNilAd.isAdValid == true {
+                    
+                    if let timeSinceAd = UserDefaults.lastDateAdWasShown()?.timeIntervalSinceNow {
+                        
+                        if timeSinceAd < -120 {
+                            
+                            nonNilAd.show(fromRootViewController: wSelf)
+                            wSelf?.collectionView.reachedBottomBlock = nil
+                            
+                        }
+                        
+                    }
+                    else {
+                        nonNilAd.show(fromRootViewController: wSelf)
+                        wSelf?.collectionView.reachedBottomBlock = nil
+                    }
+                    
+                }
+                    
+            }
+            
+        }
         
         self.addOrRemoveBackToMessengerButton()
         

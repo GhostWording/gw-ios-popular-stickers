@@ -203,7 +203,7 @@ class StickersDetailViewModel: NSObject, MAXCollectionViewImageAndTextDataSource
     func maxCollectionViewImageAndTextNumItems(inSection theSection: Int) -> Int {
         
         if let count = imagesToDownload?.count {
-            return count + 1
+            return count
         }
         
         return 0

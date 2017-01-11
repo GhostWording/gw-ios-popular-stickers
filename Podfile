@@ -13,6 +13,7 @@ target 'StickerProfiling' do
   pod 'FBSDKMessengerShareKit', '1.3.0'
   pod 'FBSDKLoginKit', '4.15.0'
   pod 'FBSDKCoreKit', '4.16.0'
+  pod 'RAMAnimatedTabBarController', '2.0.13'
 
   # Pods for StickerProfiling
 

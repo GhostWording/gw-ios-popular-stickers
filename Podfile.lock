@@ -18,6 +18,7 @@ PODS:
   - FBSDKMessengerShareKit (1.3.0)
   - GoogleAnalytics (3.17.0)
   - MBProgressHUD (1.0.0)
+  - RAMAnimatedTabBarController (2.0.13)
 
 DEPENDENCIES:
   - ChameleonFramework
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - FBSDKMessengerShareKit (= 1.3.0)
   - GoogleAnalytics
   - MBProgressHUD
+  - RAMAnimatedTabBarController (= 2.0.13)
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -39,7 +41,8 @@ SPEC CHECKSUMS:
   FBSDKMessengerShareKit: 4a38dbd3564f5da459ea35b636e6766f7067a830
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
 
-PODFILE CHECKSUM: 83004d1894ab25bc33a2fcc83cf9997b8979188b
+PODFILE CHECKSUM: 11a367189418254ebfbed38d1ae37c7f34252e21
 
 COCOAPODS: 1.1.1

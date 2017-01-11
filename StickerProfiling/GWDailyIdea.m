@@ -31,6 +31,7 @@
     [urlRequest setValue: @"application/json" forHTTPHeaderField: @"Accept"];
     [urlRequest setValue: culture forHTTPHeaderField: @"Accept-Language"];
     [urlRequest setValue: @"application/json" forHTTPHeaderField: @"Content-Type"];
+    urlRequest.timeoutInterval = 30;
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest: urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         

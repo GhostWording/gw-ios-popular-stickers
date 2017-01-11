@@ -7,20 +7,31 @@
 //
 
 import Foundation
+import RAMAnimatedTabBarController
 
 extension UITabBarController {
     
-    class func createTabBarController() -> UITabBarController {
+    class func createTabBarController() -> RAMAnimatedTabBarController {
         
         let stickersOverview = StickersOverviewController()
-        stickersOverview.tabBarItem = UITabBarItem(title: PopularStickersLocalizedString("<CategoryTabBarString>", nil), image: UIImage(named: "GridIcon")?.imageScaledToSize(CGSize(width: 30, height: 30)), tag: 1)
+        let stickersOverviewTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<CategoryTabBarString>", nil), image: UIImage(named: "GridIcon")?.imageScaledToSize(CGSize(width: 30, height: 30)), tag: 1)
+        stickersOverviewTabBarItem.animation = RAMBounceAnimation()
+        stickersOverview.tabBarItem = stickersOverviewTabBarItem
         
         
         let dailyIdeas = LMDailyIdeasViewController()
-        dailyIdeas.tabBarItem = UITabBarItem(title: PopularStickersLocalizedString("<DailyIdeaTabBarString>", nil), image: UIImage(named: "LightBulbIcon")?.imageScaledToSize(CGSize(width: 30, height: 30)), tag: 2)
+        let dailyIdeasTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<DailyIdeaTabBarString>", nil), image: UIImage(named: "LightBulbIcon")?.imageScaledToSize(CGSize(width: 30, height: 30)), tag: 2)
+        dailyIdeasTabBarItem.animation = RAMBounceAnimation()
+        dailyIdeas.tabBarItem = dailyIdeasTabBarItem
         
-        let tabBarController = UITabBarController()
-        tabBarController.setViewControllers( [stickersOverview, dailyIdeas], animated: true)
+        
+        
+        let settingsVC = SettingsViewController()
+        let settingsTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<SettingsTitle>", nil), image: UIImage(named: "SettingsIcon2")?.imageScaledToSize( CGSize(width: 30, height: 30) ), tag: 3)
+        settingsTabBarItem.animation = RAMBounceAnimation()
+        settingsVC.tabBarItem = settingsTabBarItem
+        
+        let tabBarController = RAMAnimatedTabBarController(viewControllers: [stickersOverview, dailyIdeas, settingsVC] )
         tabBarController.tabBar.tintColor = UIColor.c_blue()
         
         tabBarController.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate

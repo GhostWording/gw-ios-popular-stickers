@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         Fabric.with([Crashlytics.self])
         
         if UserDefaults.dateInstalled() == nil {
-            UserDefaults.setDateInstalled(Date())
+            UserDefaults.setDateInstalled( Date() )
+            UserDefaults.setLastDateAdWasShown( Date() )
         }
         
         // get the experiment for the user

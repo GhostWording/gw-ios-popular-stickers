@@ -98,6 +98,7 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
                             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                                 
                                 nonNilAd.show(fromRootViewController: wSelf)
+                                UserDefaults.setLastDateAdWasShown( Date() )
                                 
                             })
                             
@@ -111,6 +112,7 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             
                             nonNilAd.show(fromRootViewController: wSelf)
+                            UserDefaults.setLastDateAdWasShown( Date() )
                             
                         })
                         

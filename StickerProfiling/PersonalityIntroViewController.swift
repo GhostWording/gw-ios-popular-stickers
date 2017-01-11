@@ -20,10 +20,17 @@ class PersonalityIntroViewController: UIViewController {
     let pagingScrollView = MAXPagingScrollView()
     let type: PersonalityViewControllerType
     
+    let adLoader = AdLoader()
+    
     init(type: PersonalityViewControllerType) {
         
         self.type = type
         self.viewModel = PersonalityIntroductionModel(type: type)
+        
+        _ = adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.FirstTimeMainScreenReached, completion: {
+            error in
+            
+        })
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -406,14 +413,17 @@ class PersonalityIntroViewController: UIViewController {
     
     func moveToOverviewVC() {
         
-        self.present( UITabBarController.createTabBarController(), animated: false, completion: nil)
+        let tabBarController = UITabBarController.createTabBarController()
+        self.present( tabBarController, animated: false, completion: { [weak self] in
         
+            if let nonNilAd = self?.adLoader.interstitialAd, let nonNilVC = tabBarController.selectedViewController, self?.adLoader.interstitialAd?.isAdValid == true {
+                
+                nonNilAd.show(fromRootViewController: nonNilVC)
+                
+            }
+            
+        })
         
-        let applicationDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        if let nonNilAd = applicationDelegate.firstTimeMainScreenReachedInterstitialAd {
-            nonNilAd.show( fromRootViewController: applicationDelegate.window?.rootViewController )
-        }
         
     }
 

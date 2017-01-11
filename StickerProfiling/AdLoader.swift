@@ -12,6 +12,7 @@ import FBAudienceNetwork
 enum InterstitialAdPosition : String {
     case StickerCategoriesBottom = "1594200494225037_1707587439553008"
     case DailyIdeasBottom = "1594200494225037_1707586212886464"
+    case FirstTimeMainScreenReached = "1594200494225037_1684883995156686"
 }
 
 class AdLoader: NSObject, FBInterstitialAdDelegate {

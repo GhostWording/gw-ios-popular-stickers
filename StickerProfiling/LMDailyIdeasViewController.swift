@@ -11,7 +11,7 @@ import UIKit
 import FBSDKMessengerShareKit
 import MBProgressHUD
 
-class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
 
     var backToMessengerButton: MAXBlockButton?
     var collectionView : UICollectionView?
@@ -29,10 +29,20 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
     let showTabBarButton = MAXFadeBlockButton()
     let cellFont = UIFont.c_robotoLight( withSize: 16.0 )
     
+    let adLoader = AdLoader()
+    var reachedBottomBlock : (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.white
+        
+        _ = adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
+            error in
+            
+            print("bottom of daily ideas ad loaded")
+            
+        })
         
         headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 64))
         headerView.backgroundColor = UIColor.c_blue()
@@ -70,6 +80,47 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
         
         self.view.addSubview( collectionView! )
         
+        weak var wSelf = self
+        
+        self.reachedBottomBlock = {
+            
+            // Do whatever you want here.
+            if let nonNilAd = wSelf?.adLoader.interstitialAd {
+                if nonNilAd.isAdValid == true {
+                    
+                    if let timeSinceAd = UserDefaults.lastDateAdWasShown()?.timeIntervalSinceNow {
+                        
+                        if timeSinceAd < -120 {
+                            
+                            wSelf?.reachedBottomBlock = nil
+
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                                
+                                nonNilAd.show(fromRootViewController: wSelf)
+                                
+                            })
+                            
+                        }
+                        
+                    }
+                    else {
+                        
+                        wSelf?.reachedBottomBlock = nil
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            
+                            nonNilAd.show(fromRootViewController: wSelf)
+                            
+                        })
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
         self.refreshControl = UIRefreshControl(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
         refreshControl!.addTarget(self, action: #selector(refreshContent), for: UIControlEvents.valueChanged)
@@ -645,6 +696,19 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
         
         return CGSize.zero
     }
+    
+    // MARK: Scroll View Delegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
+        
+        if bottomEdge >= scrollView.contentSize.height {
+            reachedBottomBlock?()
+        }
+        
+    }
+    
     
     // MARK: Navigation
     func showSettingsView() {

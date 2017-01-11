@@ -235,7 +235,7 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
                     
                     if let timeSinceAd = UserDefaults.lastDateAdWasShown()?.timeIntervalSinceNow {
                         
-                        if timeSinceAd < -120 {
+                        if timeSinceAd < -180 {
                             
                             let date = Date()
                             UserDefaults.setLastDateAdWasShown( date )

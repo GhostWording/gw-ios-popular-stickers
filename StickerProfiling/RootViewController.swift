@@ -11,6 +11,7 @@ import RAMAnimatedTabBarController
 
 var tabBarCenterButton : MAXFadeBlockButton?
 var tabBarButtonImageView : UIImageView?
+var tabBarButtonAnimating = false
 
 class RootViewController: UIViewController {
 
@@ -20,6 +21,7 @@ class RootViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         viewControllerToShow = nil
+        
     }
     
     convenience init(vc vcToShow: UIViewController?) {
@@ -37,7 +39,6 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.animateAlertDailyIdeas()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +51,29 @@ class RootViewController: UIViewController {
             self.createCenterTabBarButton().isHidden = false
         }
         
+        if tabBarButtonAnimating == false  && UserDefaults.hasViewedDailyIdeas() == false && UserDefaults.dateInstalled()!.timeIntervalSinceNow < TimeInterval(-120) {
+            tabBarButtonAnimating = true
+            
+            self.animateAlertDailyIdeas()
+            
+        }
+        else if tabBarButtonAnimating == false && UserDefaults.hasViewedDailyIdeas() == false && UserDefaults.dateInstalled()!.timeIntervalSinceNow > -120 {
+            
+            let time = 120 + UserDefaults.dateInstalled()!.timeIntervalSinceNow
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + time, execute: {
+                
+                if tabBarButtonAnimating == false  && UserDefaults.hasViewedDailyIdeas() == false && UserDefaults.dateInstalled()!.timeIntervalSinceNow < TimeInterval(-120) {
+                    tabBarButtonAnimating = true
+                    
+                    self.animateAlertDailyIdeas()
+                    
+                }
+
+                
+            })
+            
+        }
         
     }
     
@@ -120,6 +144,7 @@ class RootViewController: UIViewController {
                     
                     UserDefaults.setHasViewedDailyIdeas( true )
                     self?.stopAnimationAlertDailyIdeas()
+                    tabBarButtonAnimating = false
                     
                     if let items = self?.tabBarController?.tabBar.items as? [RAMAnimatedTabBarItem] {
                         
@@ -166,40 +191,37 @@ class RootViewController: UIViewController {
         
         weak var wSelf = self
         
-        if UserDefaults.hasViewedDailyIdeas() == false {
+        UIView.animate(withDuration: 0.6, animations: {
             
-            UIView.animate(withDuration: 0.6, delay: 0, options: [UIViewAnimationOptions.repeat, UIViewAnimationOptions.autoreverse], animations: {
+            tabBarButtonImageView?.tintColor = UIColor.c_yellow()
+            
+        }, completion: { completed in
+            
+            if UserDefaults.hasViewedDailyIdeas() == true {
                 
-                tabBarButtonImageView?.tintColor = UIColor.c_yellow()
+                tabBarButtonImageView?.tintColor = UIColor.c_blue()
                 
-            }, completion: { completed in
-                
-                if UserDefaults.hasViewedDailyIdeas() == true {
+            }
+            else {
+                UIView.animate(withDuration: 0.6, animations: {
+                    tabBarButtonImageView?.tintColor = UIColor.black
+                }, completion: {
+                    succeeded in
                     
-                    tabBarButtonImageView?.tintColor = UIColor.c_blue()
                     
-                }
-                else {
-                    UIView.animate(withDuration: 0.6, animations: {
+                    if UserDefaults.hasViewedDailyIdeas() == false {
                         tabBarButtonImageView?.tintColor = UIColor.black
-                    }, completion: {
-                        succeeded in
                         
-                        
-                        if UserDefaults.hasViewedDailyIdeas() == false {
-                            tabBarButtonImageView?.tintColor = UIColor.black
-
-                            wSelf?.animateAlertDailyIdeas()
-                        }
-                        else {
-                            tabBarButtonImageView?.tintColor = UIColor.c_blue()
-                        }
-                    })
-                }
-                
-            })
+                        wSelf?.animateAlertDailyIdeas()
+                    }
+                    else {
+                        tabBarButtonImageView?.tintColor = UIColor.c_blue()
+                    }
+                })
+            }
             
-        }
+        })
+
         
     }
     

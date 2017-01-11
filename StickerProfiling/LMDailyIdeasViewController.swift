@@ -90,7 +90,7 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
                     
                     if let timeSinceAd = UserDefaults.lastDateAdWasShown()?.timeIntervalSinceNow {
                         
-                        if timeSinceAd < -120 {
+                        if timeSinceAd < -180 {
                             
                             UserDefaults.setLastDateAdWasShown( Date() )
                             

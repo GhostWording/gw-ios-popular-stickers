@@ -193,7 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             
             let timeInterval = nonNilDate.timeIntervalSinceNow
             
-            if timeInterval < -120 {
+            if timeInterval < -180 {
                 self.sessionResumesInterstitialAd = self.loadInterstitialAd()
             }
             
@@ -395,12 +395,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         else if tabBarController.selectedIndex == 1 {
             AnalyticsManager.shared().postAction(withType: kGASelectTab, targetType: kGATargetTypeApp, targetId: kGADailyIdeas, targetParameter: nil, actionLocation: nil)
+            UserDefaults.setHasViewedDailyIdeas( true )
         }
         else if tabBarController.selectedIndex == 2 {
             AnalyticsManager.shared().postAction(withType: kGASelectTab, targetType: kGATargetTypeApp, targetId: kGAOptionMenu, targetParameter: nil, actionLocation: nil)
         }
         
-        tabBarButtonImageView?.tintColor = UIColor.black
+        if tabBarButtonAnimating == false {
+            tabBarButtonImageView?.tintColor = UIColor.black
+        }
         
     }
     

@@ -20,11 +20,9 @@ extension UITabBarController {
         
         
         let dailyIdeas = LMDailyIdeasViewController()
-        let dailyIdeasTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<DailyIdeaTabBarString>", nil), image: UIImage(named: "LightBulbIcon")?.imageScaledToSize(CGSize(width: 30, height: 30)), tag: 2)
+        let dailyIdeasTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<DailyIdeaTabBarString>", nil), image: UIImage(named: "LightBulbIcon")?.imageScaledToSize(CGSize(width: 1, height: 1)), tag: 2)
         dailyIdeasTabBarItem.animation = RAMBounceAnimation()
         dailyIdeas.tabBarItem = dailyIdeasTabBarItem
-        
-        
         
         let settingsVC = SettingsViewController()
         let settingsTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<SettingsTitle>", nil), image: UIImage(named: "SettingsIcon2")?.imageScaledToSize( CGSize(width: 30, height: 30) ), tag: 3)
@@ -33,8 +31,11 @@ extension UITabBarController {
         
         let tabBarController = RAMAnimatedTabBarController(viewControllers: [stickersOverview, dailyIdeas, settingsVC] )
         tabBarController.tabBar.tintColor = UIColor.c_blue()
+        tabBarController.tabBar.barTintColor = UIColor.c_tabBarGray()
+        tabBarController.tabBar.isTranslucent = false
         
-        tabBarController.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
+        let application = UIApplication.shared.delegate as! AppDelegate
+        tabBarController.delegate = application
         
         
         return tabBarController

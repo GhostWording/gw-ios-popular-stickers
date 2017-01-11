@@ -22,7 +22,7 @@ let bottomStickerGalleryPlacementId = "1594200494225037_1688239298154489"
 var s_sentWithMessengerInDailyIdeas = false
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerDelegate, FBInterstitialAdDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate, FBSDKMessengerURLHandlerDelegate, FBInterstitialAdDelegate {
 
     var window: UIWindow?
     let messengerUrlHandler = FBSDKMessengerURLHandler()
@@ -386,6 +386,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
     
     // MARK: Tab Bar Selection
     
+    
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
         if tabBarController.selectedIndex == 0 {
@@ -394,6 +395,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FBSDKMessengerURLHandlerD
         else if tabBarController.selectedIndex == 1 {
             AnalyticsManager.shared().postAction(withType: kGASelectTab, targetType: kGATargetTypeApp, targetId: kGADailyIdeas, targetParameter: nil, actionLocation: nil)
         }
+        
+        tabBarButtonImageView?.tintColor = UIColor.black
         
     }
     

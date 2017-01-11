@@ -65,6 +65,9 @@ typedef NS_ENUM(NSInteger, MessageSendMethod) {
 +(NSNumber *)isNewInstall;
 +(void)setIsNewInstall:(BOOL)isNewInstall;
 
++(BOOL)hasViewedDailyIdeas;
++(void)setHasViewedDailyIdeas:(BOOL)hasViewed;
+
 // MARK: User Settings
 
 +(NSString * _Nullable)userGender;

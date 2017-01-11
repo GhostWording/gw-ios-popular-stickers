@@ -30,5 +30,6 @@
 +(UIColor *)c_lightBlueCellHighlightColor;
 +(UIColor *)c_facebookBlueColor;
 +(UIColor *)c_lightGrayBackgroundColor;
-
++(UIColor *)c_tabBarGrayColor;
++(UIColor *)c_tabBarItemDeselectColor;
 @end

@@ -246,6 +246,21 @@
     
 }
 
++(BOOL)hasViewedDailyIdeas {
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey: @"hasViewedDailyIdeas"] == nil) {
+        [self setHasViewedDailyIdeas: NO];
+    }
+    
+    return [[[NSUserDefaults standardUserDefaults] objectForKey: @"hasViewedDailyIdeas"] boolValue];
+}
+
++(void)setHasViewedDailyIdeas:(BOOL)hasViewed {
+    
+    [[NSUserDefaults standardUserDefaults] setObject: [NSNumber numberWithBool: hasViewed] forKey: @"hasViewedDailyIdeas"];
+    
+}
+
 // MARK: User settings
 
 +(NSString *)userGender {

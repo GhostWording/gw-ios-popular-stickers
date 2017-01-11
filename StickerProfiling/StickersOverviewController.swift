@@ -166,6 +166,9 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         
         self.addOrRemoveBackToMessengerButton()
         
+        let view = UIView(frame: CGRect(x: 200, y: 200, width: 200, height: 200) )
+        view.backgroundColor = UIColor.red
+        //self.view.addSubview( view )
     }
     
     

@@ -154,4 +154,13 @@
     return [self c_colorWithHexString: @"e6e8ea"];
 }
 
++(UIColor *)c_tabBarGrayColor {
+    return [self c_colorWithHexString: @"f2f2f2"];
+}
+
++(UIColor *)c_tabBarItemDeselectColor {
+    
+    return [self c_colorWithHexString: @"b2b2b2"];
+}
+
 @end

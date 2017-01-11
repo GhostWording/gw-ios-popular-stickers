@@ -92,13 +92,14 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
                         
                         if timeSinceAd < -120 {
                             
-                            wSelf?.reachedBottomBlock = nil
-
+                            UserDefaults.setLastDateAdWasShown( Date() )
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
                                 
                                 nonNilAd.show(fromRootViewController: wSelf)
-                                UserDefaults.setLastDateAdWasShown( Date() )
+                                _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
+                                    error in
+                                })
                                 
                             })
                             
@@ -107,12 +108,14 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
                     }
                     else {
                         
-                        wSelf?.reachedBottomBlock = nil
+                        UserDefaults.setLastDateAdWasShown( Date() )
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
                             
                             nonNilAd.show(fromRootViewController: wSelf)
-                            UserDefaults.setLastDateAdWasShown( Date() )
+                            _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
+                                error in
+                            })
                             
                         })
                         

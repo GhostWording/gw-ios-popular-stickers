@@ -237,15 +237,40 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
                         
                         if timeSinceAd < -120 {
                             
-                            nonNilAd.show(fromRootViewController: wSelf)
-                            wSelf?.collectionView.reachedBottomBlock = nil
+                            let date = Date()
+                            UserDefaults.setLastDateAdWasShown( date )
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                                
+                                nonNilAd.show(fromRootViewController: wSelf)
+                                
+                                _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
+                                    error in
+                                })
+                                
+                                
+                            })
+                            
                             
                         }
                         
                     }
                     else {
-                        nonNilAd.show(fromRootViewController: wSelf)
-                        wSelf?.collectionView.reachedBottomBlock = nil
+                        
+                        let date = Date()
+                        UserDefaults.setLastDateAdWasShown( date )
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                            
+                            nonNilAd.show(fromRootViewController: wSelf)
+                            
+                            _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
+                                error in
+                            })
+                            
+                        })
+                        
+                        
                     }
                     
                 }

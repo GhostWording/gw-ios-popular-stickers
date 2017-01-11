@@ -112,22 +112,8 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         
         let headerViewHeightWithoutStatusBar = collectionView.headerView.frame.height - 20
         
-        let settingsButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.width - headerViewHeightWithoutStatusBar * 1.5, y: 20, width: headerViewHeightWithoutStatusBar * 1.5, height: headerViewHeightWithoutStatusBar))
-        settingsButton.imageEdgeInsets = UIEdgeInsetsMake(headerViewHeightWithoutStatusBar * 0, headerViewHeightWithoutStatusBar * 0.15, headerViewHeightWithoutStatusBar * 0, headerViewHeightWithoutStatusBar * 0.15)
-        settingsButton.setImage(settingsImage, for: UIControlState())
-        settingsButton.tintColor = UIColor.white
         
-        settingsButton.buttonTouchUpInside(completion: {
-            
-            AnalyticsManager.shared().postAction( withType: kGAOptionMenu, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAMainScreen)
-            
-            wSelf?.showSettingsView()
-        })
-        
-        collectionView.headerView.addSubview(settingsButton)
-        
-        
-        self.view.addSubview(collectionView)
+        self.view.addSubview( collectionView )
         
         if self.tabBarController != nil {
             collectionView?.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
@@ -256,10 +242,14 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         stickerDetailVC.selectedStickerTitle = label
         stickerDetailVC.selectedImagePath = imagePath
         stickerDetailVC.selectedIntentionId = intentionId
-        
-        let viewController = ViewController()
-        
-        self.present(stickerDetailVC, animated: true, completion: nil)
+                
+        if let nonNilNav = self.navigationController {
+            nonNilNav.pushViewController(stickerDetailVC, animated: true)
+        }
+        else {
+            self.present(stickerDetailVC, animated: true, completion: nil)
+
+        }
         
     }
     

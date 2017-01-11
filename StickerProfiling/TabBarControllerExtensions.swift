@@ -13,11 +13,16 @@ extension UITabBarController {
     
     class func createTabBarController() -> RAMAnimatedTabBarController {
         
+        
         let stickersOverview = StickersOverviewController()
-        let stickersOverviewTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<CategoryTabBarString>", nil), image: UIImage(named: "GridIcon")?.imageScaledToSize(CGSize(width: 30, height: 30)), tag: 1)
+        let stickersOverviewTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<CategoryTabBarString>", nil), image: UIImage(named: "GridIcon")?.imageScaledToSize(CGSize(width: 28, height: 28)), tag: 1)
         stickersOverviewTabBarItem.animation = RAMBounceAnimation()
         stickersOverview.tabBarItem = stickersOverviewTabBarItem
         
+        let navOne = UINavigationController(rootViewController: stickersOverview)
+        navOne.navigationBar.isHidden = true
+
+        navOne.tabBarItem = stickersOverviewTabBarItem
         
         let dailyIdeas = LMDailyIdeasViewController()
         let dailyIdeasTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<DailyIdeaTabBarString>", nil), image: UIImage(named: "LightBulbIcon")?.imageScaledToSize(CGSize(width: 1, height: 1)), tag: 2)
@@ -25,11 +30,11 @@ extension UITabBarController {
         dailyIdeas.tabBarItem = dailyIdeasTabBarItem
         
         let settingsVC = SettingsViewController()
-        let settingsTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<SettingsTitle>", nil), image: UIImage(named: "SettingsIcon2")?.imageScaledToSize( CGSize(width: 30, height: 30) ), tag: 3)
+        let settingsTabBarItem = RAMAnimatedTabBarItem(title: PopularStickersLocalizedString("<SettingsTitle>", nil), image: UIImage(named: "SettingsIcon2")?.imageScaledToSize( CGSize(width: 28, height: 28) ), tag: 3)
         settingsTabBarItem.animation = RAMBounceAnimation()
         settingsVC.tabBarItem = settingsTabBarItem
         
-        let tabBarController = RAMAnimatedTabBarController(viewControllers: [stickersOverview, dailyIdeas, settingsVC] )
+        let tabBarController = RAMAnimatedTabBarController(viewControllers: [navOne, dailyIdeas, settingsVC] )
         tabBarController.tabBar.tintColor = UIColor.c_blue()
         tabBarController.tabBar.barTintColor = UIColor.c_tabBarGray()
         tabBarController.tabBar.isTranslucent = false

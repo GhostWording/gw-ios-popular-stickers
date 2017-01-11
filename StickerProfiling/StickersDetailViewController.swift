@@ -149,6 +149,9 @@ class StickersDetailViewController: RootViewController {
         collectionView = MAXCollectionViewImageAndText(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         collectionView.datasource = viewModel
         
+        if self.tabBarController != nil {
+            self.collectionView.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
+        }
         
         collectionView.headerView.backgroundColor = UIColor.c_blue()
         
@@ -167,36 +170,17 @@ class StickersDetailViewController: RootViewController {
             
             UserDefaults.incrementNumBackToMainMenu()
             
-            self?.dismiss(animated: true, completion: {
-                
-                if (UserDefaults.numBackToMainMenu() == 4 || UserDefaults.numBackToMainMenu() == 10 || UserDefaults.numBackToMainMenu() == 20) && UserDefaults.wantsNotification() == false {
+            if let nonNilNav = self?.navigationController {
+                nonNilNav.popViewController(animated: true)
+                self?.backPressed()
+            }
+            else {
+                self?.dismiss(animated: true, completion: {
                     
-                    let alertView = BlocksAlertView(title: PopularStickersLocalizedString("<NotificationAlertTitle>", ""), message: PopularStickersLocalizedString("<NotificationAlertMessage>", ""), delegate: nil, cancelButtonTitle: PopularStickersLocalizedString("<NotificationAlertCancelTitle>", ""), otherButtonTitles: PopularStickersLocalizedString("<NotificationAlertAcceptTitle>", ""))
+                    self?.backPressed()
                     
-                    alertView.show()
-                    
-                    alertView.buttonPressed(completion: {
-                        index, alertView -> Void in
-                        
-                        if index == 0 {
-                            // false statement, said in the alert view                            
-                            UserDefaults.setWantsNotification(false)
-                            
-                        }
-                        else {
-                            // true statement, said in the alert view
-                            let application = UIApplication.shared
-                            application.registerUserNotificationSettings( UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound] , categories: nil))
-                            
-                            UserDefaults.setWantsNotification(true)
-                            
-                        }
-                    })
-                    
-                }
-                
-                
-            })
+                })
+            }
         })
         
         collectionView.headerView.addSubview(backButton)
@@ -243,6 +227,37 @@ class StickersDetailViewController: RootViewController {
         
     }
     
+    func backPressed() {
+        
+        if (UserDefaults.numBackToMainMenu() == 4 || UserDefaults.numBackToMainMenu() == 10 || UserDefaults.numBackToMainMenu() == 20) && UserDefaults.wantsNotification() == false {
+            
+            let alertView = BlocksAlertView(title: PopularStickersLocalizedString("<NotificationAlertTitle>", ""), message: PopularStickersLocalizedString("<NotificationAlertMessage>", ""), delegate: nil, cancelButtonTitle: PopularStickersLocalizedString("<NotificationAlertCancelTitle>", ""), otherButtonTitles: PopularStickersLocalizedString("<NotificationAlertAcceptTitle>", ""))
+            
+            alertView.show()
+            
+            alertView.buttonPressed(completion: {
+                index, alertView -> Void in
+                
+                if index == 0 {
+                    // false statement, said in the alert view
+                    UserDefaults.setWantsNotification(false)
+                    
+                }
+                else {
+                    // true statement, said in the alert view
+                    let application = UIApplication.shared
+                    application.registerUserNotificationSettings( UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound] , categories: nil))
+                    
+                    UserDefaults.setWantsNotification(true)
+                    
+                }
+            })
+            
+        }
+
+        
+    }
+    
     // MARK: Messenger Integration
     
     func addOrRemoveBackToMessengerButton() {
@@ -275,8 +290,12 @@ class StickersDetailViewController: RootViewController {
         singleStickerVC.viewModel.intentionId = selectedIntentionId
         singleStickerVC.selectedStickerTitle = self.selectedStickerTitle
 
-        
-        self.present(singleStickerVC, animated: true, completion: nil)
+        if let nonNilNav = self.navigationController {
+            nonNilNav.pushViewController(singleStickerVC, animated: true)
+        }
+        else {
+            self.present(singleStickerVC, animated: true, completion: nil)
+        }
         
     }
     

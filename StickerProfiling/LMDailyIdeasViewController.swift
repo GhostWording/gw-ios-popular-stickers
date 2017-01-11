@@ -58,24 +58,7 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
         stickersTitleLabel.font = UIFont.c_roboto(withSize: Float(self.view.frame.height * 0.03))
         headerView.addSubview(stickersTitleLabel)
         
-        var settingsImage = UIImage(named: "SettingsIcon")
-        settingsImage = settingsImage?.withRenderingMode(.alwaysTemplate)
-        
         let headerViewHeightWithoutStatusBar = headerView.frame.height - 20
-        
-        let settingsButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.width - headerViewHeightWithoutStatusBar * 1.5, y: 20, width: headerViewHeightWithoutStatusBar * 1.5, height: headerViewHeightWithoutStatusBar))
-        settingsButton.imageEdgeInsets = UIEdgeInsetsMake(headerViewHeightWithoutStatusBar * 0, headerViewHeightWithoutStatusBar * 0.15, headerViewHeightWithoutStatusBar * 0, headerViewHeightWithoutStatusBar * 0.15)
-        settingsButton.setImage(settingsImage, for: UIControlState())
-        settingsButton.tintColor = UIColor.white
-        
-        settingsButton.buttonTouchUpInside(completion: {
-            
-            AnalyticsManager.shared().postAction( withType: kGAOptionMenu, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGADailyIdeasScreen)
-            
-            self.showSettingsView()
-        })
-        
-        headerView.addSubview(settingsButton)
         
         
         

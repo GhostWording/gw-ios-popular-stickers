@@ -20,6 +20,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     var indexPath : IndexPath?
     
     var selectedStickerTitle: String?
+    var containerView : UIView!
     
     let viewModel = SingleStickerViewModel()
     
@@ -55,15 +56,19 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
         })
         
+        let tabBarHeight : CGFloat = self.tabBarController != nil ? 49 : 0
         
-        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.6)
+        self.containerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - tabBarHeight))
+        self.view.addSubview( containerView )
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: containerView.frame.height * 0.6)
         imageView.contentMode = .scaleAspectFill
         imageView.image = self.imageToShow
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
         imageView.layer.masksToBounds = true
         
-        self.view.addSubview(imageView)
+        containerView.addSubview( imageView )
         
 
         bottomButton.frame = CGRect(x: self.view.frame.midX - 90, y: imageView.frame.height - 50 - imageView.frame.height * 0.05, width: 180, height: 50)
@@ -91,7 +96,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         infoLabel.text = PopularStickersLocalizedString("<SendExplanation>", "")
         infoLabel.textAlignment = .center
         infoLabel.backgroundColor = UIColor.c_bannerGray()
-        self.view.addSubview(infoLabel)
+        self.view.addSubview( infoLabel )
         
         
         
@@ -111,13 +116,19 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
             AnalyticsManager.shared().postAction( withType: kGABackFromImage, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAItemDetailScreen)
             
-            self?.dismiss(animated: true, completion: nil)
+            if let nonNilNav = self?.navigationController {
+                nonNilNav.popViewController(animated: true)
+            }
+            else {
+                self?.dismiss(animated: true, completion: nil)
+            }
+            
         })
         
         self.view.addSubview(backButton)
         
         
-        let addTextButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 70, width: 50, height: 50))
+        let addTextButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.width - 65, y: containerView.frame.height - 70, width: 50, height: 50))
         addTextButton.layer.cornerRadius = 25
         addTextButton.layer.backgroundColor = UIColor.c_blue().cgColor
         addTextButton.layer.shadowColor = UIColor.black.cgColor
@@ -195,12 +206,13 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
             
         }
         
-        self.tableView.frame = CGRect(x: 0, y: infoLabel.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - infoLabel.frame.maxY)
+        self.tableView.frame = CGRect(x: 0, y: infoLabel.frame.maxY, width: self.view.frame.width, height: containerView.frame.height - infoLabel.frame.maxY)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorColor = UIColor.lightGray
         self.tableView.layoutMargins = UIEdgeInsets.zero
         self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, tabBarHeight * 0.5, 0)
         
         self.view.insertSubview(self.tableView, belowSubview : bottomButton)
         self.tableView.reloadData()
@@ -493,8 +505,8 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         weak var wSelf = self
         UIView.animate(withDuration: 0.3, animations: {
             
-            wSelf?.infoLabel.alpha = 0.0
-            wSelf?.bottomButton.c_setOriginY( Float(self.view.frame.height - self.backButton.frame.size.height - 20))
+            self.infoLabel.alpha = 0.0
+            self.bottomButton.c_setOriginY( Float(self.containerView.frame.height - self.backButton.frame.size.height - 20))
             wSelf?.tableView.separatorColor = UIColor.clear
             
         })
@@ -692,7 +704,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
         
         if AppFlow.currentMessengerFlow == MessengerFlow.send {
             self.backToMessengerButton?.removeFromSuperview()
-            self.imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height * 0.6)
+            self.imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.containerView.frame.height * 0.6)
             self.backButton.frame = CGRect(x: self.view.frame.width * 0.05, y: 20 + self.view.frame.width * 0.05, width: self.view.frame.width * 0.12, height: self.view.frame.width * 0.12)
         }
         else {
@@ -701,7 +713,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
                 self.view.addSubview(self.backToMessengerButton!)
             }
             
-            self.imageView.frame = CGRect(x: 0, y: 40, width: self.view.frame.width, height: self.view.frame.height * 0.6 - 40)
+            self.imageView.frame = CGRect(x: 0, y: 40, width: self.view.frame.width, height: self.containerView.frame.height * 0.6 - 40)
             self.backButton.frame = CGRect(x: self.view.frame.width * 0.05, y: 20 + 40 + self.view.frame.width * 0.05, width: self.view.frame.width * 0.12, height: self.view.frame.width * 0.12)
             
         }

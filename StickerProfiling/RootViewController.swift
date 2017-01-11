@@ -91,7 +91,13 @@ class RootViewController: UIViewController {
     func createCenterTabBarButton() -> MAXFadeBlockButton {
         
         if(tabBarCenterButton == nil) {
-            tabBarCenterButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.size.width / 2.0 - 25, y: self.view.frame.size.height - 70, width: 50, height: 50))
+            
+            var navHeight : CGFloat = 0
+            if self.navigationController != nil {
+                navHeight = 44.0
+            }
+            
+            tabBarCenterButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.size.width / 2.0 - 25, y: self.view.frame.size.height - 66 + navHeight, width: 50, height: 50))
             
             //centerTabBarButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
             

@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         headerView.backgroundColor = UIColor.c_blue()
         
         self.view.addSubview(headerView)
-        
+        /*
         var backButtonImage = UIImage(named: "BackArrow")
         backButtonImage = backButtonImage?.withRenderingMode(.alwaysTemplate)
         
@@ -69,8 +69,9 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         })
         
         headerView.addSubview(backButton)
+        */
         
-        let stickersTitleLabel = UILabel(frame: CGRect( x: backButton.frame.maxX, y: 20, width: self.view.frame.width - backButton.frame.maxX - self.view.frame.width * 0.1, height: 44))
+        let stickersTitleLabel = UILabel(frame: CGRect( x: 20, y: 20, width: self.view.frame.width - 20 - self.view.frame.width * 0.1, height: 44))
         stickersTitleLabel.textAlignment = .left
         stickersTitleLabel.textColor = UIColor.white
         stickersTitleLabel.text = PopularStickersLocalizedString("<SettingsTitle>", nil)
@@ -78,8 +79,11 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         headerView.addSubview(stickersTitleLabel)
         
+        let tabBarHeight = self.tabBarController != nil ? self.tabBarController!.tabBar.frame.size.height : 0
+        
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: headerView.frame.height, width: self.view.frame.width, height: self.view.frame.height - headerView.frame.height))
         scrollView.backgroundColor = UIColor.white
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, tabBarHeight * 1.4, 0)
         
         self.view.addSubview(scrollView)
         

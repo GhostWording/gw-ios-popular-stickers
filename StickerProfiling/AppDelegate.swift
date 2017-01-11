@@ -395,6 +395,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         else if tabBarController.selectedIndex == 1 {
             AnalyticsManager.shared().postAction(withType: kGASelectTab, targetType: kGATargetTypeApp, targetId: kGADailyIdeas, targetParameter: nil, actionLocation: nil)
         }
+        else if tabBarController.selectedIndex == 2 {
+            AnalyticsManager.shared().postAction(withType: kGASelectTab, targetType: kGATargetTypeApp, targetId: kGAOptionMenu, targetParameter: nil, actionLocation: nil)
+        }
         
         tabBarButtonImageView?.tintColor = UIColor.black
         

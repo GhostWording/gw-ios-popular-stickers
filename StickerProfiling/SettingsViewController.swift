@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
+class SettingsViewController: RootViewController, FBSDKLoginButtonDelegate {
 
     // MARK: Gloabl Label
     var stickersTitleLabel: UILabel!
@@ -54,22 +54,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         headerView.backgroundColor = UIColor.c_blue()
         
         self.view.addSubview(headerView)
-        /*
-        var backButtonImage = UIImage(named: "BackArrow")
-        backButtonImage = backButtonImage?.withRenderingMode(.alwaysTemplate)
         
-        
-        let backButton = MAXFadeBlockButton(frame: CGRect(x: 0, y: 20, width: 44 * 1.5, height: 44))
-        backButton.setImage( backButtonImage, for: UIControlState())
-        backButton.tintColor = UIColor.white
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(44 * 0.3, 44 * 0.3, 44 * 0.3, 44 * 0.8)
-        
-        backButton.buttonTouchUpInside(completion: { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        })
-        
-        headerView.addSubview(backButton)
-        */
         
         let stickersTitleLabel = UILabel(frame: CGRect( x: 20, y: 20, width: self.view.frame.width - 20 - self.view.frame.width * 0.1, height: 44))
         stickersTitleLabel.textAlignment = .left
@@ -446,6 +431,8 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     func updateUIWithNewLanguage() {
+        
+        self.updateTabBarLocalizedStrings()
         
         languageTitle.text = PopularStickersLocalizedString("<ChooseLanguageTitle>", nil)
         

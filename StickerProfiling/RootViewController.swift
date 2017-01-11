@@ -92,10 +92,7 @@ class RootViewController: UIViewController {
         
         if(tabBarCenterButton == nil) {
             
-            var navHeight : CGFloat = 0
-            if self.navigationController != nil {
-                navHeight = 44.0
-            }
+            var navHeight : CGFloat = 44.0
             
             tabBarCenterButton = MAXFadeBlockButton(frame: CGRect(x: self.view.frame.size.width / 2.0 - 25, y: self.view.frame.size.height - 66 + navHeight, width: 50, height: 50))
             
@@ -212,6 +209,31 @@ class RootViewController: UIViewController {
             tabBarButtonImageView?.tintColor = UIColor.c_blue()
 
         })
+        
+    }
+    
+    func updateTabBarLocalizedStrings() {
+        
+        let application = UIApplication.shared.delegate as! AppDelegate
+        
+        
+        let tabBarController = UITabBarController.createTabBarController()
+        tabBarController.selectedIndex = 2
+        tabBarCenterButton = nil
+        
+        if let nonNilItems = tabBarController.tabBar.items as? [RAMAnimatedTabBarItem] {
+            
+            let firstItem = nonNilItems[0]
+            firstItem.deselectAnimation()
+            
+            let lastItem = nonNilItems[2]
+            lastItem.playAnimation()
+            
+        }
+        
+        application.window?.rootViewController = tabBarController
+        
+        
         
     }
     

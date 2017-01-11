@@ -58,9 +58,6 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
         stickersTitleLabel.font = UIFont.c_roboto(withSize: Float(self.view.frame.height * 0.03))
         headerView.addSubview(stickersTitleLabel)
         
-        let headerViewHeightWithoutStatusBar = headerView.frame.height - 20
-        
-        
         
         let layout = UICollectionViewFlowLayout()
         self.collectionView = UICollectionView(frame: CGRect(x: 0, y: headerView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height - headerView.frame.maxY), collectionViewLayout: layout)

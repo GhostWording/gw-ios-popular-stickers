@@ -163,4 +163,14 @@
     return [self c_colorWithHexString: @"b2b2b2"];
 }
 
++(UIColor *)c_yellowColor {
+    
+    return [self c_colorWithHexString: @"ffcd02"];
+}
+
++(UIColor *)c_yellowColorDark {
+    
+    return [self c_colorWithHexString: @"ffa800"];
+}
+
 @end

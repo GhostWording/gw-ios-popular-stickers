@@ -170,7 +170,7 @@ class RootViewController: UIViewController {
             
             UIView.animate(withDuration: 0.6, delay: 0, options: [UIViewAnimationOptions.repeat, UIViewAnimationOptions.autoreverse], animations: {
                 
-                tabBarButtonImageView?.tintColor = UIColor.red
+                tabBarButtonImageView?.tintColor = UIColor.c_yellow()
                 
             }, completion: { completed in
                 

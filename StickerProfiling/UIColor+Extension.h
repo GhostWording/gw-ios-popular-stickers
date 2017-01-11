@@ -32,4 +32,8 @@
 +(UIColor *)c_lightGrayBackgroundColor;
 +(UIColor *)c_tabBarGrayColor;
 +(UIColor *)c_tabBarItemDeselectColor;
+
++(UIColor *)c_yellowColor;
++(UIColor *)c_yellowColorDark;
+
 @end

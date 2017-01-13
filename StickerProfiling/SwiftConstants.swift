@@ -16,7 +16,7 @@ struct AppConfig {
             
             if UserDefaults.developerModeEnabled() == true {
                 
-                return -20
+                return -10
             }
             
             return -180

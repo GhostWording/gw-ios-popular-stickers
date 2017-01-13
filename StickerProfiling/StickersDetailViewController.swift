@@ -27,7 +27,27 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
         super.init()
         
         _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: { error in
-            print("ad loaded")
+            
+            if error == nil {
+                print("ad loaded")
+            }
+            else {
+                print("ad error")
+                
+                if UserDefaults.developerModeEnabled() == true {
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                            index in
+                        }), animated: true, completion: nil)
+                        
+                    })
+                    
+                }
+                
+            }
+            
         })
         
         //self.selectedStickerTitle = messengerMetadata?.objectForKey("stickerTitle") as? String
@@ -276,6 +296,21 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
             
             _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
                 error in
+                
+                if error != nil {
+                    if UserDefaults.developerModeEnabled() == true {
+                        
+                        DispatchQueue.main.async(execute: {
+                            
+                            self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                                index in
+                            }), animated: true, completion: nil)
+                            
+                        })
+                        
+                    }
+                }
+                
             })
             
             if let nonNilIntentionId = self.selectedIntentionId {

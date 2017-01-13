@@ -241,6 +241,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     func interstitialAd(_ interstitialAd: FBInterstitialAd, didFailWithError error: Error) {
         print("add error \(error) with ad placement id \(interstitialAd.placementID)")
+        
+        if UserDefaults.developerModeEnabled() == true {
+            
+        }
+        
     }
     
     // MARK: Update View Controllers with back to messenger buttons

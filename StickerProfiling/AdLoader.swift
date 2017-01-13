@@ -41,19 +41,29 @@ class AdLoader: NSObject, FBInterstitialAdDelegate {
         interstitialAd = FBInterstitialAd.init(placementID: adPosition.rawValue)
         interstitialAd?.delegate = self
         interstitialAd?.load()
+        
+        AnalyticsManager().postAction(withType: kGAAdRequested, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
 
         return interstitialAd!
     }
     
     func interstitialAdDidLoad(_ interstitialAd: FBInterstitialAd) {
         
-        completionClosure?( nil )
+        weak var wSelf = self
+        
+        DispatchQueue.main.async(execute: {
+            wSelf?.completionClosure?( nil )
+        })
         
     }
     
     func interstitialAd(_ interstitialAd: FBInterstitialAd, didFailWithError error: Error) {
         
-        completionClosure?( error )
+        weak var wSelf = self
+        
+        DispatchQueue.main.async(execute: { 
+            wSelf?.completionClosure?( error )
+        })
         
     }
     

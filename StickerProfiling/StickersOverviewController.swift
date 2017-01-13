@@ -110,9 +110,6 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         var settingsImage = UIImage(named: "SettingsIcon")
         settingsImage = settingsImage?.withRenderingMode(.alwaysTemplate)
         
-        let headerViewHeightWithoutStatusBar = collectionView.headerView.frame.height - 20
-        
-        
         self.view.addSubview( collectionView )
         
         if self.tabBarController != nil {

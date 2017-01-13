@@ -27,12 +27,27 @@ class PersonalityIntroViewController: UIViewController {
         self.type = type
         self.viewModel = PersonalityIntroductionModel(type: type)
         
+        super.init(nibName: nil, bundle: nil)
+        
         _ = adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.FirstTimeMainScreenReached, completion: {
             error in
             
+            if error != nil {
+                if UserDefaults.developerModeEnabled() == true {
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                            index in
+                        }), animated: true, completion: nil)
+                        
+                    })
+                    
+                }
+            }
+            
         })
         
-        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

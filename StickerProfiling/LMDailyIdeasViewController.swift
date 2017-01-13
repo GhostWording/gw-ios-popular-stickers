@@ -42,6 +42,23 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
             
             print("bottom of daily ideas ad loaded")
             
+            if error != nil {
+                
+                if UserDefaults.developerModeEnabled() == true {
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                            index in
+                        }), animated: true, completion: nil)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+            
         })
         
         headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 64))
@@ -149,6 +166,23 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
             
             _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
                 error in
+                
+                if error != nil {
+                    
+                    if UserDefaults.developerModeEnabled() == true {
+                        
+                        DispatchQueue.main.async(execute: {
+                            
+                            self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                                index in
+                            }), animated: true, completion: nil)
+                            
+                        })
+                        
+                    }
+                    
+                }
+                
             })
             
             AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGADailyIdeas)

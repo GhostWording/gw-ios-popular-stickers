@@ -242,6 +242,7 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
                 
                 self.reloadData()
                 completion(error as Error?)
+                
             })
             
         })

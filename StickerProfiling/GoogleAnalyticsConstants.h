@@ -32,6 +32,7 @@ static const NSString *kGAIntentionPickerScreen = @"IntentionPickerScreen";
 static const NSString *kGACountry = @"Country";
 static const NSString *kGASkipPersonalityIntro = @"SkipPersonalityQuestions";
 static const NSString *kGACategories = @"Categories";
+static const NSString *kGAStickerCategory = @"StickerCategory";
 static const NSString *kGADailyIdeas = @"DailySuggestion";
 static const NSString *kGASelectTab = @"SelectTab";
 static const NSString *kGAImageSelected = @"ImageSelected";

@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, MessageSendMethod) {
 +(NSNumber * _Nullable)userNotificationFrequency;
 +(void)setUserNotificationFrequency:(NSNumber *)theUserNotificationFrequency;
 
-+(NSDate * _Nullable)lastDateAdWasShown;
++(NSDate *)lastDateAdWasShown;
 +(void)setLastDateAdWasShown:(NSDate *)date;
 
 // MARK: Stored Information

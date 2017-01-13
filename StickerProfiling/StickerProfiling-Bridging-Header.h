@@ -19,6 +19,7 @@
 #import "UserDefaults.h"
 #import "NotificationManager.h"
 #import "MAXCollectionViewCellImageAndText.h"
+#import "BlocksAlertController.h"
 
 #import "GWCoreDataManager.h"
 #import "GWDataManager.h"

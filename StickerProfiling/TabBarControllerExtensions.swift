@@ -111,16 +111,4 @@ extension UITabBarController {
         
     }
     
-    func findActiveViewController() -> UIViewController? {
-        
-        if let nonNilViewControllers = self.viewControllers {
-            
-            let currentViewController = nonNilViewControllers[self.selectedIndex]
-            
-            return currentViewController.topMostController()
-        }
-        
-        return nil
-    }
-    
 }

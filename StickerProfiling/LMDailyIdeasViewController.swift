@@ -88,36 +88,11 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
             if let nonNilAd = wSelf?.adLoader.interstitialAd {
                 if nonNilAd.isAdValid == true {
                     
-                    if let timeSinceAd = UserDefaults.lastDateAdWasShown()?.timeIntervalSinceNow {
+                    let time = UserDefaults.lastDateAdWasShown().timeIntervalSinceNow
+                    
+                    if time < AppConfig.appAdvertDelay {
                         
-                        if timeSinceAd < -180 {
-                            
-                            UserDefaults.setLastDateAdWasShown( Date() )
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                                
-                                nonNilAd.show(fromRootViewController: wSelf)
-                                _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
-                                    error in
-                                })
-                                
-                            })
-                            
-                        }
-                        
-                    }
-                    else {
-                        
-                        UserDefaults.setLastDateAdWasShown( Date() )
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                            
-                            nonNilAd.show(fromRootViewController: wSelf)
-                            _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
-                                error in
-                            })
-                            
-                        })
+                        wSelf?.showAdAfterDelay( nonNilAd )
                         
                     }
                     
@@ -145,6 +120,42 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
             
         })
         
+        
+    }
+    
+    func showAdAfterDelay(_ nonNilAd: FBInterstitialAd) {
+        
+        UserDefaults.setLastDateAdWasShown( Date() )
+        
+        weak var wSelf = self
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            
+            if UserDefaults.developerModeEnabled() == true {
+                
+                self.present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad at this location, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
+                    
+                }), animated: true, completion: {
+                    //nonNilAd.show(fromRootViewController: wSelf)
+                })
+                
+            }
+            else {
+                
+                nonNilAd.show(fromRootViewController: wSelf)
+                
+            }
+            
+            _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
+                error in
+            })
+            
+            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGADailyIdeas)
+            print("Will show ad in Daily ideas")
+            
+        })
+
         
     }
     

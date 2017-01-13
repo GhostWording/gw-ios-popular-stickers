@@ -419,6 +419,7 @@ class PersonalityIntroViewController: UIViewController {
             if let nonNilAd = self?.adLoader.interstitialAd, let nonNilVC = tabBarController.selectedViewController, self?.adLoader.interstitialAd?.isAdValid == true {
                 
                 nonNilAd.show(fromRootViewController: nonNilVC)
+                print("Will show ad personality view controller first launch")
                 
             }
             

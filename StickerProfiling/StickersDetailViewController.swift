@@ -233,43 +233,11 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
             if let nonNilAd = wSelf?.adLoader.interstitialAd {
                 if nonNilAd.isAdValid == true {
                     
-                    if let timeSinceAd = UserDefaults.lastDateAdWasShown()?.timeIntervalSinceNow {
+                    let time = UserDefaults.lastDateAdWasShown().timeIntervalSinceNow
+                    
+                    if time < AppConfig.appAdvertDelay {
                         
-                        if timeSinceAd < -180 {
-                            
-                            let date = Date()
-                            UserDefaults.setLastDateAdWasShown( date )
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                                
-                                nonNilAd.show(fromRootViewController: wSelf)
-                                
-                                _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
-                                    error in
-                                })
-                                
-                                
-                            })
-                            
-                            
-                        }
-                        
-                    }
-                    else {
-                        
-                        let date = Date()
-                        UserDefaults.setLastDateAdWasShown( date )
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                            
-                            nonNilAd.show(fromRootViewController: wSelf)
-                            
-                            _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
-                                error in
-                            })
-                            
-                        })
-                        
+                        wSelf?.showAdAfterDelay( nonNilAd )
                         
                     }
                     
@@ -281,6 +249,43 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
         
         self.addOrRemoveBackToMessengerButton()
         
+    }
+    
+    func showAdAfterDelay(_ nonNilAd: FBInterstitialAd) {
+        let date = Date()
+        UserDefaults.setLastDateAdWasShown( date )
+        
+        weak var wSelf = self
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            
+            if UserDefaults.developerModeEnabled() == true {
+                
+                self.present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad at this location, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
+                    
+                }), animated: true, completion: {
+                    
+                    //nonNilAd.show(fromRootViewController: wSelf)
+                    
+                })
+            }
+            else {
+                nonNilAd.show(fromRootViewController: wSelf)
+            }
+            
+            
+            _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
+                error in
+            })
+            
+            if let nonNilIntentionId = self.selectedIntentionId {
+                AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGAStickerCategory)
+            }
+            else if let nonNilTheme = self.selectedImagePath {
+                AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilTheme.components(separatedBy: "themes/").last!, targetParameter: nil, actionLocation: kGAStickerCategory)
+            }
+            
+        })
     }
     
     func backPressed() {

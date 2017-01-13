@@ -189,28 +189,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     func showGlobalAdIfAppropriate() {
         
-        if let nonNilDate = UserDefaults.lastDateAdWasShown() {
-            
-            let timeInterval = nonNilDate.timeIntervalSinceNow
-            
-            if timeInterval < -180 {
-                self.sessionResumesInterstitialAd = self.loadInterstitialAd()
-            }
-            
-        }
-        else {
-            
+        let timeInterval = UserDefaults.lastDateAdWasShown().timeIntervalSinceNow
+        
+        if timeInterval < AppConfig.appAdvertDelay {
             self.sessionResumesInterstitialAd = self.loadInterstitialAd()
-            
         }
         
     }
     
-    func showFirstTimeMainScreenReachedAd() {
-        
-        self.firstTimeMainScreenReachedInterstitialAd = self.loadfirstTimeMainScreenReachedAd()
-        
-    }
     
     // MARK: Ads
     
@@ -221,11 +207,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         return self.createAdWithPlacementId( sessionResumesPlacementId )
     }
     
-    fileprivate func loadfirstTimeMainScreenReachedAd() -> FBInterstitialAd {
-        
-        
-        return self.createAdWithPlacementId( firstTimeMainScreenReachedPlacementId )
-    }
 
     fileprivate func createAdWithPlacementId(_ placementId: String) -> FBInterstitialAd {
         
@@ -243,16 +224,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         if interstitialAd.placementID == sessionResumesPlacementId {
             UserDefaults.setLastDateAdWasShown( Date() )
             AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: nil)
+            print("Session Resumed Event sent: \(kGAAdDisplayed)")
         }
         
-        if let tabBarController = self.window?.rootViewController as? UITabBarController {
-            
-            interstitialAd.show(fromRootViewController: tabBarController.findActiveViewController())
+        if UserDefaults.developerModeEnabled() == true {
+            UIViewController.findActiveViewController( self.window!.rootViewController! ).present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad due to a system resume, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                index in
+            }), animated: true, completion: nil)
         }
-        else if let viewController = self.window?.rootViewController {
-            
-            interstitialAd.show( fromRootViewController: viewController.topMostController() )
-            
+        else {
+            interstitialAd.show(fromRootViewController: UIViewController.findActiveViewController( self.window!.rootViewController! ) )
+
         }
         
     }

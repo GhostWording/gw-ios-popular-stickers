@@ -286,6 +286,9 @@
 		4E5559A81DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E5559431DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg */; };
 		4E5559A91DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E5559441DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg */; };
 		4E95E8DE1E26050E00FEC86D /* AdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E95E8DD1E26050E00FEC86D /* AdLoader.swift */; };
+		4EBA39661E287A75005A14E1 /* BlocksAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA39651E287A75005A14E1 /* BlocksAlertController.m */; };
+		4EBA39681E28809D005A14E1 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA39671E28809D005A14E1 /* UIViewControllerExtension.swift */; };
+		4EBA396A1E2894D5005A14E1 /* SwiftConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBA39691E2894D5005A14E1 /* SwiftConstants.swift */; };
 		4EDD4ECB1DF6376900D40DC4 /* GWExperiment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD4ECA1DF6376900D40DC4 /* GWExperiment.m */; };
 		4EE6876C1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE6876B1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m */; };
 		4EEECC0E1DE673DD0095A65D /* PopularStickersLocalization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EEECC0C1DE673DD0095A65D /* PopularStickersLocalization.strings */; };
@@ -669,6 +672,10 @@
 		4E5559431DE66920008FD841 /* :themes:emoticons:small:iStock_000065867555_Medium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ":themes:emoticons:small:iStock_000065867555_Medium.jpg"; sourceTree = "<group>"; };
 		4E5559441DE66920008FD841 /* :themes:emoticons:small:iStock_000065868013_Medium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ":themes:emoticons:small:iStock_000065868013_Medium.jpg"; sourceTree = "<group>"; };
 		4E95E8DD1E26050E00FEC86D /* AdLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdLoader.swift; sourceTree = "<group>"; };
+		4EBA39641E287A75005A14E1 /* BlocksAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlocksAlertController.h; sourceTree = "<group>"; };
+		4EBA39651E287A75005A14E1 /* BlocksAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlocksAlertController.m; sourceTree = "<group>"; };
+		4EBA39671E28809D005A14E1 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		4EBA39691E2894D5005A14E1 /* SwiftConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftConstants.swift; sourceTree = "<group>"; };
 		4EDD4EC91DF6376900D40DC4 /* GWExperiment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWExperiment.h; sourceTree = "<group>"; };
 		4EDD4ECA1DF6376900D40DC4 /* GWExperiment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWExperiment.m; sourceTree = "<group>"; };
 		4EE6876A1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXCollectionViewCellImageAndText.h; sourceTree = "<group>"; };
@@ -770,6 +777,7 @@
 				4E5557A51DE631C3008FD841 /* Messenger Share State */,
 				4E5557A81DE63303008FD841 /* Data Layer */,
 				4E5556DE1DE626E3008FD841 /* AppDelegate.swift */,
+				4EBA39691E2894D5005A14E1 /* SwiftConstants.swift */,
 				4EF37FF81E1DB66E0078272C /* Extension */,
 				4EF37FF51E1DB31D0078272C /* Root View Controller */,
 				4E95E8DD1E26050E00FEC86D /* AdLoader.swift */,
@@ -831,8 +839,8 @@
 		4E55572F1DE62DB7008FD841 /* Blocks Alert Views */ = {
 			isa = PBXGroup;
 			children = (
-				4E55573E1DE62EAA008FD841 /* BlocksAlertView.h */,
-				4E55573F1DE62EAA008FD841 /* BlocksAlertView.m */,
+				4EBA39601E287A1B005A14E1 /* Alert Controller >= iOS 9 */,
+				4EBA395F1E287A0D005A14E1 /* Alert View  <=iOS 8 */,
 			);
 			name = "Blocks Alert Views";
 			sourceTree = "<group>";
@@ -1525,6 +1533,24 @@
 			name = Emoji;
 			sourceTree = "<group>";
 		};
+		4EBA395F1E287A0D005A14E1 /* Alert View  <=iOS 8 */ = {
+			isa = PBXGroup;
+			children = (
+				4E55573E1DE62EAA008FD841 /* BlocksAlertView.h */,
+				4E55573F1DE62EAA008FD841 /* BlocksAlertView.m */,
+			);
+			name = "Alert View  <=iOS 8";
+			sourceTree = "<group>";
+		};
+		4EBA39601E287A1B005A14E1 /* Alert Controller >= iOS 9 */ = {
+			isa = PBXGroup;
+			children = (
+				4EBA39641E287A75005A14E1 /* BlocksAlertController.h */,
+				4EBA39651E287A75005A14E1 /* BlocksAlertController.m */,
+			);
+			name = "Alert Controller >= iOS 9";
+			sourceTree = "<group>";
+		};
 		4EF37FE71E1DB20F0078272C /* Daily Ideas VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1568,6 +1594,7 @@
 				4EF37FFB1E1DB6FC0078272C /* UIImageExtension.swift */,
 				4EF37FF91E1DB6980078272C /* TabBarControllerExtensions.swift */,
 				4E2701381DEA88D10056133B /* StringExtension.swift */,
+				4EBA39671E28809D005A14E1 /* UIViewControllerExtension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -2094,6 +2121,7 @@
 				4E5557A71DE631D2008FD841 /* AppFlow.swift in Sources */,
 				4E55581E1DE637F4008FD841 /* GWImageManager.m in Sources */,
 				4E2701391DEA88D10056133B /* StringExtension.swift in Sources */,
+				4EBA39661E287A75005A14E1 /* BlocksAlertController.m in Sources */,
 				4E5557F91DE635AA008FD841 /* GWArea.m in Sources */,
 				4E5558431DE66520008FD841 /* RecipientPickerViewModel.swift in Sources */,
 				4E5558301DE66456008FD841 /* StickersOverviewController.swift in Sources */,
@@ -2153,6 +2181,7 @@
 				4EE6876C1E0A0D9F00AFE69F /* MAXCollectionViewCellImageAndText.m in Sources */,
 				4E5558441DE66520008FD841 /* RecipientPickerViewController.swift in Sources */,
 				4E55581C1DE637F4008FD841 /* GWCoreDataManager.m in Sources */,
+				4EBA396A1E2894D5005A14E1 /* SwiftConstants.swift in Sources */,
 				4E5557781DE62F1C008FD841 /* NSString+MAXHeightExtension.m in Sources */,
 				4E55573C1DE62E89008FD841 /* ViewControllerExtension.swift in Sources */,
 				4E5558071DE635F1008FD841 /* GWAreaCulture.m in Sources */,
@@ -2161,6 +2190,7 @@
 				4E5557401DE62EAA008FD841 /* BlocksAlertView.m in Sources */,
 				4E5557FF1DE635AA008FD841 /* GWTag.m in Sources */,
 				4E5557911DE6306B008FD841 /* AnalyticsManager.m in Sources */,
+				4EBA39681E28809D005A14E1 /* UIViewControllerExtension.swift in Sources */,
 				4E55582F1DE66456008FD841 /* StickersOverviewViewModel.swift in Sources */,
 				4E5557F31DE635AA008FD841 /* GWPersonalityQuestion.m in Sources */,
 				4E5557431DE62EB6008FD841 /* MAXBlockSwitch.m in Sources */,

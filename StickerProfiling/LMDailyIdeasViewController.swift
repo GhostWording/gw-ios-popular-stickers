@@ -146,50 +146,52 @@ class LMDailyIdeasViewController: RootViewController, UICollectionViewDelegateFl
         
         weak var wSelf = self
         
+        if UserDefaults.developerModeEnabled() == true {
+            
+            self.present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad at this location, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
+                
+            }), animated: true, completion: {
+                //nonNilAd.show(fromRootViewController: wSelf)
+            })
+            
+        }
+        else {
+            
+            nonNilAd.show(fromRootViewController: wSelf)
+            
+        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+        _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
+            error in
             
-            if UserDefaults.developerModeEnabled() == true {
+            if error != nil {
                 
-                self.present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad at this location, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
+                if UserDefaults.developerModeEnabled() == true {
                     
-                }), animated: true, completion: {
-                    //nonNilAd.show(fromRootViewController: wSelf)
-                })
-                
-            }
-            else {
-                
-                nonNilAd.show(fromRootViewController: wSelf)
-                
-            }
-            
-            _ = wSelf?.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.DailyIdeasBottom, completion: {
-                error in
-                
-                if error != nil {
-                    
-                    if UserDefaults.developerModeEnabled() == true {
+                    DispatchQueue.main.async(execute: {
                         
-                        DispatchQueue.main.async(execute: {
-                            
-                            self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
-                                index in
-                            }), animated: true, completion: nil)
-                            
-                        })
+                        self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                            index in
+                        }), animated: true, completion: nil)
                         
-                    }
+                    })
                     
                 }
                 
-            })
-            
-            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGADailyIdeas)
-            print("Will show ad in Daily ideas")
+            }
             
         })
-
+        
+        AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGADailyIdeas)
+        print("Will show ad in Daily ideas")
+        
+        /*
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+         
+         
+         
+        })
+        */
         
     }
     

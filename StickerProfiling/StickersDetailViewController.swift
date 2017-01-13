@@ -277,50 +277,53 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
         
         weak var wSelf = self
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+        if UserDefaults.developerModeEnabled() == true {
             
-            if UserDefaults.developerModeEnabled() == true {
+            self.present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad at this location, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
                 
-                self.present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad at this location, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
-                    
-                }), animated: true, completion: {
-                    
-                    //nonNilAd.show(fromRootViewController: wSelf)
-                    
-                })
-            }
-            else {
-                nonNilAd.show(fromRootViewController: wSelf)
-            }
-            
-            
-            _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
-                error in
+            }), animated: true, completion: {
                 
-                if error != nil {
-                    if UserDefaults.developerModeEnabled() == true {
-                        
-                        DispatchQueue.main.async(execute: {
-                            
-                            self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
-                                index in
-                            }), animated: true, completion: nil)
-                            
-                        })
-                        
-                    }
-                }
+                //nonNilAd.show(fromRootViewController: wSelf)
                 
             })
+        }
+        else {
+            nonNilAd.show(fromRootViewController: wSelf)
+        }
+        
+        
+        _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
+            error in
             
-            if let nonNilIntentionId = self.selectedIntentionId {
-                AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGAStickerCategory)
-            }
-            else if let nonNilTheme = self.selectedImagePath {
-                AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilTheme.components(separatedBy: "themes/").last!, targetParameter: nil, actionLocation: kGAStickerCategory)
+            if error != nil {
+                if UserDefaults.developerModeEnabled() == true {
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                            index in
+                        }), animated: true, completion: nil)
+                        
+                    })
+                    
+                }
             }
             
         })
+        
+        if let nonNilIntentionId = self.selectedIntentionId {
+            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGAStickerCategory)
+        }
+        else if let nonNilTheme = self.selectedImagePath {
+            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilTheme.components(separatedBy: "themes/").last!, targetParameter: nil, actionLocation: kGAStickerCategory)
+        }
+        
+        /*
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+         
+         
+        })
+         */
     }
     
     func backPressed() {

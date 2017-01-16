@@ -44,6 +44,9 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
     var themeAndIntentionList: [StickersThemeAndIntentionInfo]?
     var themes: [AnyHashable: Any]?
     
+    var themesBefore : [AnyHashable : Any]?
+    var themesAfter : [AnyHashable : Any]?
+    
     var downloadImageClosure: ((_ indexPath: IndexPath) -> Void)?
     var selectedStickerClosure: ((_ label: String?, _ imagePath: String?, _ intentionId: String?) -> Void)?
 
@@ -76,29 +79,49 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
             imagePaths.append(themeAndIntentionInfo.defaultImagePath!)
         }
         
-        if let themes = self.themes?["Themes"] as? [NSDictionary] {
+        // sort the intentions before we add the themes before/ after
+        themeAndIntentionList?.sort(by: {
+            firstThemeAndIntention, secondThemeAndIntention -> Bool in
             
-            for themeDict in themes {
-                
+            return firstThemeAndIntention.sortOrder < secondThemeAndIntention.sortOrder
+            
+        })
+        
+        if let nonNilBeforeThemes = self.themesBefore?["Themes"] as? [NSDictionary] {
+            
+            var insertIndex = 0
+            
+            for themeDict in nonNilBeforeThemes {
                 
                 let themeAndIntentionInfo = StickersThemeAndIntentionInfo()
                 themeAndIntentionInfo.title = self.findLabelTitle( GWLocalizedBundle.currentLocaleAPIString(), labelArray: themeDict.object(forKey: "Labels") as! [NSDictionary])
                 themeAndIntentionInfo.imagePath = themeDict.object(forKey: "Path") as? String
                 themeAndIntentionInfo.defaultImagePath = self.appendApiPathToImage(themeDict.object(forKey: "DefaultImage") as! String)
+                themeAndIntentionInfo.sortOrder = 0
                 
+                themeAndIntentionList?.insert(themeAndIntentionInfo, at: insertIndex)
+                imagePaths.insert(themeAndIntentionInfo.defaultImagePath!, at: insertIndex)
                 
-                if( themeAndIntentionInfo.imagePath == "themes/nature" ) {
-                    themeAndIntentionInfo.sortOrder = 1
-                }
-                else if( themeAndIntentionInfo.imagePath == "themes/emoticons" ) {
-                    themeAndIntentionInfo.sortOrder = 0
-                }
-                else {
-                    themeAndIntentionInfo.sortOrder = 10000
-                }
+                insertIndex += 1
                 
-                themeAndIntentionList?.append(themeAndIntentionInfo)
-                imagePaths.append(themeAndIntentionInfo.defaultImagePath!)
+            }
+            
+            
+        }
+        
+        if let nonNilAfterThemes = self.themesAfter?["Themes"] as? [NSDictionary] {
+            
+            for themeDict in nonNilAfterThemes {
+                
+                let themeAndIntentionInfo = StickersThemeAndIntentionInfo()
+                themeAndIntentionInfo.title = self.findLabelTitle( GWLocalizedBundle.currentLocaleAPIString(), labelArray: themeDict.object(forKey: "Labels") as! [NSDictionary])
+                themeAndIntentionInfo.imagePath = themeDict.object(forKey: "Path") as? String
+                themeAndIntentionInfo.defaultImagePath = self.appendApiPathToImage(themeDict.object(forKey: "DefaultImage") as! String)
+                themeAndIntentionInfo.sortOrder = 0
+                
+                themeAndIntentionList?.append( themeAndIntentionInfo )
+                imagePaths.append( themeAndIntentionInfo.defaultImagePath! )
+                
             }
             
         }
@@ -114,13 +137,6 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
                 
             }
         }
-        
-        themeAndIntentionList?.sort(by: {
-            firstThemeAndIntention, secondThemeAndIntention -> Bool in
-            
-            return firstThemeAndIntention.sortOrder < secondThemeAndIntention.sortOrder
-            
-        })
         
     }
     
@@ -230,7 +246,44 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
     }
     
     func downloadThemes(_ completion: @escaping (_ error: Error?) -> Void) {
+        //themesafter.json
+        weak var wSelf = self
+        GWDataManager().downloadImageThemes(withPath: "http://gw-static-apis.azurewebsites.net/data/stickers/themesbefore.json", withCompletion: {
+            beforeThemes, error in
+            
+            if error == nil {
+                
+                wSelf?.themesBefore = beforeThemes
+                
+                GWDataManager().downloadImageThemes(withPath: "http://gw-static-apis.azurewebsites.net/data/stickers/themesafter.json", withCompletion: {
+                    afterThemes, error in
+                    
+                    wSelf?.themesAfter = afterThemes
+                    
+                    if error == nil {
+                        DispatchQueue.main.async(execute: {
+                            wSelf?.reloadData()
+                            completion( nil )
+                        })
+                    }
+                    else {
+                        DispatchQueue.main.async(execute: {
+                            completion( error )
+                        })
+                    }
+                    
+                })
+                
+            }
+            else {
+                DispatchQueue.main.async(execute: {
+                    completion( error )
+                })
+            }
+            
+        })
         
+        /*
         GWDataManager().downloadImageThemes(withPath: "http://gw-static-apis.azurewebsites.net/data/stickers/moodthemes.json", withCompletion: {
             themes, error -> Void in
             
@@ -246,7 +299,7 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
             })
             
         })
-        
+        */
     }
     
     func downloadImage(_ path: String, completion: @escaping (_ image: GWImage?, _ error: Error?) -> Void) {

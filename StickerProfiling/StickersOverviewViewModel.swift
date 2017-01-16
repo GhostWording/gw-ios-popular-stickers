@@ -282,24 +282,6 @@ class StickersOverviewViewModel: NSObject, MAXCollectionViewImageAndTextDataSour
             }
             
         })
-        
-        /*
-        GWDataManager().downloadImageThemes(withPath: "http://gw-static-apis.azurewebsites.net/data/stickers/moodthemes.json", withCompletion: {
-            themes, error -> Void in
-            
-            if error == nil {
-                self.themes = themes
-            }
-            
-            DispatchQueue.main.async(execute: {
-                
-                self.reloadData()
-                completion(error as Error?)
-                
-            })
-            
-        })
-        */
     }
     
     func downloadImage(_ path: String, completion: @escaping (_ image: GWImage?, _ error: Error?) -> Void) {

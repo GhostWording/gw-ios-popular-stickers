@@ -191,16 +191,6 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
                         wSelf?.showAdAfterDelay( nonNilAd )
                         
                     }
-                    else {
-                        
-                        if UserDefaults.developerModeEnabled() == true {
-                            self.present( BlocksAlertController.init(title: "Ads", message: "The ad should not be shown, not enough time has passed.", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
-                            }), animated: true, completion: {
-                                
-                            })
-                        }
-                        
-                    }
                     
                 }
                 

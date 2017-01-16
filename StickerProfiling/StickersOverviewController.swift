@@ -18,6 +18,7 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
     var backToMessengerButton: MAXBlockButton?
     let showTabBarButton = MAXFadeBlockButton()
     
+    let adLoader = AdLoader()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear( animated )
@@ -82,6 +83,31 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         super.viewDidLoad()
         
         weak var wSelf = self
+        
+        _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: { error in
+            
+            if error == nil {
+                print("ad loaded")
+            }
+            else {
+                print("ad error")
+                
+                if UserDefaults.developerModeEnabled() == true {
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                            index in
+                        }), animated: true, completion: nil)
+                        
+                    })
+                    
+                }
+                
+            }
+            
+        })
+
         
         backToMessengerButton = MAXBlockButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         backToMessengerButton?.backgroundColor = UIColor.c_backToMessengerBanner()
@@ -152,6 +178,36 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         let view = UIView(frame: CGRect(x: 200, y: 200, width: 200, height: 200) )
         view.backgroundColor = UIColor.red
         //self.view.addSubview( view )
+        
+        collectionView.reachedBottomBlock = {
+            
+            if let nonNilAd = wSelf?.adLoader.interstitialAd {
+                if nonNilAd.isAdValid == true {
+                    
+                    let time = UserDefaults.lastDateAdWasShown().timeIntervalSinceNow
+                    
+                    if time < AppConfig.appAdvertDelay {
+                        
+                        wSelf?.showAdAfterDelay( nonNilAd )
+                        
+                    }
+                    else {
+                        
+                        if UserDefaults.developerModeEnabled() == true {
+                            self.present( BlocksAlertController.init(title: "Ads", message: "The ad should not be shown, not enough time has passed.", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
+                            }), animated: true, completion: {
+                                
+                            })
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
     }
     
     
@@ -255,5 +311,49 @@ class StickersOverviewController: RootViewController, FBInterstitialAdDelegate {
         self.present(SettingsViewController(), animated: true, completion: nil)
         
     }
+    
+    func showAdAfterDelay(_ nonNilAd: FBInterstitialAd) {
+        let date = Date()
+        UserDefaults.setLastDateAdWasShown( date )
+        
+        weak var wSelf = self
+        
+        if UserDefaults.developerModeEnabled() == true {
+            
+            self.present( BlocksAlertController.init(title: "Succeeded", message: "Showing an ad at this location, disable developer mode to see the ad", preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: { alertIndex in
+                
+            }), animated: true, completion: {
+                
+                //nonNilAd.show(fromRootViewController: wSelf)
+                
+            })
+        }
+        else {
+            nonNilAd.show(fromRootViewController: wSelf)
+        }
+        
+        
+        _ = self.adLoader.createAdAtPosition(adPosition: InterstitialAdPosition.StickerCategoriesBottom, completion: {
+            error in
+            
+            if error != nil {
+                if UserDefaults.developerModeEnabled() == true {
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        self.present( BlocksAlertController.init(title: "Error", message: (error?.localizedDescription)!, preferredStyle: UIAlertControllerStyle.alert, firstActionTitle: "Ok", secondActionTitle: nil, thirdActionTitle: nil, fourthActionTitle: nil, completion: {
+                            index in
+                        }), animated: true, completion: nil)
+                        
+                    })
+                    
+                }
+            }
+            
+        })
+        
+        AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nil, targetParameter: nil, actionLocation: kGAStickerCategory)
+    }
+
     
 }

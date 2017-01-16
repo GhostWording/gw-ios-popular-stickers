@@ -322,10 +322,10 @@ class StickersDetailViewController: RootViewController, UIScrollViewDelegate {
         })
         
         if let nonNilIntentionId = self.selectedIntentionId {
-            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGAStickerCategory)
+            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilIntentionId, targetParameter: nil, actionLocation: kGACategoryListScreen)
         }
         else if let nonNilTheme = self.selectedImagePath {
-            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilTheme.components(separatedBy: "themes/").last!, targetParameter: nil, actionLocation: kGAStickerCategory)
+            AnalyticsManager().postAction(withType: kGAAdDisplayed, targetType: kGATargetTypeApp, targetId: nonNilTheme.components(separatedBy: "themes/").last!, targetParameter: nil, actionLocation: kGACategoryListScreen)
         }
         
         /*

@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		4E0882231E21EF280031A78A /* MAXImageAndTextHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0882221E21EF280031A78A /* MAXImageAndTextHeaderViewCell.m */; };
 		4E2701391DEA88D10056133B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2701381DEA88D10056133B /* StringExtension.swift */; };
+		4E3B0E4F1E4814DA009DA0DD /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3B0E4E1E4814DA009DA0DD /* FBAudienceNetwork.framework */; };
 		4E5556DF1DE626E3008FD841 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5556DE1DE626E3008FD841 /* AppDelegate.swift */; };
 		4E5556E11DE626E3008FD841 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5556E01DE626E3008FD841 /* ViewController.swift */; };
 		4E5556E71DE626E3008FD841 /* StickerProfiling.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E5556E51DE626E3008FD841 /* StickerProfiling.xcdatamodeld */; };
 		4E5556E91DE626E3008FD841 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E5556E81DE626E3008FD841 /* Assets.xcassets */; };
 		4E5556F71DE626E3008FD841 /* StickerProfilingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5556F61DE626E3008FD841 /* StickerProfilingTests.swift */; };
 		4E5557021DE626E3008FD841 /* StickerProfilingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557011DE626E3008FD841 /* StickerProfilingUITests.swift */; };
-		4E5557111DE62A99008FD841 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5557101DE62A99008FD841 /* FBAudienceNetwork.framework */; };
 		4E5557161DE62B39008FD841 /* MBSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E5557151DE62B39008FD841 /* MBSwitch.m */; };
 		4E5557181DE62B9A008FD841 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5557171DE62B9A008FD841 /* StoreKit.framework */; };
 		4E55571A1DE62BA0008FD841 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E5557191DE62BA0008FD841 /* AdSupport.framework */; };
@@ -329,6 +329,7 @@
 		4E0882211E21EF280031A78A /* MAXImageAndTextHeaderViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAXImageAndTextHeaderViewCell.h; sourceTree = "<group>"; };
 		4E0882221E21EF280031A78A /* MAXImageAndTextHeaderViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAXImageAndTextHeaderViewCell.m; sourceTree = "<group>"; };
 		4E2701381DEA88D10056133B /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		4E3B0E4E1E4814DA009DA0DD /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		4E5556DB1DE626E3008FD841 /* StickerProfiling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerProfiling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E5556DE1DE626E3008FD841 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E5556E01DE626E3008FD841 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -341,7 +342,6 @@
 		4E5556FD1DE626E3008FD841 /* StickerProfilingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickerProfilingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E5557011DE626E3008FD841 /* StickerProfilingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerProfilingUITests.swift; sourceTree = "<group>"; };
 		4E5557031DE626E3008FD841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4E5557101DE62A99008FD841 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		4E5557141DE62B39008FD841 /* MBSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSwitch.h; sourceTree = "<group>"; };
 		4E5557151DE62B39008FD841 /* MBSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSwitch.m; sourceTree = "<group>"; };
 		4E5557171DE62B9A008FD841 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -712,6 +712,7 @@
 				4E55572A1DE62C20008FD841 /* CoreVideo.framework in Frameworks */,
 				4E5557281DE62C16008FD841 /* CoreMedia.framework in Frameworks */,
 				4E5557261DE62C0D008FD841 /* AVFoundation.framework in Frameworks */,
+				4E3B0E4F1E4814DA009DA0DD /* FBAudienceNetwork.framework in Frameworks */,
 				4E5557241DE62C04008FD841 /* QuartzCore.framework in Frameworks */,
 				4E5557221DE62BFA008FD841 /* SystemConfiguration.framework in Frameworks */,
 				4E5557201DE62BC4008FD841 /* CoreTelephony.framework in Frameworks */,
@@ -720,7 +721,6 @@
 				4E55571A1DE62BA0008FD841 /* AdSupport.framework in Frameworks */,
 				4E5557181DE62B9A008FD841 /* StoreKit.framework in Frameworks */,
 				F65AB8F9953FEA26C84EDEFB /* Pods_StickerProfiling.framework in Frameworks */,
-				4E5557111DE62A99008FD841 /* FBAudienceNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,7 +813,7 @@
 		4E55570F1DE62A33008FD841 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4E5557101DE62A99008FD841 /* FBAudienceNetwork.framework */,
+				4E3B0E4E1E4814DA009DA0DD /* FBAudienceNetwork.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

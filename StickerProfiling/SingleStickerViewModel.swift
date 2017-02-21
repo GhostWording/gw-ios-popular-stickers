@@ -256,27 +256,34 @@ class SingleStickerViewModel: NSObject {
     fileprivate func createScoredTexts(_ texts: [NSDictionary]) -> [ScoreObject] {
         
         var scoredTexts = [ScoreObject]()
-        
-        let hasMoreThanTwoDisplays = self.containsTextWithMoreThanTwoDisplays(texts)
-        
+                
         for scoredTextDict: NSDictionary in texts {
             
             let scoreDict = scoredTextDict.object(forKey: "Scoring") as! NSDictionary
             let textDict = scoredTextDict.object(forKey: "Text") as! NSDictionary
             
-            if intentionId != nil && (scoreDict.object(forKey: "NbShares") as! Int) > 1 && self.scoredTextContainsTag(intentionId, tagIds: textDict.object(forKey: "TagIds") as? [String]) == true{
+            if intentionId == nil {
                 
-                self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
+                let hasMoreThanTwoDisplays = self.containsTextWithMoreThanTwoDisplays(texts)
+                
+                if hasMoreThanTwoDisplays == true && (scoreDict.object(forKey: "NbShares") as! Int) > 1 {
+                    self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
+                }
+                else if hasMoreThanTwoDisplays == false {
+                    self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
+                }
                 
             }
-            else if hasMoreThanTwoDisplays == true && (scoreDict.object(forKey: "NbShares") as! Int) > 1 && self.scoredTextContainsTag(intentionId, tagIds: textDict.object(forKey: "TagIds") as? [String]) == true {
+            else {
                 
-                self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
+                let containsIntention = (textDict.object(forKey: "IntentionId") as! String) == intentionId
                 
-            }
-            else if hasMoreThanTwoDisplays == false {
+                if (scoreDict.object(forKey: "NbShares") as! Int) > 1 && containsIntention == true {
+                    
+                    self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
+                    
+                }
                 
-                self.populateScoredTexts(&scoredTexts, scoredTextDict: scoredTextDict)
             }
             
         }

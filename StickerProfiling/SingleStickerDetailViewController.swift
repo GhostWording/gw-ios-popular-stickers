@@ -577,7 +577,7 @@ class SingleStickerDetailViewController: UIViewController, UIDocumentInteraction
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if self.viewModel.textIsDisplayedAndShared( indexPath.row ) == true {
-            return self.viewModel.textHeight(indexPath.row, width: self.view.frame.width * 0.8, font: UIFont.c_robotoLight(withSize: 17.0)) + 60
+            return self.viewModel.textHeight(indexPath.row, width: self.view.frame.width * 0.8, font: UIFont.c_robotoLight(withSize: 17.0)) + 50
         }
         
         return self.viewModel.textHeight(indexPath.row, width: self.view.frame.width * 0.8, font: UIFont.c_robotoLight(withSize: 17.0)) + 30

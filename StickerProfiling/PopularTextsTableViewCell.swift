@@ -65,7 +65,7 @@ class PopularTextsTableViewCell: UITableViewCell {
         
         
         if nbSharesImageView.isHidden == false {
-            popularTextLabel.frame = CGRect(x: self.frame.width * 0.1, y: 15, width: self.frame.width * 0.8, height: self.frame.height - 50)
+            popularTextLabel.frame = CGRect(x: self.frame.width * 0.1, y: 15, width: self.frame.width * 0.8, height: self.frame.height - 40)
         }
         else {
             popularTextLabel.frame = CGRect(x: self.frame.width * 0.1, y: 15, width: self.frame.width * 0.8, height: self.frame.height - 30)
